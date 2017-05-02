@@ -1,0 +1,74 @@
+-- Table: users
+
+-- DROP TABLE users;
+
+CREATE TABLE users
+(
+    user_name text NOT NULL,
+    password text NOT NULL,
+    name text NOT NULL,
+    phone_number text NOT NULL,
+    email text,
+    password_recovery text 
+);
+
+-- Table: f_look_for_metapelet
+
+-- DROP TABLE f_look_for_metapelet;
+
+CREATE TABLE f_look_for_metapelet
+(
+    name text NOT NULL,
+    telephone text NOT NULL,
+    city text NOT NULL,
+    region text NOT NULL,
+    languages text[] DEFAULT '{}'::text[],
+    not_formatted_text text,
+    user_name text NOT NULL
+);
+
+-- Table: m_can_replace
+
+-- DROP TABLE m_can_replace;
+
+CREATE TABLE m_can_replace
+(
+    name text NOT NULL,
+    telephone text NOT NULL,
+    from_date date NOT NULL,
+    until_date date NOT NULL,
+    city text NOT NULL,
+    languages text[] DEFAULT '{}'::text[],
+    not_formatted_text text,
+    user_name text NOT NULL
+);
+
+-- Table: m_look_for_permanent_job
+
+-- DROP TABLE m_look_for_permanent_job;
+
+CREATE TABLE m_look_for_permanent_job
+(
+    name text NOT NULL,
+    telephone text NOT NULL,
+    region text NOT NULL,
+    languages text[] DEFAULT '{}'::text[],
+    not_formatted_text tex,
+    user_name text NOT NULL
+);
+
+-- Table: m_look_for_replacement
+
+-- DROP TABLE m_look_for_replacement;
+
+CREATE TABLE m_look_for_replacement
+(
+    name text NOT NULL,
+    telephone text NOT NULL,
+    from_date date NOT NULL,
+    until_date date NOT NULL,
+    city text NOT NULL,
+    languages text[] DEFAULT '{}'::text[],
+    not_formatted_text text ,
+    user_name text NOT NULL
+);
