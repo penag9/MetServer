@@ -70,6 +70,20 @@ public class User {
         return passwordRecovery;
     }
 
+    @Override
+    public boolean equals(Object otherUser)   {
+
+        if ( super.equals(otherUser)  )   {
+            return true;
+        }
+
+        if ( !(otherUser instanceof User) ) {
+            return false;
+        }
+
+        return false;
+    }
+
 
 
 }
