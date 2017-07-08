@@ -35,7 +35,7 @@ var RegisterComponent = (function () {
             this.errorMessage = 'Проблема с регистрацией';
         }*/
         console.log('login with ', this.data);
-        if (this.data.username == 'a' && this.data.password == 'a') {
+        if (this.data.username == 'A' && this.data.password == 'A') {
             localStorage.setItem('pass', this.data.password);
             localStorage.setItem('name', this.data.username);
             this.webService.isAuthenticated = true;
