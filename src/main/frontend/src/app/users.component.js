@@ -66,12 +66,4 @@ UsersComponent = __decorate([
     __metadata("design:paramtypes", [web_service_1.WebService])
 ], UsersComponent);
 exports.UsersComponent = UsersComponent;
-/*
-  <div *ngFor="let user of webService.users">
-        <md-card style="margin:8px">
-            <md-card-title>{{user.name}}</md-card-title>
-            <md-card-content>{{user.text}}</md-card-content>
-        </md-card>
-    </div>
-*/ 
 //# sourceMappingURL=users.component.js.map

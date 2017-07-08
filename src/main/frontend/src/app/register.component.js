@@ -37,7 +37,7 @@ var RegisterComponent = (function () {
         console.log('login with ', this.data);
         if (this.data.username == 'a' && this.data.password == 'a') {
             localStorage.setItem('pass', this.data.password);
-            localStorage.setItem('name', this.data.name);
+            localStorage.setItem('name', this.data.username);
             this.webService.isAuthenticated = true;
             this.errorMessage = '';
             this.router.navigate(['/']);
