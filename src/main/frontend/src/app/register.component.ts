@@ -8,6 +8,7 @@ import { WebService } from './web.service';
     selector: 'register',
     template: ` 
     <h1> Регистрация нового пользователя </h1>
+    <h1 style="color: red"> {{errorMessage}} </h1>
     <form>
         <label> Логин : </label>
         <input type="text" [(ngModel)]="data.username" name="username" required>
@@ -38,29 +39,39 @@ import { WebService } from './web.service';
 export class RegisterComponent {
 
     data = {
-        username : '',
-        password : '',
-        password2 : '',
-        email : '',
-        phone : '',
-        name : '',
-        gender : '',
-    }
-    
+        username: '',
+        password: '',
+        password2: '',
+        email: '',
+        phone: '',
+        name: '',
+        gender: '',
+    };
 
-    constructor( private webService: WebService, private router: Router) {}
+    errorMessage = '';
 
-    register() { 
+
+    constructor(private webService: WebService, private router: Router) { }
+
+    register() {
+
+
+        /*
+         if(webService.login(data)) ;
+            this.errorMessage = '';
+            this.router.navigate(['/']);
+        } else {
+            this.errorMessage = 'Проблема с регистрацией';
+        }*/
         console.log('login with ', this.data);
-        if(this.data.username == 'a' && this.data.password == 'a') {
-
+        if (this.data.username == 'a' && this.data.password == 'a') {
             localStorage.setItem('pass', this.data.password);
             localStorage.setItem('name', this.data.name);
             this.webService.isAuthenticated = true;
-
+            this.errorMessage = '';
             this.router.navigate(['/']);
         } else {
-console.log('Error');
+            this.errorMessage = 'Проблема с регистрацией';
         }
-     }
+    }
 }

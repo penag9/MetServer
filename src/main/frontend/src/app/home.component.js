@@ -19,7 +19,7 @@ var HomeComponent = (function () {
 HomeComponent = __decorate([
     core_1.Component({
         selector: 'home',
-        template: " \n    <h1> \u0414\u043E\u0431\u0440\u043E \u043F\u043E\u0436\u0430\u043B\u043E\u0432\u0430\u0442\u044C {{webService.currentUser}}</h1>\n    <button  class=\"main\" routerLink=\"/message\"> \u0414\u0430\u0442\u044C \u043E\u0431\u044A\u044F\u0432\u043B\u0435\u043D\u0438\u0435 </button>    \n    <button  class=\"main\" routerLink=\"/users\"> \u0421\u043F\u0438\u0441\u043E\u043A \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0435\u0439 </button>         \n    "
+        template: " \n    <h1> \u0414\u043E\u0431\u0440\u043E \u043F\u043E\u0436\u0430\u043B\u043E\u0432\u0430\u0442\u044C {{webService.currentUser}}</h1>\n    <button  class=\"main\" routerLink=\"/message\"> \u0414\u0430\u0442\u044C \u043E\u0431\u044A\u044F\u0432\u043B\u0435\u043D\u0438\u0435 </button>    \n    <button  class=\"main\" routerLink=\"/users\" (click)=\"webServer.getUsersList()\"> \u0421\u043F\u0438\u0441\u043E\u043A \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0435\u0439 </button>         \n    "
     }),
     __metadata("design:paramtypes", [web_service_1.WebService])
 ], HomeComponent);

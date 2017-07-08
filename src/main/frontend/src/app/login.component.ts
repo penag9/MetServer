@@ -7,7 +7,7 @@ import { WebService } from './web.service';
     selector: 'login',
     template: ` 
     <h1> Добро пожаловать (для демо - А А )</h1>
-    <h1> {{errorMessage}} </h1>
+    <h1 style="color: red"> {{errorMessage}} </h1>
     <form>
         <label> Логин : </label>
         <input type="text" [(ngModel)]="data.username" name="username">
@@ -22,16 +22,24 @@ import { WebService } from './web.service';
 export class LoginComponent {
 
     data = {
-        username : '',
-        password : ''
+        username: '',
+        password: ''
     };
 
     errorMessage = '';
 
-    constructor( private webService: WebService, private router: Router) {}
+    constructor(private webService: WebService, private router: Router) { }
 
-    login() { 
-        if(this.data.username == 'A' && this.data.password == 'A') {
+    login() {
+
+        /*
+         if(webService.login(data)) ;
+            this.errorMessage = '';
+            this.router.navigate(['/']);
+        } else {
+            this.errorMessage = 'Неверный логин или пароль';
+        }*/
+        if (this.data.username == 'A' && this.data.password == 'A') {
             localStorage.setItem('pass', 'A');
             localStorage.setItem('name', 'A');
             this.webService.isAuthenticated = true;
@@ -41,5 +49,5 @@ export class LoginComponent {
         } else {
             this.errorMessage = 'Неверный логин или пароль';
         }
-     }
+    }
 }

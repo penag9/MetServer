@@ -14,7 +14,6 @@ import { WebService } from './web.service';
 })
 export class UsersComponent {
 
-  
     constructor(private webService: WebService) {}
 
     async ngOnInit() {
@@ -23,12 +22,3 @@ export class UsersComponent {
     }
 
 }
-
-/*
-  <div *ngFor="let user of webService.users">
-        <md-card style="margin:8px">
-            <md-card-title>{{user.name}}</md-card-title>
-            <md-card-content>{{user.text}}</md-card-content>
-        </md-card>
-    </div>
-*/

@@ -5,8 +5,8 @@ import { WebService } from './web.service';
     selector: 'home',
     template: ` 
     <h1> Добро пожаловать {{webService.currentUser}}</h1>
-    <button  class="main" routerLink="/message"> Дать объявление </button>    
-    <button  class="main" routerLink="/users"> Список пользователей </button>         
+    <button  class="main" routerLink="/ads"> Дать объявление </button>    
+    <button  class="main" routerLink="/users" (click)="webServer.getUsersList()"> Список пользователей </button>         
     `
 })
 export class HomeComponent {

@@ -10,11 +10,10 @@ import { AppComponent }  from './app.component';
 import { NavComponent }  from './nav.component';
 import { HomeComponent } from './home.component';
 import { RequestComponent } from './request.component';
-//import { InquiryComponent } from './inquiry.component';
 import { LoginComponent } from './login.component';
 import { RegisterComponent } from './register.component';
 import { UsersComponent } from './users.component';
-import { MessageComponent } from './message.component';
+import { AdsComponent } from './ads.component';
 
 let routes = [
   { path : '',
@@ -26,14 +25,11 @@ let routes = [
   { path : 'users',
     component : UsersComponent
   },
-  //{ path : 'inquiry',
-  //  component : InquiryComponent
-  //},
   { path : 'login',
     component : LoginComponent
   },
-  { path : 'message',
-    component : MessageComponent
+  { path : 'ads',
+    component : AdsComponent
   },
   { path : 'register',
     component : RegisterComponent
@@ -41,8 +37,8 @@ let routes = [
 
 @NgModule({
   imports:      [ BrowserModule, FormsModule, HttpModule,  RouterModule.forRoot(routes) ],
-  declarations: [ AppComponent, NavComponent, HomeComponent, RequestComponent, 
-                  LoginComponent, MessageComponent, RegisterComponent, UsersComponent,/* InquiryComponent*/ ],
+  declarations: [ AppComponent, NavComponent, HomeComponent, RequestComponent,
+                  LoginComponent, AdsComponent, RegisterComponent, UsersComponent ],
   bootstrap:    [ AppComponent ],
   providers:    [ WebService ]
 })
