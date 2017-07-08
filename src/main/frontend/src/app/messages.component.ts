@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'ads',
+    selector: 'messages',
     template: `
                 <h2> Дать объявление </h2>
     <table>  
@@ -18,4 +18,4 @@ import { Component } from '@angular/core';
     </table> 
     `
 })
-export class AdsComponent {}
+export class MessagesComponent {}

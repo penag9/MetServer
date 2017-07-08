@@ -18,7 +18,7 @@ var request_component_1 = require("./request.component");
 var login_component_1 = require("./login.component");
 var register_component_1 = require("./register.component");
 var users_component_1 = require("./users.component");
-var ads_component_1 = require("./ads.component");
+var messages_component_1 = require("./messages.component");
 var routes = [
     { path: '',
         component: home_component_1.HomeComponent
@@ -32,8 +32,8 @@ var routes = [
     { path: 'login',
         component: login_component_1.LoginComponent
     },
-    { path: 'ads',
-        component: ads_component_1.AdsComponent
+    { path: 'messages',
+        component: messages_component_1.MessagesComponent
     },
     { path: 'register',
         component: register_component_1.RegisterComponent
@@ -48,7 +48,7 @@ AppModule = __decorate([
     core_1.NgModule({
         imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, router_1.RouterModule.forRoot(routes)],
         declarations: [app_component_1.AppComponent, nav_component_1.NavComponent, home_component_1.HomeComponent, request_component_1.RequestComponent,
-            login_component_1.LoginComponent, ads_component_1.AdsComponent, register_component_1.RegisterComponent, users_component_1.UsersComponent],
+            login_component_1.LoginComponent, messages_component_1.MessagesComponent, register_component_1.RegisterComponent, users_component_1.UsersComponent],
         bootstrap: [app_component_1.AppComponent],
         providers: [web_service_1.WebService]
     })

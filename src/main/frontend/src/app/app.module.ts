@@ -13,7 +13,7 @@ import { RequestComponent } from './request.component';
 import { LoginComponent } from './login.component';
 import { RegisterComponent } from './register.component';
 import { UsersComponent } from './users.component';
-import { AdsComponent } from './ads.component';
+import { MessagesComponent } from './messages.component';
 
 let routes = [
   { path : '',
@@ -28,8 +28,8 @@ let routes = [
   { path : 'login',
     component : LoginComponent
   },
-  { path : 'ads',
-    component : AdsComponent
+  { path : 'messages',
+    component : MessagesComponent
   },
   { path : 'register',
     component : RegisterComponent
@@ -38,7 +38,7 @@ let routes = [
 @NgModule({
   imports:      [ BrowserModule, FormsModule, HttpModule,  RouterModule.forRoot(routes) ],
   declarations: [ AppComponent, NavComponent, HomeComponent, RequestComponent,
-                  LoginComponent, AdsComponent, RegisterComponent, UsersComponent ],
+                  LoginComponent, MessagesComponent, RegisterComponent, UsersComponent ],
   bootstrap:    [ AppComponent ],
   providers:    [ WebService ]
 })
