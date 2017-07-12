@@ -8,8 +8,9 @@ import { WebService } from '../web.service';
     template: ` 
     <br><br><br>
     <h1 class="center"> Дать объявление </h1>
-    <br><br><br>
+    <br>
     <h2 class="center"> Требуется замена на время отпуска </h2>
+    <br>
     <h1 style="color: red" class="center"> {{errorMessage}} </h1>
     <form>
         <label> Имя : </label>
@@ -68,7 +69,16 @@ export class HVComponent {
     constructor(private webService: WebService, private router: Router) { }
 
     placeRequest() {
+        if (!this.checkDate(this.data.begin) || !this.checkDate(this.data.end)
+            || !this.checkDateOrder(this.data.begin, this.data.end)) {
+            this.errorMessage = 'Ошибка в дате.';
+            return;
+        } else {
+            this.errorMessage = 'Нет ошибки';
 
+        }
+
+        
         /*
          if(webService.placeRequest(data)) ;
             this.errorMessage = '';
@@ -78,6 +88,25 @@ export class HVComponent {
             this.errorMessage = 'Проблемы с размещением объявления.';
         }*/
 
-        console.log(this.data);
+    }
+
+    checkDate(date) {
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+        var yyyy = today.getFullYear();
+        if ( +date.slice(0, 4) < yyyy || +date.slice(5, 7) < mm || +date.slice(8) < dd) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    checkDateOrder(begin, end) {
+        if (+end.slice(0, 4) < +begin.slice(0, 4) || +end.slice(5, 7) < +begin.slice(5, 7) || +end.slice(8) < +begin.slice(8)) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }

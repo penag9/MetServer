@@ -35,6 +35,14 @@ var AVComponent = (function () {
         this.errorMessage = '';
     }
     AVComponent.prototype.placeRequest = function () {
+        if (!this.checkDate(this.data.begin) || !this.checkDate(this.data.end)
+            || !this.checkDateOrder(this.data.begin, this.data.end)) {
+            this.errorMessage = 'Ошибка в дате.';
+            return;
+        }
+        else {
+            this.errorMessage = 'Нет ошибки';
+        }
         /*
          if(webService.placeRequest(data)) ;
             this.errorMessage = '';
@@ -43,7 +51,26 @@ var AVComponent = (function () {
         } else {
             this.errorMessage = 'Проблемы с размещением объявления.';
         }*/
-        console.log(this.data);
+    };
+    AVComponent.prototype.checkDate = function (date) {
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+        var yyyy = today.getFullYear();
+        if (+date.slice(0, 4) < yyyy || +date.slice(5, 7) < mm || +date.slice(8) < dd) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    };
+    AVComponent.prototype.checkDateOrder = function (begin, end) {
+        if (+end.slice(0, 4) < +begin.slice(0, 4) || +end.slice(5, 7) < +begin.slice(5, 7) || +end.slice(8) < +begin.slice(8)) {
+            return false;
+        }
+        else {
+            return true;
+        }
     };
     return AVComponent;
 }());
