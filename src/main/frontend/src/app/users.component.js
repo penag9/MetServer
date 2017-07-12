@@ -61,7 +61,7 @@ var UsersComponent = (function () {
 UsersComponent = __decorate([
     core_1.Component({
         selector: 'users',
-        template: "\n    <div *ngFor=\"let user of webService.users\">\n            <h2>{{user.name}}</h2><br>\n            {{user.text}} <br>\n            ------------ \n        <br><br>\n    </div>\n    "
+        template: "\n    <br>\n    <h1 class=\"center\"> \u0421\u043F\u0438\u0441\u043E\u043A \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u0435\u0439 </h1>\n    <br>\n    <div class=\"user\" *ngFor=\"let user of webService.users\">\n            <h2>\u0418\u043C\u044F - {{user.name}}</h2><br>\n            \u0414\u0430\u043D\u043D\u044B\u0435 - {{user.text}} <br>\n        <br><br>\n    </div>\n    "
     }),
     __metadata("design:paramtypes", [web_service_1.WebService])
 ], UsersComponent);

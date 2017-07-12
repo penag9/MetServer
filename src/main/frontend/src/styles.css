@@ -4,6 +4,11 @@ h1 {
   font-size: 250%;
 }
 
+h2 {
+  color: #369;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 button {
   background-color: lightsteelblue;
   border-radius: 5px;
@@ -32,4 +37,22 @@ button.main {
 table {
   width:60%;
   padding: 50pt;
+}
+
+div.user {
+  box-shadow: 5px 5px 5px lightsteelblue;
+}
+
+div.navBar {
+  min-height: 40pt;
+  box-shadow: 5px 5px 5px lightsteelblue;
+}
+
+.center {
+  text-align: center;
+}
+
+.tab {
+  position: absolute;
+  left: 120pt;
 }

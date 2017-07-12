@@ -6,7 +6,7 @@ import { WebService } from './web.service';
 @Component({
     selector: 'login',
     template: ` 
-    <h1> Добро пожаловать (для демо - А А )</h1>
+    <h1 class="center"> Добро пожаловать (для демо - А А )</h1>
     <h1 style="color: red"> {{errorMessage}} </h1>
     <form>
         <label> Логин : </label>

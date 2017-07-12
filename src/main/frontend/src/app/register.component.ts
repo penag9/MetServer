@@ -7,8 +7,8 @@ import { WebService } from './web.service';
 @Component({
     selector: 'register',
     template: ` 
-    <h1> Регистрация нового пользователя </h1>
-    <h1 style="color: red"> {{errorMessage}} </h1>
+    <h1 class="center"> Регистрация нового пользователя </h1>
+    <h1 style="color: red" class="center"> {{errorMessage}} </h1>
     <form>
         <label> Логин : </label>
         <input type="text" [(ngModel)]="data.username" name="username" required>

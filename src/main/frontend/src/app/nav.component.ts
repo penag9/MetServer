@@ -6,9 +6,9 @@ import { WebService } from './web.service';
 @Component({
     selector: 'nav',
     template: `
-    <div>
+    <div class="navBar">
             <button class="lang" >Рус</button>
-            <button class="lang"  >Eng</button>
+            <button class="lang" routerLink="/" >Eng</button>
             <button class="lang"  >עב</button>
             <button *ngIf="!webService.isAuthenticated"  class="right" routerLink="/register">Register</button>
             <button *ngIf="!webService.isAuthenticated"  class="right"  routerLink="/login">Login</button>

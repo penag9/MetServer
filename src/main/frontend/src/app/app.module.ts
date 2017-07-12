@@ -14,6 +14,8 @@ import { LoginComponent } from './login.component';
 import { RegisterComponent } from './register.component';
 import { UsersComponent } from './users.component';
 import { MessagesComponent } from './messages.component';
+import { HVComponent } from './requests/hire-vacation.component';
+import { AVComponent } from './requests/apply-vacation.component';
 
 let routes = [
   { path : '',
@@ -31,6 +33,24 @@ let routes = [
   { path : 'messages',
     component : MessagesComponent
   },
+  { path : 'request/APermanent',
+    component : AVComponent
+  },
+  { path : 'request/AVacation',
+    component : AVComponent
+  },
+  { path : 'request/AHollyday',
+    component : AVComponent
+  },
+  { path : 'request/HPermanent',
+    component : HVComponent
+  },
+  { path : 'request/HVacation',
+    component : HVComponent
+  },
+  { path : 'request/HHollyday',
+    component : HVComponent
+  },
   { path : 'register',
     component : RegisterComponent
   }];
@@ -38,7 +58,8 @@ let routes = [
 @NgModule({
   imports:      [ BrowserModule, FormsModule, HttpModule,  RouterModule.forRoot(routes) ],
   declarations: [ AppComponent, NavComponent, HomeComponent, RequestComponent,
-                  LoginComponent, MessagesComponent, RegisterComponent, UsersComponent ],
+                  LoginComponent, MessagesComponent, RegisterComponent, UsersComponent,
+                  HVComponent, AVComponent ],
   bootstrap:    [ AppComponent ],
   providers:    [ WebService ]
 })

@@ -4,10 +4,12 @@ import { WebService } from './web.service';
 @Component({
     selector: 'users',
     template: `
-    <div *ngFor="let user of webService.users">
-            <h2>{{user.name}}</h2><br>
-            {{user.text}} <br>
-            ------------ 
+    <br>
+    <h1 class="center"> Список пользователей </h1>
+    <br>
+    <div class="user" *ngFor="let user of webService.users">
+            <h2>Имя - {{user.name}}</h2><br>
+            Данные - {{user.text}} <br>
         <br><br>
     </div>
     `

@@ -29,7 +29,7 @@ export class WebService {
 
   async register(data) {
     try {
-      let response = await this.postMessage('register', data);
+      let response = await this.postMessage('user', data);
 
       /*
 if OK put in local storage and return true, else return false
@@ -48,8 +48,8 @@ if OK put in local storage and return true, else return false
       */
     } catch (error) {
       this.handleError('Unable to get message');
+      return false;
     }
-    return false;
   }
 
   async getUsersList() {
@@ -58,6 +58,19 @@ if OK put in local storage and return true, else return false
       this.users.push(response.json());
     } catch (error) {
       this.handleError('Unable to get message');
+      return false;
     }
   }
+
+
+  async placeRequest(data) {
+    try {
+      let response = await this.postMessage('message', data);
+      if (response.json()) return true;
+    } catch (error) {
+      this.handleError('Unable to get message');
+      return false;
+    }
+  }
+
 }
