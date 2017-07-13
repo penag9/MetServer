@@ -29,46 +29,46 @@ import { WebService } from '../web.service';
         <input class="tab" type="text" [(ngModel)]="data.place" name="place">
         <br><br>
         <label> Языки : </label>
-        <div class="tab">
-            <input type="checkbox" [(ngModel)]="data.russian" name="russian"> Русский  
-               <select [(ngModel)]="data.russianLevel" name="russianLevel">
+        <span class="tab">
+            <input type="checkbox" [(ngModel)]="data.russian" name="russian" (click)="checkRussian()"> Русский  
+               <select [(ngModel)]="data.russianLevel" name="russianLevel" (change)="levelRussian()">
                   <option value="0"> Уровень </option>
-                  <option value="1"> Плохо </option>
-                  <option value="2"> С трудом </option>
-                  <option value="3"> Хорошо </option>
-                  <option value="4"> Родной </option>
+                  <option value="1" (click)="levelRussian()"> Плохо </option>
+                  <option value="2" (click)="levelRussian()"> С трудом </option>
+                  <option value="3" (click)="levelRussian()"> Хорошо </option>
+                  <option value="4" (click)="levelRussian()"> Родной </option>
               </select> 
-        </div><br><br><br>
-        <div class="tab">
-            <input type="checkbox" [(ngModel)]="data.hebrew" name="hebrew"> Иврит 
-                <select [(ngModel)]="data.hebrewLevel" name="hebrewLevel">
+        </span><br><br>
+        <span class="tab">
+            <input type="checkbox" [(ngModel)]="data.hebrew" name="hebrew" (click)="checkHebrew()"> Иврит 
+                <select [(ngModel)]="data.hebrewLevel" name="hebrewLevel" (change)="levelHebrew()">
                     <option value="0"> Уровень </option>
                     <option value="1"> Плохо </option>
                     <option value="2"> С трудом </option>
                     <option value="3"> Хорошо </option>
                     <option value="4"> Родной </option>
                 </select> 
-        </div><br><br>  
-        <div class="tab">
-            <input type="checkbox" [(ngModel)]="data.romanian" name="romanian"> Румынский  
-                <select [(ngModel)]="data.romanianLevel" name="romanianLevel">
+        </span><br><br>  
+        <span class="tab">
+            <input type="checkbox" [(ngModel)]="data.romanian" name="romanian" (click)="checkRomanian()"> Румынский  
+                <select [(ngModel)]="data.romanianLevel" name="romanianLevel" (change)="levelRomanian()">
                     <option value="0"> Уровень </option>
-                    <option value="1"> Плохо </option>
-                    <option value="2"> С трудом </option>
-                    <option value="3"> Хорошо </option>
-                    <option value="4"> Родной </option>
+                    <option value="1" (click)="levelRomanian()"> Плохо </option>
+                    <option value="2" (click)="levelRomanian()"> С трудом </option>
+                    <option value="3" (click)="levelRomanian()"> Хорошо </option>
+                    <option value="4" (click)="levelRomanian()"> Родной </option>
                 </select> 
-        </div><br><br>
-        <div class="tab">
-            <input type="checkbox" [(ngModel)]="data.english" name="english"> Английский 
-                <select [(ngModel)]="data.englishLevel" name="englishLevel">
+        </span><br><br>
+        <span class="tab">
+            <input type="checkbox" [(ngModel)]="data.english" name="english" (click)="checkEnglish()"> Английский 
+                <select [(ngModel)]="data.englishLevel" name="englishLevel" (change)="levelEnglish()">
                     <option value="0"> Уровень </option>
-                    <option value="1"> Плохо </option>
-                    <option value="2"> С трудом </option>
-                    <option value="3"> Хорошо </option>
-                    <option value="4"> Родной </option>
+                    <option value="1" (click)="levelEnglish()"> Плохо </option>
+                    <option value="2" (click)="levelEnglish()"> С трудом </option>
+                    <option value="3" (click)="levelEnglish()"> Хорошо </option>
+                    <option value="4" (click)="levelEnglish()"> Родной </option>
                 </select> 
-        </div><br>
+        </span><br>
         <br><br>
         <label> Дополнительная информация : </label><br>
         <textarea rows="10" cols="100" [(ngModel)]="data.freetext" name="freetext"></textarea>
@@ -102,12 +102,12 @@ export class AVComponent {
     constructor(private webService: WebService, private router: Router) { }
 
     placeRequest() {
+
         if (!this.checkDate(this.data.begin) || !this.checkDate(this.data.end)
             || !this.checkDateOrder(this.data.begin, this.data.end)) {
             this.errorMessage = 'Ошибка в дате.';
             return;
         } else {
-            this.errorMessage = 'Нет ошибки';
 
         }
 
@@ -141,5 +141,41 @@ export class AVComponent {
         } else {
             return true;
         }
+    }
+
+    checkRussian() {
+        if(this.data.russian) this.data.russianLevel = 0;
+    }
+
+    levelRussian() {
+        if( this.data.russianLevel > 0 ) this.data.russian = true;
+        else this.data.russian = false;
+    }
+
+    checkHebrew() {
+        if(this.data.hebrew) this.data.hebrewLevel = 0;
+    }
+
+    levelHebrew() {
+        if( this.data.hebrewLevel > 0 ) this.data.hebrew = true;
+        else this.data.hebrew = false;
+    }
+    
+    checkRomanian() {
+        if(this.data.romanian) this.data.romanianLevel = 0;
+    }
+
+    levelRomanian() {
+        if( this.data.romanianLevel > 0 ) this.data.romanian = true;
+        else this.data.romanian = false;
+    }
+    
+    checkEnglish() {
+        if(this.data.english) this.data.englishLevel = 0;
+    }
+
+    levelEnglish() {
+        if( this.data.englishLevel > 0 ) this.data.english = true;
+        else this.data.english = false;
     }
 }

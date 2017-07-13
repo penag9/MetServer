@@ -29,18 +29,18 @@ import { WebService } from '../web.service';
         <input class="tab" type="text" [(ngModel)]="data.place" name="place">
         <br><br>
         <label> Языки : </label>
-        <div class="tab">
+        <span class="tab">
             <input type="checkbox" [(ngModel)]="data.russian" name="russian"> Русский  
-        </div><br><br><br>  
-        <div class="tab">
+        </span><br><br>  
+        <span class="tab">
             <input type="checkbox" [(ngModel)]="data.hebrew" name="hebrew"> Иврит 
-        </div><br><br>  
-        <div class="tab">
+        </span><br><br>  
+        <span class="tab">
             <input type="checkbox" [(ngModel)]="data.romanian" name="romanian"> Румынский 
-        </div><br><br>  
-        <div class="tab">
+        </span><br><br>  
+        <span class="tab">
             <input type="checkbox" [(ngModel)]="data.english" name="english"> Английский
-        </div><br><br>
+        </span><br><br>
         <label> Дополнительная информация : </label><br>
         <textarea rows="10" cols="100" [(ngModel)]="data.freetext" name="freetext"></textarea>
         <br><br>
@@ -74,7 +74,6 @@ export class HVComponent {
             this.errorMessage = 'Ошибка в дате.';
             return;
         } else {
-            this.errorMessage = 'Нет ошибки';
 
         }
 

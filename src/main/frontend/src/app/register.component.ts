@@ -11,26 +11,28 @@ import { WebService } from './web.service';
     <h1 style="color: red" class="center"> {{errorMessage}} </h1>
     <form>
         <label> Логин : </label>
-        <input type="text" [(ngModel)]="data.username" name="username" required>
+        <input class="tab" type="text" [(ngModel)]="data.username" name="username" required>
         <br><br>
         <label> Пароль : </label>
-        <input type="password" [(ngModel)]="data.password" name="password" required>
+        <input class="tab" type="password" [(ngModel)]="data.password" name="password" required>
         <br><br>
         <label> Повторите пароль : </label>
-        <input type="password" [(ngModel)]="data.password2" name="password2" required>
+        <input class="tab" type="password" [(ngModel)]="data.password2" name="password2" required>
         <br><br>
         <label> Электронная почта : </label>
-        <input type="email" [(ngModel)]="data.email" name="email">
+        <input class="tab" type="email" [(ngModel)]="data.email" name="email">
         <br><br>
         <label> Номер телефона : </label>
-        <input type="text" [(ngModel)]="data.phone" name="phone">
+        <input class="tab" type="text" [(ngModel)]="data.phone" name="phone">
         <br><br>
         <label> Имя : </label>
-        <input type="text" [(ngModel)]="data.name" name="name">
+        <input class="tab" type="text" [(ngModel)]="data.name" name="name">
         <br><br>
         <label> Пол : </label>
-        <input type="radio" [(ngModel)]="data.gender" name="gender" value="Male"> Мужской  
-        <input type="radio" [(ngModel)]="data.gender" name="gender"  value="Female"> Женский
+        <span class="tab" >
+             <input type="radio" [(ngModel)]="data.gender" name="gender" value="Male"> Мужской  
+             <input type="radio" [(ngModel)]="data.gender" name="gender"  value="Female"> Женский
+        </span>
         <br><br>
         <button  (click)="register()"> Войти </button>  
     </form>       
@@ -55,7 +57,10 @@ export class RegisterComponent {
 
     register() {
 
-
+        if(this.data.password != this.data.password2) {
+            this.errorMessage = 'Пароль не потвержден.';
+            return;
+        }
         /*
          if(webService.login(data)) ;
             this.errorMessage = '';

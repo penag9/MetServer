@@ -56,3 +56,25 @@ div.navBar {
   position: absolute;
   left: 120pt;
 }
+
+table.show {
+    border: 1px solid white;
+    width: 100%;
+}
+
+tr.show:nth-child(even) {
+  background-color: lightblue;
+}
+
+tr.show:nth-child(odd) {
+  background-color: lightsteelblue
+}
+
+tr.show:hover {
+  background-color: lightgreen;
+}
+
+th.show {
+    background-color: lightskyblue;
+    color: white;
+}

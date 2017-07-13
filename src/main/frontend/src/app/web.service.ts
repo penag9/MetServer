@@ -73,4 +73,8 @@ if OK put in local storage and return true, else return false
     }
   }
 
+  getHireForVacationList() {}
+
+  getApplyForVacationList() {}
+
 }

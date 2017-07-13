@@ -146,6 +146,8 @@ var WebService = (function () {
             });
         });
     };
+    WebService.prototype.getHireForVacationList = function () { };
+    WebService.prototype.getApplyForVacationList = function () { };
     return WebService;
 }());
 WebService = __decorate([

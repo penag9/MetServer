@@ -16,6 +16,8 @@ import { UsersComponent } from './users.component';
 import { MessagesComponent } from './messages.component';
 import { HVComponent } from './requests/hire-vacation.component';
 import { AVComponent } from './requests/apply-vacation.component';
+import { ShowHireVacationComponent } from './show/show-hire-vacation.component';
+import { ShowApplyVacationComponent } from './show/show-apply-vacation.component';
 
 let routes = [
   { path : '',
@@ -51,6 +53,12 @@ let routes = [
   { path : 'request/HHollyday',
     component : HVComponent
   },
+  { path : 'show/SHVacation',
+    component : ShowHireVacationComponent
+  },
+  { path : 'show/SAVacation',
+    component : ShowApplyVacationComponent
+  },
   { path : 'register',
     component : RegisterComponent
   }];
@@ -59,7 +67,7 @@ let routes = [
   imports:      [ BrowserModule, FormsModule, HttpModule,  RouterModule.forRoot(routes) ],
   declarations: [ AppComponent, NavComponent, HomeComponent, RequestComponent,
                   LoginComponent, MessagesComponent, RegisterComponent, UsersComponent,
-                  HVComponent, AVComponent ],
+                  HVComponent, AVComponent, ShowHireVacationComponent,ShowApplyVacationComponent ],
   bootstrap:    [ AppComponent ],
   providers:    [ WebService ]
 })

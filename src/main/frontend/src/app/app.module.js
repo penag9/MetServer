@@ -21,6 +21,8 @@ var users_component_1 = require("./users.component");
 var messages_component_1 = require("./messages.component");
 var hire_vacation_component_1 = require("./requests/hire-vacation.component");
 var apply_vacation_component_1 = require("./requests/apply-vacation.component");
+var show_hire_vacation_component_1 = require("./show/show-hire-vacation.component");
+var show_apply_vacation_component_1 = require("./show/show-apply-vacation.component");
 var routes = [
     { path: '',
         component: home_component_1.HomeComponent
@@ -55,6 +57,12 @@ var routes = [
     { path: 'request/HHollyday',
         component: hire_vacation_component_1.HVComponent
     },
+    { path: 'show/SHVacation',
+        component: show_hire_vacation_component_1.ShowHireVacationComponent
+    },
+    { path: 'show/SAVacation',
+        component: show_apply_vacation_component_1.ShowApplyVacationComponent
+    },
     { path: 'register',
         component: register_component_1.RegisterComponent
     }
@@ -69,7 +77,7 @@ AppModule = __decorate([
         imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, router_1.RouterModule.forRoot(routes)],
         declarations: [app_component_1.AppComponent, nav_component_1.NavComponent, home_component_1.HomeComponent, request_component_1.RequestComponent,
             login_component_1.LoginComponent, messages_component_1.MessagesComponent, register_component_1.RegisterComponent, users_component_1.UsersComponent,
-            hire_vacation_component_1.HVComponent, apply_vacation_component_1.AVComponent],
+            hire_vacation_component_1.HVComponent, apply_vacation_component_1.AVComponent, show_hire_vacation_component_1.ShowHireVacationComponent, show_apply_vacation_component_1.ShowApplyVacationComponent],
         bootstrap: [app_component_1.AppComponent],
         providers: [web_service_1.WebService]
     })
