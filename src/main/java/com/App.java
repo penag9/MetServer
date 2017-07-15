@@ -1,4 +1,4 @@
-package app;
+package com;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class App {
 
     public static void main (String [] args)    {
-        //new SpringApplicationBuilder(app.App.class).web(false).run(args);
+        //new SpringApplicationBuilder(com.App.class).web(false).run(args);
         SpringApplication.run(App.class, args);
     }
 }

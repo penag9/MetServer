@@ -1,6 +1,6 @@
-package repository;
+package com.repository;
 
-import model.User;
+import com.model.User;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 

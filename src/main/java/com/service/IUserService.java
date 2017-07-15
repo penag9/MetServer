@@ -1,13 +1,13 @@
-package service;
+package com.service;
 
-import model.User;
+import com.model.User;
 
 /**
  * Created by faina on 09/06/17.
  */
 public interface IUserService {
 
-    boolean saveUser(User user);
+    User saveUser(User user);
 
     User getUser(String username);
 }
