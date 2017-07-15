@@ -1,0 +1,1 @@
+To run demo please run npm install and then npm start.

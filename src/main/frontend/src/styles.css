@@ -1,0 +1,80 @@
+h1 {
+  color: #369;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 250%;
+}
+
+h2 {
+  color: #369;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button {
+  background-color: lightsteelblue;
+  border-radius: 5px;
+}
+
+button.leng {
+ margin: 1%;
+ width: 10pt;
+ height: 10pt;
+}
+
+button.right {
+ float: right;
+ margin: 1%;
+ width: 50pt;
+ height: 25pt;
+}
+
+button.main {
+  margin: 40px;
+  border-radius: 10px;
+  width : 150pt;
+  height: 150pt;
+}
+
+table {
+  width:60%;
+  padding: 50pt;
+}
+
+div.user {
+  box-shadow: 5px 5px 5px lightsteelblue;
+}
+
+div.navBar {
+  min-height: 40pt;
+  box-shadow: 5px 5px 5px lightsteelblue;
+}
+
+.center {
+  text-align: center;
+}
+
+.tab {
+  position: absolute;
+  left: 120pt;
+}
+
+table.show {
+    border: 1px solid white;
+    width: 100%;
+}
+
+tr.show:nth-child(even) {
+  background-color: lightblue;
+}
+
+tr.show:nth-child(odd) {
+  background-color: lightsteelblue
+}
+
+tr.show:hover {
+  background-color: lightgreen;
+}
+
+th.show {
+    background-color: lightskyblue;
+    color: white;
+}
