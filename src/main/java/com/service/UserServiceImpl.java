@@ -1,8 +1,8 @@
-package service;
+package com.service;
 
-import model.User;
+import com.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import repository.IUserRepositry;
+import com.repository.IUserRepositry;
 
 /**
  * Created by faina on 24/06/17.
@@ -14,15 +14,15 @@ public class UserServiceImpl implements IUserService {
 
 
     @Override
-    public boolean saveUser(User user) {
+    public User saveUser(User user) {
         if (isValiid(user)) {
             User createdUser = userRepository.save(user);
             if (createdUser != null)    {
-                return true;
+                return createdUser;
             }
         }
 
-        return false;
+        return null;
     }
 
     private boolean isValiid(User user) {
@@ -31,7 +31,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public User getUser(String username) {
-        return userRepository.findOne(username);
+    public User getUser(String id) {
+        return userRepository.findOne(id);
     }
 }
