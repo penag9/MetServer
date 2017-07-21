@@ -1,1 +1,1 @@
-To run demo please run npm install and then npm start.
+To run demo please install Node.js, then run "npm install" and then "npm start".
