@@ -49,10 +49,32 @@ require("rxjs/add/operator/toPromise");
 var WebService = (function () {
     function WebService(http) {
         this.http = http;
-        this.BASE_URL = 'http://localhost:63145/api';
+        this.BASE_URL = 'http://localhost:8080/';
         this.users = [{ name: 'A', text: 'A' }, { name: 'B', text: 'B' }];
         this.isAuthenticated = false;
         this.currentUser = '';
+        this.currentTable = [{
+                id: 1, lang: 'Русский', place: 'Яфо', begin: '2/3/2017', end: '  5/3/2017', name: 'Кто-то 1',
+                phone: '11111', russian: true, russianLevel: 3, hebrew: false, hebrewLevel: 0, romanian: false,
+                romanianLevel: 0, english: false, englishLevel: 0, freetext: 'aaaaa'
+            },
+            {
+                id: 2, lang: 'Русский, Иврит, Румынский, Английский', place: 'Яфо', begin: '3/4/2017', end: '  7/4/2017', name: 'Кто-то 2',
+                phone: '22222', russian: true, russianLevel: 3, hebrew: true, hebrewLevel: 1, romanian: true,
+                romanianLevel: 1, english: true, englishLevel: 2, freetext: 'ssssss'
+            },
+            {
+                id: 3, lang: 'Русский, Иврит', place: 'Яфо', begin: '4/5/2017', end: '  8/5/2017', name: 'Кто-то 3',
+                phone: '33333', russian: true, russianLevel: 3, hebrew: true, hebrewLevel: 3, romanian: false,
+                romanianLevel: 0, english: false, englishLevel: 0, freetext: 'dddddd'
+            },
+            {
+                id: 4, lang: 'Русский', place: 'Яфо', begin: '5/6/2017', end: '  9/6/2017', name: 'Кто-то 4',
+                phone: '444444', russian: true, russianLevel: 3, hebrew: false, hebrewLevel: 0, romanian: false,
+                romanianLevel: 0, english: false, englishLevel: 0, freetext: 'ffffff'
+            },
+        ];
+        this.currentMessageIndex = 1;
     }
     WebService.prototype.postMessage = function (type, message) {
         return this.http.post(this.BASE_URL + type, message).toPromise();
@@ -69,16 +91,22 @@ var WebService = (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, this.postMessage('user', data)];
+                        console.log('send ', JSON.stringify(data));
+                        _a.label = 1;
                     case 1:
-                        response = _a.sent();
-                        return [3 /*break*/, 3];
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.postMessage('users', JSON.stringify(data))];
                     case 2:
+                        response = _a.sent();
+                        console.log(response);
+                        localStorage.setItem('username', data.userName);
+                        localStorage.setItem('name', data.name);
+                        return [3 /*break*/, 4];
+                    case 3:
                         error_1 = _a.sent();
                         this.handleError('Unable to get message');
-                        return [3 /*break*/, 3];
-                    case 3: return [2 /*return*/, false];
+                        return [3 /*break*/, 4];
+                    case 4: return [2 /*return*/, false];
                 }
             });
         });
@@ -90,7 +118,7 @@ var WebService = (function () {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, this.postMessage('login', data)];
+                        return [4 /*yield*/, this.postMessage('login', JSON.stringify(data))];
                     case 1:
                         response = _a.sent();
                         return [3 /*break*/, 3];

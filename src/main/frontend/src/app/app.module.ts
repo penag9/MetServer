@@ -16,6 +16,8 @@ import { UsersComponent } from './users.component';
 import { MessagesComponent } from './messages.component';
 import { HVComponent } from './requests/hire-vacation.component';
 import { AVComponent } from './requests/apply-vacation.component';
+import { ShowHireVacationTableComponent } from './show/show-hire-vacation-table.component';
+import { ShowApplyVacationTableComponent } from './show/show-apply-vacation-table.component';
 import { ShowHireVacationComponent } from './show/show-hire-vacation.component';
 import { ShowApplyVacationComponent } from './show/show-apply-vacation.component';
 
@@ -53,6 +55,12 @@ let routes = [
   { path : 'request/HHollyday',
     component : HVComponent
   },
+  { path : 'show/SHVacationTable',
+    component : ShowHireVacationTableComponent
+  },
+  { path : 'show/SAVacationTable',
+    component : ShowApplyVacationTableComponent
+  },
   { path : 'show/SHVacation',
     component : ShowHireVacationComponent
   },
@@ -67,7 +75,8 @@ let routes = [
   imports:      [ BrowserModule, FormsModule, HttpModule,  RouterModule.forRoot(routes) ],
   declarations: [ AppComponent, NavComponent, HomeComponent, RequestComponent,
                   LoginComponent, MessagesComponent, RegisterComponent, UsersComponent,
-                  HVComponent, AVComponent, ShowHireVacationComponent,ShowApplyVacationComponent ],
+                  HVComponent, AVComponent, ShowHireVacationTableComponent,ShowApplyVacationTableComponent,
+                   ShowHireVacationComponent,ShowApplyVacationComponent ],
   bootstrap:    [ AppComponent ],
   providers:    [ WebService ]
 })

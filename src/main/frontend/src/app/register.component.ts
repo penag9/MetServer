@@ -11,13 +11,13 @@ import { WebService } from './web.service';
     <h1 style="color: red" class="center"> {{errorMessage}} </h1>
     <form>
         <label> Логин : </label>
-        <input class="tab" type="text" [(ngModel)]="data.username" name="username" required>
+        <input class="tab" type="text" [(ngModel)]="data.userName" name="username" required>
         <br><br>
         <label> Пароль : </label>
         <input class="tab" type="password" [(ngModel)]="data.password" name="password" required>
         <br><br>
         <label> Повторите пароль : </label>
-        <input class="tab" type="password" [(ngModel)]="data.password2" name="password2" required>
+        <input class="tab" type="password" [(ngModel)]="data.passwordRecovery" name="passwordRecovery" required>
         <br><br>
         <label> Электронная почта : </label>
         <input class="tab" type="email" [(ngModel)]="data.email" name="email">
@@ -41,9 +41,9 @@ import { WebService } from './web.service';
 export class RegisterComponent {
 
     data = {
-        username: '',
+        userName: '',
         password: '',
-        password2: '',
+        passwordRecovery: '',
         email: '',
         phone: '',
         name: '',
@@ -57,26 +57,27 @@ export class RegisterComponent {
 
     register() {
 
-        if(this.data.password != this.data.password2) {
+        if(this.data.password != this.data.passwordRecovery) {
             this.errorMessage = 'Пароль не потвержден.';
             return;
         }
-        /*
-         if(webService.login(data)) ;
+        
+         if(this.webService.register(this.data)) {
             this.errorMessage = '';
             this.router.navigate(['/']);
         } else {
             this.errorMessage = 'Проблема с регистрацией';
-        }*/
-        console.log('login with ', this.data);
-        if (this.data.username == 'A' && this.data.password == 'A') {
+        }
+        /*
+        if (this.data.userName == 'A' && this.data.password == 'A') {
             localStorage.setItem('pass', this.data.password);
-            localStorage.setItem('name', this.data.username);
+            localStorage.setItem('name', this.data.userName);
             this.webService.isAuthenticated = true;
             this.errorMessage = '';
             this.router.navigate(['/']);
         } else {
             this.errorMessage = 'Проблема с регистрацией';
         }
+        */
     }
 }

@@ -30,8 +30,7 @@ var LoginComponent = (function () {
             this.errorMessage = 'Неверный логин или пароль';
         }*/
         if (this.data.username == 'A' && this.data.password == 'A') {
-            localStorage.setItem('pass', 'A');
-            localStorage.setItem('name', 'A');
+            localStorage.setItem('username', 'A');
             this.webService.isAuthenticated = true;
             this.webService.currentUser = localStorage.getItem('name');
             this.errorMessage = '';
