@@ -11,41 +11,41 @@ h2 {
 
 button {
     background-color: lightsteelblue;
-    border-radius: 5px;
+    border-radius: 0.3rem;
 }
 
 button.leng {
     margin: 1%;
-    width: 10pt;
-    height: 10pt;
+    width: 1rem;
+    height: 1rem;
 }
 
 button.right {
     float: right;
-    margin: 1%;
-    width: 50pt;
-    height: 25pt;
+    margin: 0.5rem;
+    width: 5rem;
+    height: 2rem;
 }
 
 button.main {
-    margin: 40px;
-    border-radius: 10px;
-    width: 150pt;
-    height: 150pt;
+    margin: 2rem;
+    border-radius: 0.3rem;
+    width: 10rem;
+    height: 10rem;
 }
 
 table {
     width: 60%;
-    padding: 50pt;
+    padding: 4rem;
 }
 
 div.user {
-    box-shadow: 5px 5px 5px lightsteelblue;
+    box-shadow: 0.3rem 0.3rem 0.3rem lightsteelblue;
 }
 
 div.navBar {
-    min-height: 40pt;
-    box-shadow: 5px 5px 5px lightsteelblue;
+    min-height: 3rem;
+    box-shadow: 0.3rem 0.3rem 0.3rem lightsteelblue;
 }
 
 .center {
@@ -54,12 +54,12 @@ div.navBar {
 
 .tab {
     position: absolute;
-    left: 120pt;
+    left: 8rem;
 }
 
 .tab2 {
-    position: absolute;
-    left: 250pt;
+    position: relative;
+    left: 7rem;
 }
 
 table.show {

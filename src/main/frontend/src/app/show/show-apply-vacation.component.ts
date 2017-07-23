@@ -10,24 +10,24 @@ import { WebService } from '../web.service';
                                                 {{webService.currentTable[webService.currentMessageIndex].end}} </h2>
         <h2 class="center"> в {{webService.currentTable[webService.currentMessageIndex].place}} </h2><br><br>  
     <div>
-        <div style="float:left; width: 200px;">
+        <div style="display: inline-block; width: 200px;">
         Photo <br> Placeholder <br><br><br><br><br><br><br><br>
         Имя : {{webService.currentTable[webService.currentMessageIndex].name}}
         </div>
-        <div style="position:relative">
+        <div style="display: inline-block">
         <label>Знание языков :</label>
-            <span class="tab2" *ngIf="webService.currentTable[webService.currentMessageIndex].russian">        
+            <div class="tab2" *ngIf="webService.currentTable[webService.currentMessageIndex].russian">        
                 Русский  Уровень : {{webService.currentTable[webService.currentMessageIndex].russianLevel}}
-            </span><br><br>  
-            <span class="tab2" *ngIf="webService.currentTable[webService.currentMessageIndex].hebrew">        
+            </div><br>  
+            <div class="tab2" *ngIf="webService.currentTable[webService.currentMessageIndex].hebrew">        
                 Иврит  Уровень : {{webService.currentTable[webService.currentMessageIndex].hebrewLevel}}
-            </span><br><br>  
-            <span class="tab2" *ngIf="webService.currentTable[webService.currentMessageIndex].romanian">        
+            </div><br>  
+            <div class="tab2" *ngIf="webService.currentTable[webService.currentMessageIndex].romanian">        
                 Румынский  Уровень : {{webService.currentTable[webService.currentMessageIndex].romanianLevel}}
-            </span><br><br>  
-            <span class="tab2" *ngIf="webService.currentTable[webService.currentMessageIndex].english">        
+            </div><br>  
+            <div class="tab2" *ngIf="webService.currentTable[webService.currentMessageIndex].english">        
                 Английский  Уровень : {{webService.currentTable[webService.currentMessageIndex].englishLevel}}
-            </span><br><br>  
+            </div><br>  
             Телефон : {{webService.currentTable[webService.currentMessageIndex].phone}}
         </div> 
     </div><br><br>

@@ -9,10 +9,10 @@ import { WebService } from '../web.service';
                                                 {{webService.currentTable[webService.currentMessageIndex].end}}</h2>
     <h2 class="center"> в {{webService.currentTable[webService.currentMessageIndex].place}} </h2><br><br>  
     <label>Знание языков :</label>
-    <span class="tab" *ngIf="webService.currentTable[webService.currentMessageIndex].russian">  Русский</span><br><br>  
-    <span class="tab" *ngIf="webService.currentTable[webService.currentMessageIndex].hebrew">  Иврит  </span><br><br>  
-    <span class="tab" *ngIf="webService.currentTable[webService.currentMessageIndex].romanian">  Румынский  </span><br><br>  
-    <span class="tab" *ngIf="webService.currentTable[webService.currentMessageIndex].english">  Английский </span><br><br>  
+    <div class="tab2" *ngIf="webService.currentTable[webService.currentMessageIndex].russian">  Русский</div><br> 
+    <div class="tab2" *ngIf="webService.currentTable[webService.currentMessageIndex].hebrew">  Иврит  </div><br>  
+    <div class="tab2" *ngIf="webService.currentTable[webService.currentMessageIndex].romanian">  Румынский  </div><br>  
+    <div class="tab2" *ngIf="webService.currentTable[webService.currentMessageIndex].english">  Английский </div><br> 
     <label> Имя : </label>{{webService.currentTable[webService.currentMessageIndex].name}} <br><br>      
     <label> Телефон : </label>{{webService.currentTable[webService.currentMessageIndex].phone}} <br><br>      
     <label> Дополнительная информация : </label><br>

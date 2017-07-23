@@ -3,8 +3,8 @@ import { Component } from '@angular/core';
 @Component({
     selector: 'messages',
     template: `
-                <h2> Дать объявление </h2>
-    <table>  
+                <h2 class="center"> Дать объявление </h2>
+    <table class="show">  
         <tr>
             <td><button  class="main" routerLink="/request/APermanent"> Ищу постоянную работу </button></td>
             <td><button  class="main" routerLink="/request/AVacation"> Могу заменить на время отпуска </button></td>
