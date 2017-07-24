@@ -70,6 +70,27 @@ public class User {
         return passwordRecovery;
     }
 
+    @Column(name="sex")
+    private String sex;
+
+    @Column(name="lang")
+    private String lang;
+
+    @Column(name="picture")
+    private String picture;
+
+    public String getSex() {
+        return sex;
+    }
+
+    public String getLang() {
+        return lang;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
     @Override
     public boolean equals(Object otherUser)   {
 

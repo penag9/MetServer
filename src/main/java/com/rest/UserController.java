@@ -37,7 +37,7 @@ public class UserController {
             status = HttpStatus.CONFLICT;
         }
         else {
-            headers.add("faina", savedUser.getUserName());
+            headers.add("username", savedUser.getUserName());
         }
 
         return new ResponseEntity<String>(headers, status);
