@@ -4,7 +4,7 @@ import { WebService } from './web.service';
 @Component({
     selector: 'home',
     template: ` 
-    <h1  class="center"> Добро пожаловать {{webService.currentUser}}</h1>
+    <br><br>
     <button  class="main" routerLink="/messages"> Дать объявление </button>    
     <button  class="main" routerLink="/users" (click)="webService.getUsersList()"> Список пользователей </button>     
     <button  class="main" routerLink="/show/SAVacationTable" (click)="webService.getApplyForVacationList()"> Замены на выходные </button>     

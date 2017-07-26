@@ -28,7 +28,8 @@ var NavComponent = (function () {
 NavComponent = __decorate([
     core_1.Component({
         selector: 'nav',
-        template: "\n    <div class=\"navBar\">\n            <button class=\"lang\" >\u0420\u0443\u0441</button>\n            <button class=\"lang\" routerLink=\"/\" >Eng</button>\n            <button class=\"lang\"  >\u05E2\u05D1</button>\n            <button *ngIf=\"!webService.isAuthenticated\"  class=\"right\" routerLink=\"/register\">Register</button>\n            <button *ngIf=\"!webService.isAuthenticated\"  class=\"right\"  routerLink=\"/login\">Login</button>\n            <button *ngIf=\"webService.isAuthenticated\"   class=\"right\" routerLink=\"/\" >Profile</button>                                    \n            <button *ngIf=\"webService.isAuthenticated\"   class=\"right\" (click)=\"logout()\" >Logout</button> \n    </div>\n    "
+        template: "\n    <div class=\"navBar\">\n            <button class=\"lang\" >\u0420\u0443\u0441</button>\n            <button class=\"lang\" routerLink=\"/\" >Eng</button>\n            <button class=\"lang\"  >\u05E2\u05D1</button>\n            <button *ngIf=\"!webService.isAuthenticated\"  class=\"right\" routerLink=\"/register\">Register</button>\n            <button *ngIf=\"!webService.isAuthenticated\"  class=\"right\"  routerLink=\"/login\">Login</button>\n            <button *ngIf=\"webService.isAuthenticated\"   class=\"right\" routerLink=\"/\" >Profile</button>                                    \n            <button *ngIf=\"webService.isAuthenticated\"   class=\"right\" (click)=\"logout()\" >Logout</button> \n    </div>\n    ",
+        styleUrls: ['./nav.component.css']
     }),
     __metadata("design:paramtypes", [web_service_1.WebService, router_1.Router])
 ], NavComponent);

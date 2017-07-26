@@ -15,7 +15,8 @@ import { WebService } from './web.service';
             <button *ngIf="webService.isAuthenticated"   class="right" routerLink="/" >Profile</button>                                    
             <button *ngIf="webService.isAuthenticated"   class="right" (click)="logout()" >Logout</button> 
     </div>
-    `
+    `,
+    styleUrls: ['./nav.component.css']
 })
 export class NavComponent {
 

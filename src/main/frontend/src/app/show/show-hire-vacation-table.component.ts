@@ -26,7 +26,8 @@ import { WebService } from '../web.service';
         </table>
 
     </div>
-    `
+    `,
+    styleUrls: ['./show.css']
 })
 export class ShowHireVacationTableComponent {
 

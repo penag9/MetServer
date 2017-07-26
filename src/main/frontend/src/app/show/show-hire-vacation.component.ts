@@ -19,7 +19,8 @@ import { WebService } from '../web.service';
     <textarea rows="10" cols="100" readonly name="freetext">{{webService.currentTable[webService.currentMessageIndex].freetext}}</textarea>
     <br><br>
     <button type="button" onclick="history.back()">Обратно</button>
-    `
+    `,
+    styleUrls: ['./show.css']
 })
 export class ShowHireVacationComponent {
 
