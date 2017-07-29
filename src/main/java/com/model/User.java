@@ -1,5 +1,8 @@
 package com.model;
 
+import lombok.Getter;
+
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -11,6 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "users")
+@Getter
 public class User {
 
     /**TODO:
@@ -37,38 +41,17 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    //TODO: encrypt pwd!!
-    public String getPassword() {
-        return password;
-    }
-
     @Column(name = "name")
     private String name;
-
-    public String getName() {
-        return name;
-    }
 
     @Column(name = "phone_number")
     private String phone;
 
-    public String getPhone() {
-        return phone;
-    }
-
     @Column(name = "email")
     private String email;
 
-    public String getEmail() {
-        return email;
-    }
-
     @Column(name = "password_recovery")
     private String passwordRecovery;
-
-    public String getpasswordRecovery() {
-        return passwordRecovery;
-    }
 
     @Column(name="sex")
     private String sex;
@@ -79,19 +62,7 @@ public class User {
     @Column(name="picture")
     private String picture;
 
-    public String getSex() {
-        return sex;
-    }
-
-    public String getLang() {
-        return lang;
-    }
-
-    public String getPicture() {
-        return picture;
-    }
-
-    @Override
+     @Override
     public boolean equals(Object otherUser)   {
 
         if ( super.equals(otherUser)  )   {
