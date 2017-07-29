@@ -1,43 +1,30 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { WebService } from '../web.service';
 
 @Component({
     selector: 'show-hire-vacation',
     template: ` 
-    <h2 class="center"> Требуется замена на время отпуска </h2>
-    <div style="overflow-x:auto;">
-        <table class="show">
-            <tr>
-                <th class="show"> Языки </th>
-                <th class="show"> Где </th>
-                <th class="show"> По какое число </th>
-                <th class="show"> С какого числа </th>
-                <th class="show"> Имя </th>
-            </tr>
-            <tr class="show" *ngFor="let user of data">
-                <td class="show">{{user.lang}}</td>
-                <td class="show">{{user.place}}</td>
-                <td class="show">{{user.end}}</td>
-                <td class="show">{{user.begin}}</td>
-                <td class="show">{{user.name}}</td>
-            </tr>
-        </table>
-
-    </div>
-    `
+    <h2 class="center"> Требуется замена c {{webService.currentTable[webService.currentMessageIndex].begin}} по 
+                                                {{webService.currentTable[webService.currentMessageIndex].end}}</h2>
+    <h2 class="center"> в {{webService.currentTable[webService.currentMessageIndex].place}} </h2><br><br>  
+    <label>Знание языков :</label>
+    <div class="tab2" *ngIf="webService.currentTable[webService.currentMessageIndex].russian">  Русский</div><br> 
+    <div class="tab2" *ngIf="webService.currentTable[webService.currentMessageIndex].hebrew">  Иврит  </div><br>  
+    <div class="tab2" *ngIf="webService.currentTable[webService.currentMessageIndex].romanian">  Румынский  </div><br>  
+    <div class="tab2" *ngIf="webService.currentTable[webService.currentMessageIndex].english">  Английский </div><br> 
+    <label> Имя : </label>{{webService.currentTable[webService.currentMessageIndex].name}} <br><br>      
+    <label> Телефон : </label>{{webService.currentTable[webService.currentMessageIndex].phone}} <br><br>      
+    <label> Дополнительная информация : </label><br>
+    <textarea rows="10" cols="100" readonly name="freetext">{{webService.currentTable[webService.currentMessageIndex].freetext}}</textarea>
+    <br><br>
+    <button type="button" onclick="history.back()">Обратно</button>
+    `,
+    styleUrls: ['./show.css']
 })
 export class ShowHireVacationComponent {
 
-    data = [{lang: 'Русский', place: 'Яфо', begin: '2/3/2017', end: '  5/3/2017', name: 'Кто-то 1'},
-            {lang: 'Русский', place: 'Яфо', begin: '3/4/2017', end: '  7/4/2017', name: 'Кто-то 2'},
-            {lang: 'Русский', place: 'Яфо', begin: '4/5/2017', end: '  8/5/2017', name: 'Кто-то 3'},
-            {lang: 'Русский', place: 'Яфо', begin: '5/6/2017', end: '  9/6/2017', name: 'Кто-то 4'},
-    ];
 
-    errorMessage = '';
-
-    constructor(private webService: WebService, private router: Router) { }
+    constructor(private webService: WebService) { }
 
 }

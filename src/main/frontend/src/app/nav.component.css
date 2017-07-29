@@ -1,0 +1,22 @@
+button.lang {
+    margin: 11px;
+    width: 78px;
+    height: 42.5px;
+    border-radius: 8.2px;
+    color: white;
+    background-color: #fc5c03;
+}
+
+button.right {
+    float: right;
+    margin: 0.5rem;
+    width: 6rem;
+    height: 3rem;
+    border-radius: 0.5rem;
+    color: white;
+    background-color: #fc5c03;
+}
+
+div.navBar {
+    min-height: 3rem;
+}

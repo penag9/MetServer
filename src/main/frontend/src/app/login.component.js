@@ -30,8 +30,7 @@ var LoginComponent = (function () {
             this.errorMessage = 'Неверный логин или пароль';
         }*/
         if (this.data.username == 'A' && this.data.password == 'A') {
-            localStorage.setItem('pass', 'A');
-            localStorage.setItem('name', 'A');
+            localStorage.setItem('username', 'A');
             this.webService.isAuthenticated = true;
             this.webService.currentUser = localStorage.getItem('name');
             this.errorMessage = '';
@@ -46,7 +45,7 @@ var LoginComponent = (function () {
 LoginComponent = __decorate([
     core_1.Component({
         selector: 'login',
-        template: " \n    <h1 class=\"center\"> \u0414\u043E\u0431\u0440\u043E \u043F\u043E\u0436\u0430\u043B\u043E\u0432\u0430\u0442\u044C (\u0434\u043B\u044F \u0434\u0435\u043C\u043E - \u0410 \u0410 )</h1>\n    <h1 style=\"color: red\"> {{errorMessage}} </h1>\n    <form>\n        <label> \u041B\u043E\u0433\u0438\u043D : </label>\n        <input type=\"text\" [(ngModel)]=\"data.username\" name=\"username\">\n        <br><br>\n        <label> \u041F\u0430\u0440\u043E\u043B\u044C : </label>\n        <input type=\"password\" [(ngModel)]=\"data.password\" name=\"password\">\n        <br><br>\n        <button  (click)=\"login()\"> \u0412\u043E\u0439\u0442\u0438 </button>  \n    </form>       \n    "
+        template: " \n    <h1 class=\"center\"> \u0414\u043E\u0431\u0440\u043E \u043F\u043E\u0436\u0430\u043B\u043E\u0432\u0430\u0442\u044C (\u0434\u043B\u044F \u0434\u0435\u043C\u043E - \u0410 \u0410 )</h1>\n    <h1 style=\"color: red\"> {{errorMessage}} </h1>\n    \n    <form #f=\"ngForm\" (ngSubmit)=\"login()\">\n        <p>\n            <label> \u041B\u043E\u0433\u0438\u043D : </label>\n            <input type=\"text\"  \n                [(ngModel)]=\"data.username\" required  name=\"username\" >\n        </p>\n        <p>\n            <label> \u041F\u0430\u0440\u043E\u043B\u044C : </label>\n            <input type=\"password\"  \n                [(ngModel)]=\"data.password\" required  name=\"password\">\n        </p>\n        <p>\n            <button type=\"submit\" [disabled]=\"!f.valid\">\u0412\u043E\u0439\u0442\u0438</button>\n        </p>\n    </form>\n    "
     }),
     __metadata("design:paramtypes", [web_service_1.WebService, router_1.Router])
 ], LoginComponent);

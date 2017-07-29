@@ -1,0 +1,27 @@
+button {
+    border-radius: 8.2px;
+    color: white;
+    background-color: #fc5c03;
+}
+
+table.show {
+    width: 100%;
+    padding: 4rem;
+}
+
+tr.show:nth-child(even) {
+    background-color: lightblue;
+}
+
+tr.show:nth-child(odd) {
+    background-color: lightsteelblue
+}
+
+tr.show:hover {
+    background-color: lightgreen;
+}
+
+th.show {
+    background-color: lightskyblue;
+    color: white;
+}

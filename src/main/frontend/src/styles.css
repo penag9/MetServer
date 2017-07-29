@@ -1,80 +1,70 @@
-h1 {
-  color: #369;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 250%;
-}
-
-h2 {
-  color: #369;
-  font-family: Arial, Helvetica, sans-serif;
+body {
+    background: url("background.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    margin: 0px;
 }
 
 button {
-  background-color: lightsteelblue;
-  border-radius: 5px;
+    outline: none;
 }
 
-button.leng {
- margin: 1%;
- width: 10pt;
- height: 10pt;
+h1 {
+    color: #369;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 250%;
 }
 
-button.right {
- float: right;
- margin: 1%;
- width: 50pt;
- height: 25pt;
+h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 250%;
 }
 
-button.main {
-  margin: 40px;
-  border-radius: 10px;
-  width : 150pt;
-  height: 150pt;
-}
-
-table {
-  width:60%;
-  padding: 50pt;
+img#title {
+    width: 100%;
+    opacity: 0.52
 }
 
 div.user {
-  box-shadow: 5px 5px 5px lightsteelblue;
-}
-
-div.navBar {
-  min-height: 40pt;
-  box-shadow: 5px 5px 5px lightsteelblue;
+    box-shadow: 0.3rem 0.3rem 0.3rem lightsteelblue;
 }
 
 .center {
-  text-align: center;
+    text-align: center;
 }
 
 .tab {
-  position: absolute;
-  left: 120pt;
+    position: absolute;
+    left: 9rem;
 }
 
-table.show {
-    border: 1px solid white;
-    width: 100%;
+.tab2 {
+    position: relative;
+    left: 7rem;
 }
 
-tr.show:nth-child(even) {
-  background-color: lightblue;
+
+/* move to other css ? */
+
+table.main {
+    width: 60%;
+    padding: 4rem;
+    position: relative;
+    left: 15%;
 }
 
-tr.show:nth-child(odd) {
-  background-color: lightsteelblue
+button.main {
+    background-color: rgba(255, 255, 255, 0.3);
+    margin: 2rem;
+    border-radius: 2rem;
+    width: 15rem;
+    height: 8rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 150%;
 }
 
-tr.show:hover {
-  background-color: lightgreen;
-}
-
-th.show {
-    background-color: lightskyblue;
-    color: white;
+button.main:hover {
+    background-color: rgba(255, 255, 255, 0.7);
 }
