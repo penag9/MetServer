@@ -1,6 +1,7 @@
 package com.model;
 
 import lombok.Getter;
+import lombok.ToString;
 
 
 import javax.persistence.Column;
@@ -15,6 +16,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "users")
 @Getter
+@ToString
 public class User {
 
     /**TODO:
@@ -75,7 +77,5 @@ public class User {
 
         return false;
     }
-
-
 
 }
