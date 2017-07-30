@@ -1,20 +1,14 @@
 package com.rest;
 
 import com.model.User;
-import com.service.UserServiceImpl;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.service.IUserService;
 
-import javax.websocket.server.PathParam;
-import javax.ws.rs.GET;
-import javax.ws.rs.HttpMethod;
-import javax.ws.rs.Path;
-//import javax.ws.rs.PathParam;
 
 /**
  * Created by faina on 09/06/17.
@@ -26,8 +20,12 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
+    private static Logger LOG = Logger.getLogger(UserController.class.getName());
+
     @RequestMapping(value = "/users", method = RequestMethod.POST)
     public ResponseEntity<?> createUser(@RequestBody User user)    {
+
+        LOG.info("POST /users received following user:\n"+user.toString());
 
         User savedUser = userService.saveUser(user);
         HttpStatus status = HttpStatus.CREATED;
@@ -37,15 +35,19 @@ public class UserController {
             status = HttpStatus.CONFLICT;
         }
         else {
-            headers.add("faina", savedUser.getUserName());
+            headers.add("username", savedUser.getUserName());
         }
 
+
+        LOG.info("returning status "+status+",  headers"+headers);
         return new ResponseEntity<String>(headers, status);
 
     }
 
     @RequestMapping(value = "/users/{user_id}", method = RequestMethod.GET)
     public User getUser(@PathVariable("user_id") String user_id)    {
+
+        LOG.info("GET /users/{user_id} got user_id="+user_id);
 
         return userService.getUser(user_id);
 

@@ -9,7 +9,10 @@ CREATE TABLE users
     name text NOT NULL,
     phone_number text NOT NULL,
     email text,
-    password_recovery text 
+    password_recovery text
+    sex text
+    lang text
+    pic text
 );
 
 -- Table: f_look_for_metapelet
