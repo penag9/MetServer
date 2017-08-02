@@ -14,7 +14,7 @@ var RequestComponent = (function () {
 RequestComponent = __decorate([
     core_1.Component({
         selector: 'request',
-        template: " <h1> Placeholder </h1>   \n    "
+        template: "  \n        <br><br>\n        <button  class=\"main\" routerLink=\"/register\"> \u0420\u0435\u0433\u0438\u0441\u0442\u0440\u0430\u0446\u0438\u044F </button>    \n        <button  class=\"main\" routerLink=\"/login\"> \u041B\u043E\u0433\u0438\u043D </button>     \n  \n    "
     })
 ], RequestComponent);
 exports.RequestComponent = RequestComponent;

@@ -11,7 +11,7 @@ import { WebService } from './web.service';
     
     <form #f="ngForm" (ngSubmit)="login()">
         <p>
-            <label> Логин : </label>
+            <label> Username / Email / Phone : </label>
             <input type="text"  
                 [(ngModel)]="data.username" required  name="username" >
         </p>
@@ -20,8 +20,13 @@ import { WebService } from './web.service';
             <input type="password"  
                 [(ngModel)]="data.password" required  name="password">
         </p>
+        <p> 
+            <a href="" class="tab"> Забыли пароль? </a> <br>
+            <input type="checkbox" [(ngModel)]="rememberMe" name="rememberMe"> Запомнить <br>
+        </p>
         <p>
             <button type="submit" [disabled]="!f.valid">Войти</button>
+            <button  type="button" onclick="history.back()"> Обратно </button>
         </p>
     </form>
     `
@@ -32,6 +37,8 @@ export class LoginComponent {
         username: '',
         password: ''
     };
+
+    rememberMe = false;
 
     errorMessage = '';
 
@@ -47,9 +54,13 @@ export class LoginComponent {
             this.errorMessage = 'Неверный логин или пароль';
         }*/
         if (this.data.username == 'A' && this.data.password == 'A') {
-            localStorage.setItem('username', 'A');
+            if(this.rememberMe) {
+                localStorage.setItem('username', 'A');
+
+            }
+            
             this.webService.isAuthenticated = true;
-            this.webService.currentUser = localStorage.getItem('name');
+            this.webService.currentUser = this.data.username;
             this.errorMessage = '';
             this.router.navigate(['/']);
         } else {

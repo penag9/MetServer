@@ -37,7 +37,11 @@ export class WebService {
 
   currentMessageIndex = 1;
 
-  constructor(private http: Http) { }
+  constructor(private http: Http) { 
+    if(this.currentUser = localStorage.getItem('username')) {
+      this.isAuthenticated = true;
+    }
+  }
 
   postMessage(type, message) {
     return this.http.post(this.BASE_URL + type, message).toPromise();
@@ -57,9 +61,13 @@ export class WebService {
       let response = await this.postMessage('users', JSON.stringify(data));
 
       console.log(response);
+
+      this.currentUser = data.username;
+      this.isAuthenticated = true;
+/*
       localStorage.setItem('username', data.userName);
       localStorage.setItem('name', data.name);
-      /*
+      
       
 if OK put in local storage and return true, else return false
       */

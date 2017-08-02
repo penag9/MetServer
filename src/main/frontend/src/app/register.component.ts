@@ -51,6 +51,7 @@ import { WebService } from './web.service';
         </p>
         <p>
             <button type="submit" [disabled]="!f.valid"> Войти </button>
+            <button  type="button" onclick="history.back()"> Обратно </button>
         </p>
     </form>
 
