@@ -14,6 +14,7 @@ import com.service.IUserService;
  * Created by faina on 09/06/17.
  */
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 public class UserController {
 
@@ -54,7 +55,7 @@ public class UserController {
     }
 
     @RequestMapping(
-            value = "/**",
+            value = "/users",
             method = RequestMethod.OPTIONS
     )
     public ResponseEntity handle() {
