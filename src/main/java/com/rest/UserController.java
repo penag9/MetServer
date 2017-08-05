@@ -52,4 +52,12 @@ public class UserController {
         return userService.getUser(user_id);
 
     }
+
+    @RequestMapping(
+            value = "/**",
+            method = RequestMethod.OPTIONS
+    )
+    public ResponseEntity handle() {
+        return new ResponseEntity(HttpStatus.OK);
+    }
 }
