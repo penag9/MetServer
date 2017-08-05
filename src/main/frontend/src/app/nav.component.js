@@ -17,8 +17,7 @@ var NavComponent = (function () {
         this.router = router;
     }
     NavComponent.prototype.logout = function () {
-        localStorage.removeItem('name');
-        localStorage.removeItem('pass');
+        localStorage.removeItem('username');
         this.webService.isAuthenticated = false;
         this.webService.currentUser = '';
         this.router.navigate(['/']);
@@ -28,10 +27,17 @@ var NavComponent = (function () {
 NavComponent = __decorate([
     core_1.Component({
         selector: 'nav',
-        template: "\n    <div class=\"navBar\">\n            <button class=\"lang\" >\u0420\u0443\u0441</button>\n            <button class=\"lang\" routerLink=\"/\" >Eng</button>\n            <button class=\"lang\"  >\u05E2\u05D1</button>\n            <button *ngIf=\"!webService.isAuthenticated\"  class=\"right\" routerLink=\"/register\">Register</button>\n            <button *ngIf=\"!webService.isAuthenticated\"  class=\"right\"  routerLink=\"/login\">Login</button>\n            <button *ngIf=\"webService.isAuthenticated\"   class=\"right\" routerLink=\"/\" >Profile</button>                                    \n            <button *ngIf=\"webService.isAuthenticated\"   class=\"right\" (click)=\"logout()\" >Logout</button> \n    </div>\n    ",
+        template: "\n    <div class=\"navBar\">\n            <button class=\"lang\" >\u0420\u0443\u0441</button>\n            <button class=\"lang\" >Eng</button>\n            <button class=\"lang\"  >\u05E2\u05D1</button>\n        <span class=\"right\">   \n            <img *ngIf=\"!webService.isAuthenticated\" class=\"right\" src=\"./app/images/Login.png\" routerLink=\"/login\" >\n            <button *ngIf=\"!webService.isAuthenticated\"  class=\"right\" routerLink=\"/register\">\u0420\u0435\u0433\u0438\u0441\u0442\u0440\u0430\u0446\u0438\u044F</button>  \n            <img *ngIf=\"webService.isAuthenticated\" class=\"right\" src=\"./app/images/Profile.png\" routerLink=\"/\" >                        \n            <button *ngIf=\"webService.isAuthenticated\"   class=\"right\" (click)=\"logout()\" >Logout</button>                 \n        </span>    \n    </div>\n    ",
         styleUrls: ['./nav.component.css']
     }),
     __metadata("design:paramtypes", [web_service_1.WebService, router_1.Router])
 ], NavComponent);
 exports.NavComponent = NavComponent;
+/*
+<button *ngIf="!webService.isAuthenticated"  class="right"  routerLink="/login">Логин</button>
+<img *ngIf="!webService.isAuthenticated" class="right" src="./app/images/7-p1.png" routerLink="/login">
+            <button *ngIf="webService.isAuthenticated"   class="right" routerLink="/" >Profile</button>
+            <img *ngIf="!webService.isAuthenticated" class="right" src="./app/images/7-p1.png" routerLink="/" >
+           
+*/ 
 //# sourceMappingURL=nav.component.js.map

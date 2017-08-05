@@ -1,5 +1,9 @@
 button.lang {
-    margin: 11px;
+    position: relative;
+    left: 14.5rem;
+    margin-right: 11px;
+    margin-top: 42.5px;
+    margin-bottom: 42.5px;
     width: 78px;
     height: 42.5px;
     border-radius: 8.2px;
@@ -8,13 +12,26 @@ button.lang {
 }
 
 button.right {
-    float: right;
-    margin: 0.5rem;
-    width: 6rem;
-    height: 3rem;
-    border-radius: 0.5rem;
+    margin-top: 32px;
+    margin-bottom: 32px;
+    margin-left: 16px;
+    width: 126px;
+    height: 68px;
+    border-radius: 15px;
     color: white;
     background-color: #fc5c03;
+}
+
+span.right {
+    float: right;
+    width: 27%;
+}
+
+img.right {
+    position: relative;
+    top: 32px;
+    height: 68px;
+    width: 126px;
 }
 
 div.navBar {

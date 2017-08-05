@@ -44,7 +44,8 @@ import { WebService } from '../web.service';
         <label> Дополнительная информация : </label><br>
         <textarea rows="10" cols="100" [(ngModel)]="data.freetext" name="freetext"></textarea>
         <br><br>
-        <button  (click)="placeRequest()"> Готово </button>  
+        <button  (click)="placeRequest()"> Готово </button> 
+        <button type="button" onclick="history.back()">Обратно</button> 
     </form>       
     `
 })
