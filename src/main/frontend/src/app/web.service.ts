@@ -1,4 +1,4 @@
-import { Http } from '@angular/http';
+import { Http, Headers, RequestOptions  } from '@angular/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 
@@ -37,18 +37,21 @@ export class WebService {
 
   currentMessageIndex = 1;
 
-  constructor(private http: Http) { 
+  constructor(private http: Http) {
     if(this.currentUser = localStorage.getItem('username')) {
       this.isAuthenticated = true;
     }
   }
 
   postMessage(type, message) {
-    return this.http.post(this.BASE_URL + type, message).toPromise();
+
+	      let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+    return this.http.post(this.BASE_URL + type, message, options ).toPromise();
   }
 
   getMessage(type) {
-    return this.http.get(this.BASE_URL + '/messages').toPromise();
+    return this.http.get(this.BASE_URL + 'messages').toPromise();
   }
 
   handleError(errorMessage) {

@@ -80,10 +80,12 @@ var WebService = (function () {
         }
     }
     WebService.prototype.postMessage = function (type, message) {
-        return this.http.post(this.BASE_URL + type, message).toPromise();
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        var options = new http_1.RequestOptions({ headers: headers });
+        return this.http.post(this.BASE_URL + type, message, options).toPromise();
     };
     WebService.prototype.getMessage = function (type) {
-        return this.http.get(this.BASE_URL + '/messages').toPromise();
+        return this.http.get(this.BASE_URL + 'messages').toPromise();
     };
     WebService.prototype.handleError = function (errorMessage) {
         console.log(errorMessage);

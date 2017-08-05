@@ -45,8 +45,8 @@ import { WebService } from './web.service';
         <p>
             <label> Пол : </label>            
             <span class="tab">
-                 <input type="radio" [(ngModel)]="data.gender" name="gender" value="Male"  required> Мужской  
-                <input type="radio" [(ngModel)]="data.gender" name="gender"  value="Female"  required> Женский
+                 <input type="radio" [(ngModel)]="data.sex" name="sex" value="m"  required> Мужской  
+                <input type="radio" [(ngModel)]="data.sex" name="sex"  value="f"  required> Женский
             </span>
         </p>
         <p>
@@ -66,7 +66,9 @@ export class RegisterComponent {
         email: '',
         phone: '',
         name: '',
-        gender: '',
+        sex: '',
+        lang: '',
+        picture: ''
     };
 
     errorMessage = '';

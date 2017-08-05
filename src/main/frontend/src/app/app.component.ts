@@ -6,7 +6,7 @@ import { NavComponent }  from './nav.component';
 @Component({
   selector: 'my-app',
   template: ` <nav></nav> 
-              <img id="title" src="logo.jpg" routerLink="/" >
+              <img id="title" src="logo.png" routerLink="/" >
               <router-outlet></router-outlet>
               `,
 })
