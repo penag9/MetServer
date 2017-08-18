@@ -42,5 +42,6 @@ div.navBar {
     position: relative;
     left: 70%;
     top: 25%;
+    width: 25%;
     outline: none;
 }

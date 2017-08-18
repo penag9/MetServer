@@ -6,7 +6,7 @@ import { WebService } from './web.service';
 @Component({
     selector: 'nav',
     template: `
-    <div class="navBar" routerLink="/">
+    <div class="navBar">
             <button class="lang" >עב</button>
             <button class="lang" >Рус</button>
             <button class="lang" >Eng</button>

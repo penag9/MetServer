@@ -9,53 +9,62 @@ import { WebService } from './web.service';
     <h1 class="center"> Вход/Регистрация (для демо - А А )</h1>
     <h1 style="color: red"> {{errorMessage}} </h1>
     
-    <div>
-        <button (click)="newUser=false;"> Вход </button>
-        <button (click)="newUser=true;"> Регистрация </button>
-        <br>
-        <form *ngIf="!newUser" #f="ngForm" (ngSubmit)="login()">
-            <p>
-                <label> Адрес электронной почты : </label><br>
-                <input type="text"  
-                    [(ngModel)]="data.username" required  name="username" >
-            </p>
-            <p>
-                <label> Пароль :       Забыли пароль?</label><br>
-                <input type="password"  
-                    [(ngModel)]="data.password" required  name="password">
-            </p>
-            <p> 
-                <br>
-                <input type="checkbox" [(ngModel)]="rememberMe" name="rememberMe"> Запомнить 
-                <br>
-            </p>
-            <p>
-                <button type="submit" [disabled]="!f.valid">Войти</button>
-            </p>
-        </form>
-        <form *ngIf="newUser" #f="ngForm" (ngSubmit)="register()">
-            <p>
-                <label> Адрес электронной почты : </label><br>
-                <input type="text"  
-                    [(ngModel)]="data.username" required  name="username" >
-            </p>
-            <p>
-            <label> Пароль : </label><br>
-            <input type="password"  
-                [(ngModel)]="data.password" required  name="password">
-            </p>
-            <p>
-                <label> Потвердить пароль : </label><br>
-                <input type="password"  
-                    [(ngModel)]="passwordRecovery" required  name="passwordRecovery">
-            </p>
-            <p>
-                <button  type="button" onclick="history.back()"> Отменить </button>
-                <button type="submit" [disabled]="!f.valid"> Потвердить</button>                
-            </p>
-        </form>
-    </div>    
-    `
+    <div id="container">
+        <div id="login">
+            <br>
+            <button *ngIf="!newUser" class="login" > Вход </button>
+            <button *ngIf="!newUser" class="unselected right" (click)="newUser=true;" > Регистрация </button>
+            <button *ngIf="newUser" class="unselected" (click)="newUser=false;"> Вход </button>
+            <button *ngIf="newUser" class="login right" > Регистрация </button>
+            <br>
+            <form *ngIf="!newUser" #f="ngForm" (ngSubmit)="login()">
+                <div class="tab2">
+                    <p>
+                        <label> Адрес электронной почты : </label><br>
+                        <input type="text" class="field" 
+                            [(ngModel)]="data.username" required minlength="5"  name="username" >
+                    </p>
+                    <p>
+                        <label> Пароль :</label><br>
+                        <input type="password" class="field"  
+                            [(ngModel)]="data.password" required  minlength="8" name="password">
+                    </p>
+                    <p> 
+                        <input type="checkbox" [(ngModel)]="rememberMe" name="rememberMe"> Запомнить 
+                        <br><br>
+                    </p>
+                </div>    
+                <p>
+                    <button type="submit" class="login" [disabled]="!f.valid">Войти</button>
+                </p>
+            </form>
+            <form *ngIf="newUser" #f="ngForm" (ngSubmit)="register()">
+                <div class="tab2">
+                    <p>
+                        <label> Адрес электронной почты : </label><br>
+                        <input type="text" class="field"   
+                            [(ngModel)]="data.username" required  minlength="5" name="username" >
+                    </p>
+                    <p>
+                    <label> Пароль : </label><br>
+                    <input type="password" class="field"   
+                        [(ngModel)]="data.password" required   minlength="8" name="password">
+                    </p>
+                    <p>
+                        <label> Потвердить пароль : </label><br>
+                        <input type="password" class="field"   
+                            [(ngModel)]="passwordRecovery" required   minlength="8" name="passwordRecovery">
+                    </p>
+                </div>   
+                <p>
+                    <button  type="button"  class="login" onclick="history.back()" > Отменить </button>
+                    <button type="submit" class="login right" [disabled]="!f.valid"> Потвердить</button>                
+                </p>
+            </form>
+        </div>
+    </div>        
+    `,
+    styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
 
@@ -65,7 +74,7 @@ export class LoginComponent {
     };
 
     newUser = false;
-    
+
     rememberMe = false;
 
     passwordRecovery = '';
@@ -83,12 +92,18 @@ export class LoginComponent {
         } else {
             this.errorMessage = 'Неверный логин или пароль';
         }*/
+
+        if (this.data.username.indexOf('@') == -1 || this.data.username.indexOf('.') == -1  ) {
+            this.errorMessage = 'Неправильный емайл';
+            return;
+        }
+
         if (this.data.username == 'A' && this.data.password == 'A') {
-            if(this.rememberMe) {
+            if (this.rememberMe) {
                 localStorage.setItem('username', 'A');
 
             }
-            
+
             this.webService.isAuthenticated = true;
             this.webService.currentUser = this.data.username;
             this.errorMessage = '';
@@ -99,28 +114,33 @@ export class LoginComponent {
     }
 
     register() {
-        
-                if(this.data.password != this.passwordRecovery) {
-                    this.errorMessage = 'Пароль не потвержден.';
-                    return;
-                }
-                
-                 if(this.webService.register(this.data)) {
-                    this.errorMessage = '';
-                    this.router.navigate(['/']);
-                } else {
-                    this.errorMessage = 'Проблема с регистрацией';
-                }
-                /*
-                if (this.data.userName == 'A' && this.data.password == 'A') {
-                    localStorage.setItem('pass', this.data.password);
-                    localStorage.setItem('name', this.data.userName);
-                    this.webService.isAuthenticated = true;
-                    this.errorMessage = '';
-                    this.router.navigate(['/']);
-                } else {
-                    this.errorMessage = 'Проблема с регистрацией';
-                }
-                */
+
+        if (this.data.username.indexOf('@') == -1 || this.data.username.indexOf('.') == -1  ) {
+            this.errorMessage = 'Неправильный емайл';
+            return;
+        }
+
+        if (this.data.password != this.passwordRecovery) {
+            this.errorMessage = 'Пароль не cовпадает.';
+            return;
+        }
+
+        if (this.webService.register(this.data)) {
+            this.errorMessage = '';
+            this.router.navigate(['/']);
+        } else {
+            this.errorMessage = 'Проблема с регистрацией';
+        }
+        /*
+        if (this.data.userName == 'A' && this.data.password == 'A') {
+            localStorage.setItem('pass', this.data.password);
+            localStorage.setItem('name', this.data.userName);
+            this.webService.isAuthenticated = true;
+            this.errorMessage = '';
+            this.router.navigate(['/']);
+        } else {
+            this.errorMessage = 'Проблема с регистрацией';
+        }
+        */
     }
 }
