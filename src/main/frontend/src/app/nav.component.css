@@ -1,25 +1,36 @@
 button.lang {
     position: relative;
-    left: 14.5rem;
-    margin-right: 11px;
-    margin-top: 42.5px;
-    margin-bottom: 42.5px;
-    width: 78px;
-    height: 42.5px;
+    left: 15px;
+    margin: 4px;
+    width: 68.2px;
+    height: 37.6px;
     border-radius: 8.2px;
     color: white;
     background-color: #fc5c03;
+    font-family: 'Microsoft Sans Serif', Microsoft, sans-serif;
+    font-size: 18.4px;
 }
 
 button.right {
-    margin-top: 32px;
-    margin-bottom: 32px;
-    margin-left: 16px;
-    width: 126px;
-    height: 68px;
+    margin: 3px;
+    width: 144.7px;
+    height: 60.7px;
     border-radius: 15px;
     color: white;
-    background-color: #fc5c03;
+    background-color: #f9874e;
+    font-family: 'Microsoft Sans Serif', Microsoft, sans-serif;
+    font-size: 18.25px;
+}
+
+button#help {
+    margin: 3px;
+    width: 102.7px;
+    height: 60.7px;
+    border-radius: 15px;
+    color: white;
+    background-color: #f9874e;
+    font-family: 'Microsoft Sans Serif', Microsoft, sans-serif;
+    font-size: 18.25px;
 }
 
 span.right {
@@ -27,13 +38,9 @@ span.right {
     width: 27%;
 }
 
-img.right {
-    position: relative;
-    top: 32px;
-    height: 68px;
-    width: 126px;
-}
-
 div.navBar {
-    min-height: 3rem;
+    position: relative;
+    left: 70%;
+    top: 25%;
+    outline: none;
 }
