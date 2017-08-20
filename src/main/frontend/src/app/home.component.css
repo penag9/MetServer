@@ -1,0 +1,58 @@
+h3 {
+    font-family: 'Microsoft Sans Serif', Microsoft, sans-serif;
+    font-size: 24px;
+}
+
+div.container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -35%);
+    width: 66%;
+    height: 75%;
+    outline: none;
+}
+
+div.container2 {
+    margin: 5.5px;
+    width: 48%;
+    height: 90%;
+    display: inline-block;
+    outline: none;
+}
+
+div.container3 {
+    text-align: center;
+    border-radius: 15px;
+    border: 1px solid black;
+    outline: none;
+}
+
+button.big {
+    background-color: rgba(255, 255, 255, 0.3);
+    margin: 5px;
+    border-radius: 15px;
+    width: 402.9px;
+    height: 172px;
+    font-family: 'Microsoft Sans Serif', Microsoft, sans-serif;
+    font-size: 32px;
+}
+
+button.big:hover {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+button.add {
+    margin: 5px;
+    width: 200px;
+    height: 37.6px;
+    border-radius: 11px;
+    color: white;
+    background-color: #fc5c03;
+    font-family: 'Microsoft Sans Serif', Microsoft, sans-serif;
+    font-size: 21.3px;
+}
+
+button.add:hover {
+    background-color: #f9874e;
+}
