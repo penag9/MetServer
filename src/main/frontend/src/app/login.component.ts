@@ -5,65 +5,7 @@ import { WebService } from './web.service';
 
 @Component({
     selector: 'login',
-    template: ` 
-    <h1 class="center"> Вход/Регистрация (для демо - А А )</h1>
-    <h1 style="color: red"> {{errorMessage}} </h1>
-    
-    <div id="container">
-        <div id="login">
-            <br>
-            <button *ngIf="!newUser" class="login" > Вход </button>
-            <button *ngIf="!newUser" class="unselected right" (click)="newUser=true;" > Регистрация </button>
-            <button *ngIf="newUser" class="unselected" (click)="newUser=false;"> Вход </button>
-            <button *ngIf="newUser" class="login right" > Регистрация </button>
-            <br>
-            <form *ngIf="!newUser" #f="ngForm" (ngSubmit)="login()">
-                <div class="tab2">
-                    <p>
-                        <label> Адрес электронной почты : </label><br>
-                        <input type="text" class="field" 
-                            [(ngModel)]="data.username" required minlength="5"  name="username" >
-                    </p>
-                    <p>
-                        <label> Пароль :</label><br>
-                        <input type="password" class="field"  
-                            [(ngModel)]="data.password" required  minlength="8" name="password">
-                    </p>
-                    <p> 
-                        <input type="checkbox" [(ngModel)]="rememberMe" name="rememberMe"> Запомнить 
-                        <br><br>
-                    </p>
-                </div>    
-                <p>
-                    <button type="submit" class="login" [disabled]="!f.valid">Войти</button>
-                </p>
-            </form>
-            <form *ngIf="newUser" #f="ngForm" (ngSubmit)="register()">
-                <div class="tab2">
-                    <p>
-                        <label> Адрес электронной почты : </label><br>
-                        <input type="text" class="field"   
-                            [(ngModel)]="data.username" required  minlength="5" name="username" >
-                    </p>
-                    <p>
-                    <label> Пароль : </label><br>
-                    <input type="password" class="field"   
-                        [(ngModel)]="data.password" required   minlength="8" name="password">
-                    </p>
-                    <p>
-                        <label> Потвердить пароль : </label><br>
-                        <input type="password" class="field"   
-                            [(ngModel)]="passwordRecovery" required   minlength="8" name="passwordRecovery">
-                    </p>
-                </div>   
-                <p>
-                    <button  type="button"  class="login" onclick="history.back()" > Отменить </button>
-                    <button type="submit" class="login right" [disabled]="!f.valid"> Потвердить</button>                
-                </p>
-            </form>
-        </div>
-    </div>        
-    `,
+    templateUrl: './login.component.html',
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
@@ -144,3 +86,15 @@ export class LoginComponent {
         */
     }
 }
+
+
+
+/*
+
+        <button *ngIf="!newUser" class="login"> Вход </button>
+        <button *ngIf="!newUser" class="unselected right" (click)="newUser=true;"> Регистрация </button>
+        <button *ngIf="newUser" class="unselected" (click)="newUser=false;"> Вход </button>
+        <button *ngIf="newUser" class="login right"> Регистрация </button>
+        <br>
+
+*/

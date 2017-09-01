@@ -4,19 +4,19 @@ div#container {
     left: 50%;
     transform: translate(-50%, -30%);
     width: 47%;
-    height: 38%;
+    height: 40%;
     background-color: white;
     border-radius: 15px;
     outline: none;
 }
 
-div#login {
+div#enter {
     position: fixed;
-    top: 10%;
+    top: 20%;
     left: 50%;
     transform: translate(-50%, -5%);
     width: 90%;
-    height: 90%;
+    height: 75%;
     background-color: white;
     border-radius: 15px;
     border: gray solid 1px;

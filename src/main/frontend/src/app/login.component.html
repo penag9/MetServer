@@ -1,0 +1,96 @@
+<h1 class="center"> Вход/Регистрация (для демо - А А )</h1>
+<h1 style="color: red"> {{errorMessage}} </h1>
+
+
+<svg class="hidden">
+    <defs>
+        <path id="tabshape" d="M80,60C34,53.5,64.417,0,0,0v60H80z"/>
+    </defs>
+</svg>
+
+
+
+
+<div id="container">
+
+    <!-------------------- --------------
+    <section>
+        <div class="tabs tabs-style-shape">
+            <nav>
+                <ul>
+                    <li [ngClass]="{'tab-current': !newUser }" (click)="newUser=false;">
+                        <a href="#section-shape-1">
+                            <svg viewBox="0 0 80 60" preserveAspectRatio="none"><use xlink:href="#tabshape"></use></svg>
+                            <span>Вход</span>
+                        </a>
+                    </li>
+                    <li [ngClass]="{'tab-current': newUser }" (click)="newUser=true;">
+                        <a href="#section-shape-5">
+                            <svg viewBox="0 0 80 60" preserveAspectRatio="none"><use xlink:href="#tabshape"></use></svg>
+                            <span>Регистрация</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="content-wrap">
+                <section id="section-shape-1" [ngClass]="{'content-current': !newUser }">
+                    <p>1</p>
+                </section>
+                <section id="section-shape-5" [ngClass]="{'content-current': !newUser }">
+                    <p>2</p>
+                </section>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-------------------- -------------->
+
+    <br>
+    <button [ngClass]="{'login': !newUser , 'unselected': newUser }" (click)="newUser=false;"> Вход </button>
+    <button [ngClass]="{'login': newUser , 'unselected': !newUser , 'right': true }" (click)="newUser=true;"> Регистрация </button>
+
+    <div id="enter">
+        <br>
+        <form *ngIf="!newUser" #f="ngForm" (ngSubmit)="login()">
+            <div class="tab2">
+                <p>
+                    <label> Адрес электронной почты : </label><br>
+                    <input type="text" class="field" [(ngModel)]="data.username" required minlength="5" name="username">
+                </p>
+                <p>
+                    <label> Пароль :</label><br>
+                    <input type="password" class="field" [(ngModel)]="data.password" required minlength="8" name="password">
+                </p>
+                <p>
+                    <input type="checkbox" [(ngModel)]="rememberMe" name="rememberMe"> Запомнить
+                    <br><br>
+                </p>
+            </div>
+            <p>
+                <button type="submit" class="login" [disabled]="!f.valid">Войти</button>
+            </p>
+        </form>
+        <form *ngIf="newUser" #f="ngForm" (ngSubmit)="register()">
+            <div class="tab2">
+                <p>
+                    <label> Адрес электронной почты : </label><br>
+                    <input type="text" class="field" [(ngModel)]="data.username" required minlength="5" name="username">
+                </p>
+                <p>
+                    <label> Пароль : </label><br>
+                    <input type="password" class="field" [(ngModel)]="data.password" required minlength="8" name="password">
+                </p>
+                <p>
+                    <label> Потвердить пароль : </label><br>
+                    <input type="password" class="field" [(ngModel)]="passwordRecovery" required minlength="8" name="passwordRecovery">
+                </p>
+            </div>
+            <p>
+                <button type="button" class="login" onclick="history.back()"> Отменить </button>
+                <button type="submit" class="login right" [disabled]="!f.valid"> Потвердить</button>
+            </p>
+        </form>
+    </div>
+</div>
