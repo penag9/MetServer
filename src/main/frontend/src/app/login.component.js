@@ -23,6 +23,9 @@ var LoginComponent = (function () {
         this.rememberMe = false;
         this.passwordRecovery = '';
         this.errorMessage = '';
+        this.noEmailError = true;
+        this.noPasswordError = true;
+        this.noRepeatError = true;
     }
     LoginComponent.prototype.login = function () {
         /*
@@ -34,6 +37,7 @@ var LoginComponent = (function () {
         }*/
         if (this.data.username.indexOf('@') == -1 || this.data.username.indexOf('.') == -1) {
             this.errorMessage = 'Неправильный емайл';
+            this.noEmailError = false;
             return;
         }
         if (this.data.username == 'A' && this.data.password == 'A') {
@@ -52,6 +56,7 @@ var LoginComponent = (function () {
     LoginComponent.prototype.register = function () {
         if (this.data.username.indexOf('@') == -1 || this.data.username.indexOf('.') == -1) {
             this.errorMessage = 'Неправильный емайл';
+            this.noEmailError = false;
             return;
         }
         if (this.data.password != this.passwordRecovery) {

@@ -23,6 +23,10 @@ export class LoginComponent {
 
     errorMessage = '';
 
+    noEmailError = true;
+    noPasswordError = true;
+    noRepeatError = true;
+
     constructor(private webService: WebService, private router: Router) { }
 
     login() {
@@ -37,6 +41,7 @@ export class LoginComponent {
 
         if (this.data.username.indexOf('@') == -1 || this.data.username.indexOf('.') == -1  ) {
             this.errorMessage = 'Неправильный емайл';
+            this.noEmailError = false;
             return;
         }
 
@@ -59,6 +64,7 @@ export class LoginComponent {
 
         if (this.data.username.indexOf('@') == -1 || this.data.username.indexOf('.') == -1  ) {
             this.errorMessage = 'Неправильный емайл';
+            this.noEmailError = false;
             return;
         }
 

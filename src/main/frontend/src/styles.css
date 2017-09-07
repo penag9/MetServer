@@ -9,6 +9,7 @@ body {
 
 nav {
     height: 189.3px;
+    min-width: 1200px;
     background: url("logo.png");
     background-size: 100% 100%;
     background-repeat: no-repeat;
@@ -52,6 +53,10 @@ div.user {
     position: relative;
     left: 30px;
     ;
+}
+
+.hiden {
+    display: none;
 }
 
 

@@ -1,67 +1,27 @@
-<h1 class="center"> Вход/Регистрация (для демо - А А )</h1>
+<h1 class="center"> Вход/Регистрация (для демо - a@a.a aaaaaaaa )</h1>
 <h1 style="color: red"> {{errorMessage}} </h1>
 
 
-<svg class="hidden">
-    <defs>
-        <path id="tabshape" d="M80,60C34,53.5,64.417,0,0,0v60H80z"/>
-    </defs>
-</svg>
 
-
-
-
-<div id="container">
-
-    <!-------------------- --------------
-    <section>
-        <div class="tabs tabs-style-shape">
-            <nav>
-                <ul>
-                    <li [ngClass]="{'tab-current': !newUser }" (click)="newUser=false;">
-                        <a href="#section-shape-1">
-                            <svg viewBox="0 0 80 60" preserveAspectRatio="none"><use xlink:href="#tabshape"></use></svg>
-                            <span>Вход</span>
-                        </a>
-                    </li>
-                    <li [ngClass]="{'tab-current': newUser }" (click)="newUser=true;">
-                        <a href="#section-shape-5">
-                            <svg viewBox="0 0 80 60" preserveAspectRatio="none"><use xlink:href="#tabshape"></use></svg>
-                            <span>Регистрация</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-            <div class="content-wrap">
-                <section id="section-shape-1" [ngClass]="{'content-current': !newUser }">
-                    <p>1</p>
-                </section>
-                <section id="section-shape-5" [ngClass]="{'content-current': !newUser }">
-                    <p>2</p>
-                </section>
-            </div>
-        </div>
-    </section>
-
-
-
-    <!-------------------- -------------->
-
-    <br>
-    <button [ngClass]="{'login': !newUser , 'unselected': newUser }" (click)="newUser=false;"> Вход </button>
-    <button [ngClass]="{'login': newUser , 'unselected': !newUser , 'right': true }" (click)="newUser=true;"> Регистрация </button>
-
-    <div id="enter">
+<div class="container">
+    <ul class="tabrow">
+        <li [ngClass]="{'selected': !newUser, 'first': true}" (click)="newUser=false;"> Вход </li>
+        <li [ngClass]="{'selected': newUser, 'next': true}" (click)="newUser=true;"> Регистрация </li>
+    </ul>
+    <div class="content">
         <br>
         <form *ngIf="!newUser" #f="ngForm" (ngSubmit)="login()">
             <div class="tab2">
                 <p>
                     <label> Адрес электронной почты : </label><br>
                     <input type="text" class="field" [(ngModel)]="data.username" required minlength="5" name="username">
+
+                    <span [ngClass]="{'error': true, 'hiden': noEmailError}"> Это адрес не зарегестрирован </span>
                 </p>
                 <p>
                     <label> Пароль :</label><br>
                     <input type="password" class="field" [(ngModel)]="data.password" required minlength="8" name="password">
+                    <span [ngClass]="{'error': true, 'hiden': noPasswordError}"> Не верный пароль </span>
                 </p>
                 <p>
                     <input type="checkbox" [(ngModel)]="rememberMe" name="rememberMe"> Запомнить
@@ -77,14 +37,21 @@
                 <p>
                     <label> Адрес электронной почты : </label><br>
                     <input type="text" class="field" [(ngModel)]="data.username" required minlength="5" name="username">
+                    <span [ngClass]="{'error': true, 'hiden': noEmailError}"> Это адрес почты уже существует </span>
                 </p>
                 <p>
                     <label> Пароль : </label><br>
                     <input type="password" class="field" [(ngModel)]="data.password" required minlength="8" name="password">
+                    <span [ngClass]="{'error': true, 'hiden': noPasswordError}"> Минимум 8 символов: английские буквы, цифры, символы </span>
                 </p>
                 <p>
                     <label> Потвердить пароль : </label><br>
                     <input type="password" class="field" [(ngModel)]="passwordRecovery" required minlength="8" name="passwordRecovery">
+                    <span [ngClass]="{'error': true, 'hiden': noRepeatError}"> Вторично введенный паролоь не соответствует изначальному </span>
+                </p>
+                <p>
+                    <input type="checkbox" name="agree"> я соглашаюсь с правилами пользования сайта
+                    <br><br>
                 </p>
             </div>
             <p>
@@ -92,5 +59,6 @@
                 <button type="submit" class="login right" [disabled]="!f.valid"> Потвердить</button>
             </p>
         </form>
+
     </div>
 </div>

@@ -1,26 +1,20 @@
-div#container {
+.container {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -30%);
-    width: 47%;
-    height: 40%;
-    background-color: white;
-    border-radius: 15px;
-    outline: none;
 }
 
-div#enter {
-    position: fixed;
-    top: 20%;
-    left: 50%;
-    transform: translate(-50%, -5%);
-    width: 90%;
-    height: 75%;
+.content {
+    width: 800px;
+    height: 360px;
     background-color: white;
-    border-radius: 15px;
-    border: gray solid 1px;
-    outline: none;
+    border: 1px solid black;
+    z-index: 0;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 15px;
 }
 
 button.login {
@@ -61,4 +55,92 @@ button.unselected {
 
 button:disabled {
     background-color: gray;
+}
+
+.error {
+    background-color: #f9874e;
+    color: white;
+    width: 100px;
+    border-radius: 4px;
+}
+
+
+/*========= rounded tabs =============*/
+
+.tabrow {
+    width: 798px;
+    list-style: none;
+    padding-left: 4px;
+    line-height: 64px;
+    overflow: hidden;
+    font-size: 22px;
+    font-family: 'Microsoft Sans Serif', Microsoft, sans-serif;
+    position: relative;
+    margin-bottom: -1px;
+}
+
+.tabrow li {
+    border: 1px solid black;
+    background: white;
+    display: inline-block;
+    position: relative;
+    left: 0px;
+    z-index: 0;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
+    margin: 0 -4px;
+    padding: 0 60px;
+}
+
+.tabrow li.selected {
+    background: white;
+    color: black;
+    text-decoration: underline #f9874e;
+    z-index: 2;
+    border-bottom: 1px solid white;
+}
+
+.tabrow:before {
+    position: absolute;
+    content: " ";
+    width: 90%;
+    bottom: 0;
+    left: 0;
+    border-bottom: 1px solid black;
+    z-index: 1;
+}
+
+.next:before,
+.next:after,
+.first:after {
+    border: 1px solid black;
+    position: absolute;
+    bottom: -1px;
+    width: 15px;
+    height: 15px;
+    content: " ";
+}
+
+.next:before {
+    left: -16px;
+    border-bottom-right-radius: 15px;
+    border-width: 0 1px 1px 0;
+    box-shadow: 5px 5px 0 5px white;
+}
+
+.next:after,
+.first:after {
+    right: -16px;
+    border-bottom-left-radius: 15px;
+    border-width: 0 0 1px 1px;
+    box-shadow: -5px 5px 0 5px white;
+}
+
+
+/*------------*/
+
+.next {
+    border-left: 1px solid black;
+    margin: 0 0;
 }
