@@ -14,6 +14,7 @@ import { LoginComponent } from './login.component';
 import { RegisterComponent } from './register.component';
 import { UsersComponent } from './users.component';
 import { MessagesComponent } from './messages.component';
+import { ProfileComponent } from './profile.component';
 import { HVComponent } from './requests/hire-vacation.component';
 import { AVComponent } from './requests/apply-vacation.component';
 import { ShowHireVacationTableComponent } from './show/show-hire-vacation-table.component';
@@ -36,6 +37,9 @@ let routes = [
   },
   { path : 'messages',
     component : MessagesComponent
+  },
+  { path : 'profile',
+    component : ProfileComponent
   },
   { path : 'request/APermanent',
     component : AVComponent
@@ -66,15 +70,12 @@ let routes = [
   },
   { path : 'show/SAVacation',
     component : ShowApplyVacationComponent
-  },
-  { path : 'register',
-    component : RegisterComponent
   }];
 
 @NgModule({
   imports:      [ BrowserModule, FormsModule, HttpModule,  RouterModule.forRoot(routes) ],
   declarations: [ AppComponent, NavComponent, HomeComponent, RequestComponent,
-                  LoginComponent, MessagesComponent, RegisterComponent, UsersComponent,
+                  LoginComponent, MessagesComponent, ProfileComponent, RegisterComponent, UsersComponent,
                   HVComponent, AVComponent, ShowHireVacationTableComponent,ShowApplyVacationTableComponent,
                    ShowHireVacationComponent,ShowApplyVacationComponent ],
   bootstrap:    [ AppComponent ],

@@ -45,9 +45,9 @@ export class LoginComponent {
             return;
         }
 
-        if (this.data.username == 'A' && this.data.password == 'A') {
+        if (this.data.username == 'a@a.a' && this.data.password == 'aaaaaaaa') {
             if (this.rememberMe) {
-                localStorage.setItem('username', 'A');
+                localStorage.setItem('username', 'a@a.a');
 
             }
 
@@ -56,7 +56,7 @@ export class LoginComponent {
             this.errorMessage = '';
             this.router.navigate(['/']);
         } else {
-            this.errorMessage = 'Неверный логин или пароль';
+            this.errorMessage = 'Неверный логин или пароль ' + this.data.username + this.data.password;
         }
     }
 
@@ -94,13 +94,3 @@ export class LoginComponent {
 }
 
 
-
-/*
-
-        <button *ngIf="!newUser" class="login"> Вход </button>
-        <button *ngIf="!newUser" class="unselected right" (click)="newUser=true;"> Регистрация </button>
-        <button *ngIf="newUser" class="unselected" (click)="newUser=false;"> Вход </button>
-        <button *ngIf="newUser" class="login right"> Регистрация </button>
-        <br>
-
-*/

@@ -1,0 +1,72 @@
+<h1 class="center"> Вход/Регистрация (для демо - a@a.a aaaaaaaa )</h1>
+<h1 style="color: red"> {{errorMessage}} </h1>
+
+
+
+<div class="container">
+    <ul class="tabrow">
+        <li [ngClass]="{'selected': selectedTab==0, 'first': true}" (click)="selectedTab=0;"> Мой профиль </li>
+        <li [ngClass]="{'selected': selectedTab==1, 'next': true, 'sec': true}" (click)="selectedTab=1;"> Мои объявления </li>
+        <li [ngClass]="{'selected': selectedTab==2, 'next': true, 'third': true}" (click)="selectedTab=2;"> Дать объявление </li>
+        <li [ngClass]="{'selected': selectedTab==3, 'next': true, 'forth': true}" (click)="selectedTab=3;"> Удалить профиль </li>
+    </ul>
+    <div class="content">
+
+        <div class="right">
+            pic
+        </div>
+        <br>
+        <form *ngIf="selectedTab==0" #f="ngForm" (ngSubmit)="update()">
+            <div class="tab2">
+                <p>
+                    <label> Адрес электронной почты : </label><br>
+                    <input type="text" class="field" [(ngModel)]="data.username" required minlength="5" name="username">
+
+                </p>
+                <p>
+                    <label> Имя :</label><br>
+                    <input type="text" class="field" [(ngModel)]="data.name" name="name">
+                </p>
+                <p>
+                    <label> Телефон :</label><br>
+                    <input type="text" class="field" [(ngModel)]="data.phone" name="phone">
+                </p>
+                <p>
+                    <label> Пол : </label>
+                    <span class="tab">
+                        <input type="radio" [(ngModel)]="data.sex" name="sex" value="m" > Мужской  
+                        <input type="radio" [(ngModel)]="data.sex" name="sex"  value="f" > Женский
+                    </span>
+                </p>
+                <p>
+                    <label> Языки : </label>
+                    <span class="tab">
+                        <input type="checkbox" [(ngModel)]="data.russian" name="russian"> Русский  
+                    </span><br><br>
+                    <span class="tab">
+                        <input type="checkbox" [(ngModel)]="data.hebrew" name="hebrew"> Иврит 
+                    </span><br><br>
+                    <span class="tab">
+                        <input type="checkbox" [(ngModel)]="data.english" name="english"> Английский
+                    </span><br><br>
+                    <span class="tab">
+                        <input type="checkbox" [(ngModel)]="data.romanian" name="romanian"> Румынский 
+                    </span><br><br>
+                    <span class="tab">
+                        <input type="checkbox" [(ngModel)]="data.french" name="french"> Французкий 
+                    </span>
+                </p> <br>
+            </div>
+            <p>
+                <button type="button" class="login"> Поменять пароль </button>
+                <button type="button" class="login" onclick="history.back()"> Обратно </button>
+                <button type="submit" class="login" [disabled]="!f.valid">Сохранить</button>
+            </p>
+        </form>
+        <div *ngIf="selectedTab!=0">
+            <br>
+            <h1>Plaseholder</h1>
+        </div>
+
+    </div>
+</div>

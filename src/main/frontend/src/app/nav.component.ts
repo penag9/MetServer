@@ -13,7 +13,8 @@ import { WebService } from './web.service';
             <br> 
             <button *ngIf="!webService.isAuthenticated" class="right" routerLink="/login" (click)="$event.stopPropagation();"> вход </button> 
             <button *ngIf="webService.isAuthenticated" class="right" (click)="logout();$event.stopPropagation();" >Logout</button>
-            <button id="help" (click)="$event.stopPropagation();"> Помощь </button>   
+            <button *ngIf="!webService.isAuthenticated" id="help" (click)="$event.stopPropagation();"> Помощь </button>   
+            <button *ngIf="webService.isAuthenticated"  id="help" routerLink="/profile" (click)="$event.stopPropagation();"> Профиль </button>   
     </div>
     `,
     styleUrls: ['./nav.component.css']

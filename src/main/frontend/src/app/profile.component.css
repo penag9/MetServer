@@ -7,7 +7,7 @@
 
 .content {
     width: 800px;
-    height: 360px;
+    height: 520px;
     background-color: white;
     border: 1px solid black;
     z-index: 0;
@@ -26,7 +26,7 @@ button.login {
     color: white;
     background-color: #f9874e;
     font-family: 'Microsoft Sans Serif', Microsoft, sans-serif;
-    font-size: 21.3px;
+    font-size: 14px;
 }
 
 .field {
@@ -40,15 +40,20 @@ button.login {
     float: right;
 }
 
-button:disabled {
-    background-color: gray;
+.first {
+    z-index: 5;
 }
 
-.error {
-    background-color: #f9874e;
-    color: white;
-    width: 100px;
-    border-radius: 4px;
+.sec {
+    z-index: 4;
+}
+
+.third {
+    z-index: 3;
+}
+
+.fortht {
+    z-index: 2;
 }
 
 
@@ -72,30 +77,29 @@ button:disabled {
     display: inline-block;
     position: relative;
     left: 0px;
-    z-index: 0;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
     margin: 0 -4px;
-    padding: 0 60px;
+    padding: 0 10px;
 }
 
 .tabrow li.selected {
     background: white;
     color: black;
     text-decoration: underline #f9874e;
-    z-index: 2;
+    z-index: 20;
     border-bottom: 1px solid white;
 }
 
 .tabrow:before {
     position: absolute;
     content: " ";
-    width: 90%;
+    width: 97%;
     bottom: 0;
     left: 0;
     border-bottom: 1px solid black;
-    z-index: 1;
+    z-index: 10;
 }
 
 .next:before,

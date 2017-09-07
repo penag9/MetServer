@@ -40,9 +40,9 @@ var LoginComponent = (function () {
             this.noEmailError = false;
             return;
         }
-        if (this.data.username == 'A' && this.data.password == 'A') {
+        if (this.data.username == 'a@a.a' && this.data.password == 'aaaaaaaa') {
             if (this.rememberMe) {
-                localStorage.setItem('username', 'A');
+                localStorage.setItem('username', 'a@a.a');
             }
             this.webService.isAuthenticated = true;
             this.webService.currentUser = this.data.username;
@@ -50,7 +50,7 @@ var LoginComponent = (function () {
             this.router.navigate(['/']);
         }
         else {
-            this.errorMessage = 'Неверный логин или пароль';
+            this.errorMessage = 'Неверный логин или пароль ' + this.data.username + this.data.password;
         }
     };
     LoginComponent.prototype.register = function () {
@@ -93,13 +93,4 @@ LoginComponent = __decorate([
     __metadata("design:paramtypes", [web_service_1.WebService, router_1.Router])
 ], LoginComponent);
 exports.LoginComponent = LoginComponent;
-/*
-
-        <button *ngIf="!newUser" class="login"> Вход </button>
-        <button *ngIf="!newUser" class="unselected right" (click)="newUser=true;"> Регистрация </button>
-        <button *ngIf="newUser" class="unselected" (click)="newUser=false;"> Вход </button>
-        <button *ngIf="newUser" class="login right"> Регистрация </button>
-        <br>
-
-*/ 
 //# sourceMappingURL=login.component.js.map
