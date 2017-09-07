@@ -13,7 +13,8 @@
     <div class="content">
 
         <div class="right">
-            pic
+            <img *ngIf="data.sex=='f'" src="../app/images/fPic.png">
+            <img *ngIf="data.sex=='m'" src="../app/images/mPic.png">
         </div>
         <br>
         <form *ngIf="selectedTab==0" #f="ngForm" (ngSubmit)="update()">
@@ -59,13 +60,13 @@
             </div>
             <p>
                 <button type="button" class="login"> Поменять пароль </button>
-                <button type="button" class="login" onclick="history.back()"> Обратно </button>
-                <button type="submit" class="login" [disabled]="!f.valid">Сохранить</button>
+                <button type="submit" class="login right" [disabled]="!f.valid">Сохранить</button>
+                <button type="button" class="login right" onclick="history.back()"> Обратно </button>
             </p>
         </form>
         <div *ngIf="selectedTab!=0">
             <br>
-            <h1>Plaseholder</h1>
+            <h1>Placeholder</h1>
         </div>
 
     </div>
