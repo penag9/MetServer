@@ -21,7 +21,7 @@ img {
     border-top-right-radius: 15px;
 }
 
-button.login {
+button.submit {
     margin-left: 30px;
     margin-right: 30px;
     width: 144.7px;
@@ -31,6 +31,19 @@ button.login {
     background-color: #f9874e;
     font-family: 'Microsoft Sans Serif', Microsoft, sans-serif;
     font-size: 14px;
+}
+
+button.white {
+    margin-left: 30px;
+    margin-right: 30px;
+    width: 144.7px;
+    height: 37.6px;
+    border-radius: 8.2px;
+    color: black;
+    background-color: white;
+    font-family: 'Microsoft Sans Serif', Microsoft, sans-serif;
+    font-size: 14px;
+    border: 1px solid #f9874e;
 }
 
 .field {
@@ -68,6 +81,7 @@ button.login {
     list-style: none;
     padding-left: 4px;
     line-height: 64px;
+    height: 64px;
     overflow: hidden;
     font-size: 22px;
     font-family: 'Microsoft Sans Serif', Microsoft, sans-serif;
@@ -93,7 +107,7 @@ button.login {
     color: black;
     text-decoration: underline #f9874e;
     z-index: 20;
-    border-bottom: 2px solid white;
+    border-bottom: 1px solid white;
 }
 
 .tabrow:before {
@@ -111,23 +125,23 @@ button.login {
 .first:after {
     border: 1px solid black;
     position: absolute;
-    bottom: -1px;
-    width: 15px;
+    bottom: 0px;
+    width: 20px;
     height: 15px;
     content: " ";
 }
 
 .next:before {
-    left: -16px;
-    border-bottom-right-radius: 15px;
+    left: -21px;
+    border-bottom-right-radius: 20px;
     border-width: 0 1px 1px 0;
     box-shadow: 5px 5px 0 5px white;
 }
 
 .next:after,
 .first:after {
-    right: -16px;
-    border-bottom-left-radius: 15px;
+    right: -21px;
+    border-bottom-left-radius: 20px;
     border-width: 0 0 1px 1px;
     box-shadow: -5px 5px 0 5px white;
 }

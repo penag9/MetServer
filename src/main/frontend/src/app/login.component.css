@@ -1,8 +1,16 @@
 .container {
     position: fixed;
-    top: 50%;
+    top: 400px;
     left: 50%;
-    transform: translate(-50%, -30%);
+    transform: translateX(-50%);
+}
+
+.errorContainer {
+    position: fixed;
+    top: 500px;
+    left: 68%;
+    width: 350px;
+    transform: translateX(-50%);
 }
 
 .content {
@@ -45,10 +53,14 @@ button:disabled {
 }
 
 .error {
+    position: relative;
+    left: 40px;
     background-color: #f9874e;
+    font-size: 18px;
+    width: 300px;
+    height: 22px;
     color: white;
-    width: 100px;
-    border-radius: 4px;
+    padding: 4px;
 }
 
 
@@ -59,6 +71,7 @@ button:disabled {
     list-style: none;
     padding-left: 4px;
     line-height: 64px;
+    height: 64px;
     overflow: hidden;
     font-size: 22px;
     font-family: 'Microsoft Sans Serif', Microsoft, sans-serif;
@@ -85,7 +98,7 @@ button:disabled {
     color: black;
     text-decoration: underline #f9874e;
     z-index: 2;
-    border-bottom: 2px solid white;
+    border-bottom: 1px solid white;
 }
 
 .tabrow:before {
@@ -104,13 +117,13 @@ button:disabled {
     border: 1px solid black;
     position: absolute;
     bottom: -1px;
-    width: 15px;
+    width: 20px;
     height: 15px;
     content: " ";
 }
 
 .next:before {
-    left: -16px;
+    left: -21px;
     border-bottom-right-radius: 15px;
     border-width: 0 1px 1px 0;
     box-shadow: 5px 5px 0 5px white;
@@ -118,7 +131,7 @@ button:disabled {
 
 .next:after,
 .first:after {
-    right: -16px;
+    right: -21px;
     border-bottom-left-radius: 15px;
     border-width: 0 0 1px 1px;
     box-shadow: -5px 5px 0 5px white;

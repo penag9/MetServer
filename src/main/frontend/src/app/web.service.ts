@@ -67,13 +67,6 @@ export class WebService {
 
       this.currentUser = data.username;
       this.isAuthenticated = true;
-/*
-      localStorage.setItem('username', data.userName);
-      localStorage.setItem('name', data.name);
-      
-      
-if OK put in local storage and return true, else return false
-      */
     } catch (error) {
       this.handleError('Unable to get message');
     }
@@ -83,9 +76,7 @@ if OK put in local storage and return true, else return false
   async login(data) {
     try {
       let response = await this.postMessage('login', JSON.stringify(data));
-      /*
-if OK put in local storage and return true, else return false
-      */
+      
     } catch (error) {
       this.handleError('Unable to get message');
       return false;

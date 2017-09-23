@@ -17,7 +17,7 @@ button.right {
     height: 60.7px;
     border-radius: 15px;
     color: white;
-    background-color: #f9874e;
+    background-color: #fc5c03;
     font-family: 'Microsoft Sans Serif', Microsoft, sans-serif;
     font-size: 18.25px;
 }
@@ -28,10 +28,15 @@ button#help {
     height: 60.7px;
     border-radius: 15px;
     color: white;
-    background-color: #f9874e;
+    background-color: #fc5c03;
     font-family: 'Microsoft Sans Serif', Microsoft, sans-serif;
     font-size: 18.25px;
 }
+
+button:hover, button#help:hover {
+    background-color: #f9874e;
+}
+
 
 span.right {
     float: right;

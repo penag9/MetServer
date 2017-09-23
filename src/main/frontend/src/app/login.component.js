@@ -21,66 +21,64 @@ var LoginComponent = (function () {
         };
         this.newUser = false;
         this.rememberMe = false;
-        this.passwordRecovery = '';
-        this.errorMessage = '';
-        this.noEmailError = true;
-        this.noPasswordError = true;
+        this.repeat = '';
         this.noRepeatError = true;
+        this.noRegisteredError = true;
+        this.noExistingError = true;
     }
     LoginComponent.prototype.login = function () {
+        console.log(this.data.username, this.data.password);
         /*
-         if(webService.login(data)) ;
-            this.errorMessage = '';
-            this.router.navigate(['/']);
-        } else {
-            this.errorMessage = 'Неверный логин или пароль';
-        }*/
-        if (this.data.username.indexOf('@') == -1 || this.data.username.indexOf('.') == -1) {
-            this.errorMessage = 'Неправильный емайл';
-            this.noEmailError = false;
-            return;
-        }
-        if (this.data.username == 'a@a.a' && this.data.password == 'aaaaaaaa') {
+        
+                if (this.data.username.indexOf('@') == -1 || this.data.username.indexOf('.') == -1) {
+                    this.noEmailError = false;
+                    return;
+                }
+        */
+        if (this.data.username == 'a@a.a' && this.data.password == '12345678') {
             if (this.rememberMe) {
                 localStorage.setItem('username', 'a@a.a');
             }
             this.webService.isAuthenticated = true;
             this.webService.currentUser = this.data.username;
-            this.errorMessage = '';
             this.router.navigate(['/']);
         }
         else {
-            this.errorMessage = 'Неверный логин или пароль ' + this.data.username + this.data.password;
+            if (this.webService.login(this.data)) {
+                this.webService.isAuthenticated = true;
+                this.webService.currentUser = this.data.username;
+                this.router.navigate(['/']);
+            }
+            else {
+                this.noRegisteredError = true;
+            }
         }
     };
     LoginComponent.prototype.register = function () {
-        if (this.data.username.indexOf('@') == -1 || this.data.username.indexOf('.') == -1) {
-            this.errorMessage = 'Неправильный емайл';
-            this.noEmailError = false;
-            return;
-        }
-        if (this.data.password != this.passwordRecovery) {
-            this.errorMessage = 'Пароль не cовпадает.';
+        /*
+                if (this.data.username.indexOf('@') == -1 || this.data.username.indexOf('.') == -1) {
+                    this.noEmailError = false;
+                    return;
+                }
+        
+        */
+        if (this.data.password != this.repeat) {
+            this.noRepeatError = false;
             return;
         }
         if (this.webService.register(this.data)) {
-            this.errorMessage = '';
+            this.webService.isAuthenticated = true;
+            this.webService.currentUser = this.data.username;
             this.router.navigate(['/']);
         }
         else {
-            this.errorMessage = 'Проблема с регистрацией';
         }
-        /*
-        if (this.data.userName == 'A' && this.data.password == 'A') {
-            localStorage.setItem('pass', this.data.password);
-            localStorage.setItem('name', this.data.userName);
-            this.webService.isAuthenticated = true;
-            this.errorMessage = '';
-            this.router.navigate(['/']);
-        } else {
-            this.errorMessage = 'Проблема с регистрацией';
-        }
-        */
+    };
+    LoginComponent.prototype.resetData = function () {
+        this.data.username = '';
+        this.data.password = '';
+        this.noRegisteredError = true;
+        this.noExistingError = true;
     };
     return LoginComponent;
 }());
