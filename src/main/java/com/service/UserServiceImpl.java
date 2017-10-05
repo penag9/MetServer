@@ -15,7 +15,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public User saveUser(User user) {
-        if (isValiid(user)) {
+        if (isValid(user)) {
             User createdUser = userRepository.save(user);
             if (createdUser != null)    {
                 return createdUser;
@@ -25,9 +25,8 @@ public class UserServiceImpl implements IUserService {
         return null;
     }
 
-    private boolean isValiid(User user) {
-        //TODO: implement
-        return true;
+    private boolean isValid(User user) {
+        return getUser(user.getUserName()) == null;
     }
 
     @Override
