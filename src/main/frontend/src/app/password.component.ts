@@ -45,7 +45,6 @@ export class PasswordComponent {
     constructor(private webService: WebService, private router: Router) { }
 
     update() {
-        console.log(this.newPassword , this.repeatNewPassword);
         if(this.newPassword != this.repeatNewPassword) {
             this.noRepeatError = false;
             return;
