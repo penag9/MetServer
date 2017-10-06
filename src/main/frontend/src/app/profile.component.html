@@ -64,9 +64,10 @@
                 <button type="button" class="white right" onclick="history.back()"> Обратно </button>
             </p>
         </form>
-        <div *ngIf="selectedTab!=0">
-            <br>
-            <h1>Placeholder</h1>
+        <div *ngIf="selectedTab==3" class="remove">
+            <h4>ВНИМАНИЕ!</h4>Ваш профиль будет безвозвратно удален.<br> Все ваши личные данные будут удалены<br> без возможности восстановления.<br> Вы уверены?<br><br><br>
+            <button type="button" class="white" (click)="selectedTab=0;"> Отменить </button>
+            <button type="button" class="white"> Удалить </button>
         </div>
 
     </div>

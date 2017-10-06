@@ -2,6 +2,18 @@ img {
     margin: 40px;
 }
 
+h3 {
+    text-decoration: underline #f9874e;
+    font-family: 'Microsoft Sans Serif', Microsoft, sans-serif;
+    font-size: 18px;
+}
+
+h4 {
+    color: #fc5c03;
+    font-family: 'Microsoft Sans Serif', Microsoft, sans-serif;
+    font-size: 20px;
+}
+
 .container {
     position: fixed;
     top: 50%;
@@ -19,6 +31,13 @@ img {
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     border-top-right-radius: 15px;
+}
+
+.remove {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Microsoft Sans Serif', Microsoft, sans-serif;
+    font-size: 18px;
 }
 
 button.submit {
@@ -44,6 +63,10 @@ button.white {
     font-family: 'Microsoft Sans Serif', Microsoft, sans-serif;
     font-size: 14px;
     border: 1px solid #f9874e;
+}
+
+button.white:hover {
+    background-color: #f9874e;
 }
 
 .field {
