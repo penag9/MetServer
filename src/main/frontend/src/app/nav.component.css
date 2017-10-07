@@ -12,6 +12,7 @@ button.lang {
 }
 
 button.right {
+    float: left;
     display: inline-block;
     margin: 3px;
     width: 144.7px;
