@@ -21,7 +21,6 @@ var PasswordComponent = (function () {
         this.noRepeatError = true;
     }
     PasswordComponent.prototype.update = function () {
-        console.log(this.newPassword, this.repeatNewPassword);
         if (this.newPassword != this.repeatNewPassword) {
             this.noRepeatError = false;
             return;

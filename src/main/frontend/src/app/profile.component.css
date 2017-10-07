@@ -15,10 +15,13 @@ h4 {
 }
 
 .container {
-    position: fixed;
-    top: 50%;
+    position: relative;
     left: 50%;
-    transform: translate(-50%, -30%);
+    top: 50px;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 650px;
+    outline: none;
 }
 
 .content {
@@ -31,6 +34,8 @@ h4 {
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     border-top-right-radius: 15px;
+    font-family: 'Microsoft Sans Serif', Microsoft, sans-serif;
+    font-size: 16px;
 }
 
 .remove {
@@ -49,7 +54,7 @@ button.submit {
     color: white;
     background-color: #f9874e;
     font-family: 'Microsoft Sans Serif', Microsoft, sans-serif;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 button.white {
@@ -61,7 +66,7 @@ button.white {
     color: black;
     background-color: white;
     font-family: 'Microsoft Sans Serif', Microsoft, sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     border: 1px solid #f9874e;
 }
 

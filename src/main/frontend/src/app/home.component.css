@@ -4,12 +4,11 @@ h3 {
 }
 
 div.container {
-    position: fixed;
-    top: 215px;
+    position: relative;
     left: 50%;
     transform: translateX(-50%);
     width: 1300px;
-    height: 900px;
+    height: 790px;
     outline: none;
 }
 

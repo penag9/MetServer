@@ -1,16 +1,11 @@
 .container {
-    position: fixed;
-    top: 400px;
+    position: relative;
     left: 50%;
+    top: 50px;
     transform: translateX(-50%);
-}
-
-.errorContainer {
-    position: fixed;
-    top: 500px;
-    left: 68%;
-    width: 350px;
-    transform: translateX(-50%);
+    width: 800px;
+    height: 500px;
+    outline: none;
 }
 
 .content {
@@ -23,6 +18,8 @@
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     border-top-right-radius: 15px;
+    font-family: 'Microsoft Sans Serif', Microsoft, sans-serif;
+    font-size: 18px;
 }
 
 button.login {
