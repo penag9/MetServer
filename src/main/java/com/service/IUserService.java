@@ -1,5 +1,6 @@
 package com.service;
 
+import com.model.CredentialsPair;
 import com.model.User;
 
 /**
@@ -10,4 +11,6 @@ public interface IUserService {
     User saveUser(User user);
 
     User getUser(String username);
+
+    boolean isPwdValid(CredentialsPair pair);
 }

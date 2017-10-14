@@ -1,5 +1,6 @@
 package com.rest;
 
+import com.constants.Constants;
 import com.model.User;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,13 @@ public class UserController {
 
     private static Logger LOG = Logger.getLogger(UserController.class.getName());
 
-    @RequestMapping(value = "/users", method = RequestMethod.POST)
+
+    /**
+     * registers a new user with unique email
+     * @param user
+     * @return
+     */
+    @RequestMapping(value = Constants.USERS, method = RequestMethod.POST)
     public ResponseEntity<?> createUser(@RequestBody User user)    {
 
         LOG.info("POST /users received following user:\n"+user.toString());
@@ -45,10 +52,15 @@ public class UserController {
 
     }
 
-    @RequestMapping(value = "/users/{user_id}", method = RequestMethod.GET)
+    /**
+     * requests existing user
+     * @param user_id
+     * @return
+     */
+    @RequestMapping(value = Constants.USERS+"/{user_id}", method = RequestMethod.GET)
     public User getUser(@PathVariable("user_id") String user_id)    {
 
-        LOG.info("GET /users/{user_id} got user_id="+user_id);
+        LOG.info("GET "+Constants.USERS+"/{user_id} got user_id="+user_id);
 
         return userService.getUser(user_id);
 

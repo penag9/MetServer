@@ -1,5 +1,6 @@
 package com.service;
 
+import com.model.CredentialsPair;
 import com.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.repository.IUserRepositry;
@@ -32,5 +33,10 @@ public class UserServiceImpl implements IUserService {
     @Override
     public User getUser(String id) {
         return userRepository.findOne(id);
+    }
+
+    @Override
+    public boolean isPwdValid(CredentialsPair pair) {
+        return false;
     }
 }
