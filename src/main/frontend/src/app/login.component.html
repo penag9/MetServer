@@ -49,13 +49,14 @@
                 </p>
                 <p>
                     <label class="tab2"> Потвердить пароль : </label><br>
-                    <input type="password" class="field tab2" [(ngModel)]="recovery" pattern="[!-~]{8,}" required name="recovery" #rec="ngModel">
-                    <span [ngClass]="{'error': true, 'hiden': rec.valid || rec.pristine }"> Вторично введенный пароль не соответствует изначальному  </span>
+                    <input type="password" class="field tab2" [(ngModel)]="repeat" pattern="[!-~]{8,}" required name="repeat" onchange="noRepeatError=true;" #rec="ngModel">
+                    <span [ngClass]="{'error': true, 'hiden': noRepeatError || rec.valid || rec.pristine }"> Вторично введенный пароль не соответствует изначальному  </span>
 
                     <p>
                         <span class="tab2"><input type="checkbox" name="agree" required [ngModel]="isAccepted" #agree="ngModel"> я соглашаюсь с правилами пользования сайта</span>
                         <br><br>
                     </p>
+
             </div>
             <p>
                 <button type="button" class="login tab2" onclick="history.back()"> Отменить </button>

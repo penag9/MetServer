@@ -27,14 +27,6 @@ var LoginComponent = (function () {
         this.noExistingError = true;
     }
     LoginComponent.prototype.login = function () {
-        console.log(this.data.username, this.data.password);
-        /*
-        
-                if (this.data.username.indexOf('@') == -1 || this.data.username.indexOf('.') == -1) {
-                    this.noEmailError = false;
-                    return;
-                }
-        */
         if (this.data.username == 'a@a.a' && this.data.password == '12345678') {
             if (this.rememberMe) {
                 localStorage.setItem('username', 'a@a.a');

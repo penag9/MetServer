@@ -12,6 +12,7 @@ button.lang {
 }
 
 button.right {
+    display: inline-block;
     margin: 3px;
     width: 144.7px;
     height: 60.7px;
@@ -33,14 +34,20 @@ button#help {
     font-size: 18.25px;
 }
 
-button:hover, button#help:hover {
-    background-color: #f9874e;
+button.small {
+    margin: 3px;
+    width: 102.7px;
+    height: 28px;
+    border-radius: 8px;
+    color: white;
+    background-color: #fc5c03;
+    font-family: 'Microsoft Sans Serif', Microsoft, sans-serif;
+    font-size: 18.25px;
 }
 
-
-span.right {
-    float: right;
-    width: 27%;
+button:hover,
+button#help:hover {
+    background-color: #f9874e;
 }
 
 div.navBar {

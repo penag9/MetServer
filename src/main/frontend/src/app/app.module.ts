@@ -11,6 +11,7 @@ import { NavComponent }  from './nav.component';
 import { HomeComponent } from './home.component';
 import { RequestComponent } from './request.component';
 import { LoginComponent } from './login.component';
+import { PasswordComponent } from './password.component';
 import { RegisterComponent } from './register.component';
 import { UsersComponent } from './users.component';
 import { MessagesComponent } from './messages.component';
@@ -34,6 +35,9 @@ let routes = [
   },
   { path : 'login',
     component : LoginComponent
+  },
+  { path : 'password',
+    component : PasswordComponent
   },
   { path : 'messages',
     component : MessagesComponent
@@ -75,7 +79,7 @@ let routes = [
 @NgModule({
   imports:      [ BrowserModule, FormsModule, HttpModule,  RouterModule.forRoot(routes) ],
   declarations: [ AppComponent, NavComponent, HomeComponent, RequestComponent,
-                  LoginComponent, MessagesComponent, ProfileComponent, RegisterComponent, UsersComponent,
+                  LoginComponent, PasswordComponent, MessagesComponent, ProfileComponent, RegisterComponent, UsersComponent,
                   HVComponent, AVComponent, ShowHireVacationTableComponent,ShowApplyVacationTableComponent,
                    ShowHireVacationComponent,ShowApplyVacationComponent ],
   bootstrap:    [ AppComponent ],

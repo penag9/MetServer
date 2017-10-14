@@ -10,11 +10,19 @@ import { WebService } from './web.service';
             <button class="lang" >עב</button>
             <button class="lang" >Рус</button>
             <button class="lang" >Eng</button>
-            <br> 
-            <button *ngIf="!webService.isAuthenticated" class="right" routerLink="/login" (click)="$event.stopPropagation();"> вход </button> 
-            <button *ngIf="webService.isAuthenticated" class="right" (click)="logout();$event.stopPropagation();" >Logout</button>
-            <button *ngIf="!webService.isAuthenticated" id="help" (click)="$event.stopPropagation();"> Помощь </button>   
-            <button *ngIf="webService.isAuthenticated"  id="help" routerLink="/profile" (click)="$event.stopPropagation();"> Профиль </button>   
+            <div> 
+                <button *ngIf="!webService.isAuthenticated" class="right" routerLink="/login" 
+                                                            (click)="$event.stopPropagation();">вход<br>регистрация</button> 
+                <button *ngIf="webService.isAuthenticated" class="right" routerLink="/profile" 
+                                                            (click)="$event.stopPropagation();">мой<br>профиль</button>            
+                
+                <button *ngIf="!webService.isAuthenticated" id="help" (click)="$event.stopPropagation();">помощь</button>   
+                <div *ngIf="webService.isAuthenticated" style="display: inline-table;">
+                    <button class="small" (click)="$event.stopPropagation();"> помощь </button>   
+                    <br>
+                    <button class="small" (click)="logout();$event.stopPropagation();" >выход</button>                
+                <div>
+            </div>
     </div>
     `,
     styleUrls: ['./nav.component.css']
