@@ -1,5 +1,6 @@
 package com.service;
 
+import com.model.CredentialsPair;
 import com.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.repository.IUserRepositry;
@@ -15,7 +16,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public User saveUser(User user) {
-        if (isValiid(user)) {
+        if (isValid(user)) {
             User createdUser = userRepository.save(user);
             if (createdUser != null)    {
                 return createdUser;
@@ -25,13 +26,17 @@ public class UserServiceImpl implements IUserService {
         return null;
     }
 
-    private boolean isValiid(User user) {
-        //TODO: implement
-        return true;
+    private boolean isValid(User user) {
+        return getUser(user.getUserName()) == null;
     }
 
     @Override
     public User getUser(String id) {
         return userRepository.findOne(id);
+    }
+
+    @Override
+    public boolean isPwdValid(CredentialsPair pair) {
+        return false;
     }
 }
