@@ -70,8 +70,8 @@ button.white {
     border: 1px solid #f9874e;
 }
 
-button.white:hover {
-    background-color: #f9874e;
+button:hover {
+    cursor: url("../app/images/click1.png"), pointer;
 }
 
 .field {

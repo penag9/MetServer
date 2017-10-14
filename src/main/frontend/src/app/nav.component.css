@@ -48,7 +48,7 @@ button.small {
 
 button:hover,
 button#help:hover {
-    background-color: #f9874e;
+    cursor: url("../app/images/click1.png"), pointer;
 }
 
 div.navBar {

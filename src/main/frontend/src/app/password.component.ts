@@ -8,6 +8,7 @@ import { WebService } from './web.service';
     selector: 'password',
     template: `  
         <div class="container">
+            <h3>Смена пароля</h3>
             <form #f="ngForm" (ngSubmit)="update()">
                 <p>
                     <label class="tab2"> Старый пароль : </label><br>
