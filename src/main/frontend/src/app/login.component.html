@@ -13,14 +13,12 @@
                 <p>
                     <label class="tab2"> Адрес электронной почты : </label><br>
                     <input type="email" class="field tab2" [(ngModel)]="data.username" required pattern="[!-~]{1,}@[!-~]{1,}\.[!-~]{1,}" name="username" #username="ngModel">
-                    <span [ngClass]="{'error': true, 'hiden': username.valid || username.pristine }"> В адресе должен быть знак '@' и '.' </span>
-                    <span [ngClass]="{'error': true, 'hiden': noRegisteredError }"> Неверный логин или пароль </span>
+                    <span [ngClass]="{'error': true, 'hiden': !webService.webErrors.unauthorized }"> Неверный логин или пароль </span>
 
                 </p>
                 <p>
                     <label class="tab2"> Пароль :</label><br>
                     <input type="password" class="field tab2" [(ngModel)]="data.password" required pattern="[!-~]{8,}" name="password" #password="ngModel">
-                    <span [ngClass]="{'error': true, 'hiden': password.valid || password.pristine }"> Минимум 8 символов: английские буквы, цифры, символы  </span>
 
                 </p>
                 <p>

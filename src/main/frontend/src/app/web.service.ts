@@ -1,4 +1,4 @@
-import { Http, Headers, RequestOptions  } from '@angular/http';
+import { Http, Headers, RequestOptions } from '@angular/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 
@@ -6,6 +6,7 @@ import 'rxjs/add/operator/toPromise';
 export class WebService {
 
   BASE_URL = 'http://localhost:8080/';
+
 
   users = [{ name: 'A', text: 'A' }, { name: 'B', text: 'B' }];
 
@@ -38,28 +39,38 @@ export class WebService {
   currentMessageIndex = 1;
 
   constructor(private http: Http) {
-    if(this.currentUser = localStorage.getItem('username')) {
+    if (this.currentUser = localStorage.getItem('username')) {
       this.isAuthenticated = true;
     }
   }
 
   postMessage(type, message) {
 
-	      let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
-    return this.http.post(this.BASE_URL + type, message, options ).toPromise();
+    let headers = localStorage.getItem('token') ?
+                      new Headers({ 'Content-Type': 'application/json','Authorization': localStorage.getItem('token') }) 
+                      :new Headers({ 'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this.BASE_URL + type, message, options);
   }
 
   getMessage(type) {
-    return this.http.get(this.BASE_URL + 'messages').toPromise();
+    let headers = localStorage.getItem('token') ?
+                      new Headers({ 'Content-Type': 'application/json','Authorization': localStorage.getItem('token') }) 
+                      :new Headers({ 'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers: headers });
+    return this.http.get(this.BASE_URL + type, options);
   }
 
   handleError(errorMessage) {
     console.log(errorMessage);
   }
 
-  async register(data) {
-    console.log('send ',JSON.stringify(data));
+  register(data) {
+
+
+    return this.postMessage('users', JSON.stringify(data));
+    /*
+    console.log('register ', JSON.stringify(data));
     try {
       let response = await this.postMessage('users', JSON.stringify(data));
 
@@ -68,22 +79,41 @@ export class WebService {
       this.currentUser = data.username;
       this.isAuthenticated = true;
     } catch (error) {
+
+      console.log(error);
       this.handleError('Unable to get message');
+
+      return false;
     }
-    return false;
+    */
   }
 
-  async login(data) {
+  login(data) {
+
+
+    return this.postMessage('login', JSON.stringify(data));
+
+    /*
+    console.log('login  ', JSON.stringify(data));
     try {
       let response = await this.postMessage('login', JSON.stringify(data));
-      
+      console.log('resp ',response);
     } catch (error) {
+      console.log('error ',error);
+      if(error.status == 403) {
+       // this.webErrors.unauthorized = true;
+      }
       this.handleError('Unable to get message');
       return false;
     }
+     */
   }
 
-  async getUsersList() {
+  getUsersList() {
+
+      return this.getMessage('users');
+    
+    /*
     try {
       let response = await this.getMessage('users');
       this.users.push(response.json());
@@ -91,10 +121,16 @@ export class WebService {
       this.handleError('Unable to get message');
       return false;
     }
+    */
   }
 
 
-  async placeRequest(data) {
+  placeRequest(data) {
+
+    
+      return this.postMessage('message', data);
+
+    /*
     try {
       let response = await this.postMessage('message', data);
       if (response.json()) return true;
@@ -102,6 +138,7 @@ export class WebService {
       this.handleError('Unable to get message');
       return false;
     }
+        */
   }
 
   getHireForVacationList() { }

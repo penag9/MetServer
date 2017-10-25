@@ -16,7 +16,7 @@ var LoginComponent = (function () {
         this.webService = webService;
         this.router = router;
         this.data = {
-            username: '',
+            userName: '',
             password: ''
         };
         this.newUser = false;
@@ -27,22 +27,29 @@ var LoginComponent = (function () {
         this.noExistingError = true;
     }
     LoginComponent.prototype.login = function () {
-        if (this.data.username == 'a@a.a' && this.data.password == '12345678') {
+        if (this.data.userName == 'a@a.a' && this.data.password == '12345678') {
             if (this.rememberMe) {
                 localStorage.setItem('username', 'a@a.a');
             }
             this.webService.isAuthenticated = true;
-            this.webService.currentUser = this.data.username;
+            this.webService.currentUser = this.data.userName;
             this.router.navigate(['/']);
         }
         else {
+            /*
+                        this.webService.login(this.data);
+                        this.noRegisteredError = false;
+            */
             if (this.webService.login(this.data)) {
+                console.log(true);
+                this.noRegisteredError = true;
                 this.webService.isAuthenticated = true;
-                this.webService.currentUser = this.data.username;
+                this.webService.currentUser = this.data.userName;
                 this.router.navigate(['/']);
             }
             else {
-                this.noRegisteredError = true;
+                console.log(false);
+                this.noRegisteredError = false;
             }
         }
     };
@@ -60,14 +67,14 @@ var LoginComponent = (function () {
         }
         if (this.webService.register(this.data)) {
             this.webService.isAuthenticated = true;
-            this.webService.currentUser = this.data.username;
+            this.webService.currentUser = this.data.userName;
             this.router.navigate(['/']);
         }
         else {
         }
     };
     LoginComponent.prototype.resetData = function () {
-        this.data.username = '';
+        this.data.userName = '';
         this.data.password = '';
         this.noRegisteredError = true;
         this.noExistingError = true;

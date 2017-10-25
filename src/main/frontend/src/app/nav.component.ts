@@ -39,16 +39,3 @@ export class NavComponent {
     }
 
 }
-/*
-
-
-            <img *ngIf="webService.isAuthenticated" class="right" src="./app/images/Profile.png" routerLink="/" >       
-
-            <img *ngIf="!webService.isAuthenticated" class="right" src="./app/images/Login.png" routerLink="/login" >
-
-<button *ngIf="!webService.isAuthenticated"  class="right"  routerLink="/login">Логин</button>
-<img *ngIf="!webService.isAuthenticated" class="right" src="./app/images/7-p1.png" routerLink="/login">
-            <button *ngIf="webService.isAuthenticated"   class="right" routerLink="/" >Profile</button>           
-            <img *ngIf="!webService.isAuthenticated" class="right" src="./app/images/7-p1.png" routerLink="/" >
-           
-*/

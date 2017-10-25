@@ -11,7 +11,7 @@ import { WebService } from './web.service';
 export class LoginComponent {
 
     data = {
-        username: '',
+        userName: '',
         password: ''
     };
 
@@ -30,24 +30,49 @@ export class LoginComponent {
     login() {
        
 
-        if (this.data.username == 'a@a.a' && this.data.password == '12345678') {
+        if (this.data.userName == 'a@a.a' && this.data.password == '12345678') {
             if (this.rememberMe) {
                 localStorage.setItem('username', 'a@a.a');
 
             }
 
             this.webService.isAuthenticated = true;
-            this.webService.currentUser = this.data.username;
+            this.webService.currentUser = this.data.userName;
             this.router.navigate(['/']);
         } else {
+
+
+            this.webService.login(this.data)
+                .subscribe(response => {
+                    this.noRegisteredError = true;
+                    this.webService.isAuthenticated = true;
+
+                    this.webService.currentUser = this.data.userName;
+                 //   this.webService.token = response.data.token;
+                    this.router.navigate(['/']);
+                }, error => {
+                    if (error.status == 403) {
+                        this.noRegisteredError = false;
+                    }
+                    console.log(false);
+                });
+
+
+/*
+            
             if (this.webService.login(this.data)) {
 
+                console.log(true);
+
+                this.noRegisteredError = true;
                 this.webService.isAuthenticated = true;
-                this.webService.currentUser = this.data.username;
+                this.webService.currentUser = this.data.userName;
                 this.router.navigate(['/']);
             } else {
-                this.noRegisteredError = true;
+                console.log(false);
+                this.noRegisteredError = false;
             }
+           */ 
         }
     }
 
@@ -67,7 +92,7 @@ export class LoginComponent {
         if (this.webService.register(this.data)) {
 
             this.webService.isAuthenticated = true;
-            this.webService.currentUser = this.data.username;
+            this.webService.currentUser = this.data.userName;
             this.router.navigate(['/']);
         } else {
             // this.errorMessage = 'Проблема с регистрацией';
@@ -76,7 +101,7 @@ export class LoginComponent {
     }
 
     resetData() {
-        this.data.username = '';
+        this.data.userName = '';
         this.data.password = '';
 
         this.noRegisteredError = true;

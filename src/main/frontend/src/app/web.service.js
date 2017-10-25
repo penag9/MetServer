@@ -50,6 +50,9 @@ var WebService = (function () {
     function WebService(http) {
         this.http = http;
         this.BASE_URL = 'http://localhost:8080/';
+        this.webErrors = {
+            unauthorized: false,
+        };
         this.users = [{ name: 'A', text: 'A' }, { name: 'B', text: 'B' }];
         this.isAuthenticated = false;
         this.currentUser = '';
@@ -96,7 +99,7 @@ var WebService = (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        console.log('send ', JSON.stringify(data));
+                        console.log('register ', JSON.stringify(data));
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
@@ -109,9 +112,10 @@ var WebService = (function () {
                         return [3 /*break*/, 4];
                     case 3:
                         error_1 = _a.sent();
+                        console.log(error_1);
                         this.handleError('Unable to get message');
-                        return [3 /*break*/, 4];
-                    case 4: return [2 /*return*/, false];
+                        return [2 /*return*/, false];
+                    case 4: return [2 /*return*/];
                 }
             });
         });
@@ -122,16 +126,24 @@ var WebService = (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, this.postMessage('login', JSON.stringify(data))];
+                        console.log('login  ', JSON.stringify(data));
+                        _a.label = 1;
                     case 1:
-                        response = _a.sent();
-                        return [3 /*break*/, 3];
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.postMessage('login', JSON.stringify(data))];
                     case 2:
+                        response = _a.sent();
+                        console.log('resp ', response);
+                        return [3 /*break*/, 4];
+                    case 3:
                         error_2 = _a.sent();
+                        console.log('error ', error_2);
+                        if (error_2.status == 403) {
+                            this.webErrors.unauthorized = true;
+                        }
                         this.handleError('Unable to get message');
                         return [2 /*return*/, false];
-                    case 3: return [2 /*return*/];
+                    case 4: return [2 /*return*/];
                 }
             });
         });
