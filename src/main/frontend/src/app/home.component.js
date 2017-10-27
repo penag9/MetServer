@@ -33,43 +33,4 @@ HomeComponent = __decorate([
     __metadata("design:paramtypes", [web_service_1.WebService, router_1.Router])
 ], HomeComponent);
 exports.HomeComponent = HomeComponent;
-/*
-
-        <div>
-            <label> Семьям требуются: </label>
-            <div>
-                <button  class="main" > Требуется работник по уходу </button>
-                <br>
-                <button  class="main" > Требуется замена на время отпуска </button>
-                <br>
-                <button  class="main" routerLink="/show/SHVacationTable"
-                        (click)="webService.getHireForVacationList()"> Требуется замена на выходные или праздники </button>
-                <br>
-                <button (click)="addMessage()"> Дать объявление </button>
-            </div>
-        </div>
-
-
-        <div>
-            <label> Работники по уходу: </label>
-            <div>
-                <button  class="main" > Ищу постоянную работу </button>
-                <br>
-                <button  class="main" > Могу заменить на время отпуска </button>
-                <br>
-                <button  class="main" routerLink="/show/SAVacationTable"
-                        (click)="webService.getApplyForVacationList()"> Могу заменить на выходные или праздники </button>
-                <br>
-                <button (click)="addMessage()"> Дать объявление </button>
-            </div>
-        </div>
-*/
-/*
-
-    <button  class="main" (click)="addMessage()"> Дать объявление </button>
-    <button  class="main" routerLink="/users" (click)="webService.getUsersList()"> Список пользователей </button>
-    <button  class="main" routerLink="/show/SAVacationTable" (click)="webService.getApplyForVacationList()"> Замены на выходные </button>
-    <button  class="main" routerLink="/show/SHVacationTable" (click)="webService.getHireForVacationList()"> Нужна замена на выходные </button>
-
-*/ 
 //# sourceMappingURL=home.component.js.map

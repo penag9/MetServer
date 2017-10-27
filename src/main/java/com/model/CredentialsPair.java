@@ -10,6 +10,6 @@ import lombok.Setter;
 @Setter
 public class CredentialsPair {
 
-    private String userName;
+    private String username;
     private String password;
 }

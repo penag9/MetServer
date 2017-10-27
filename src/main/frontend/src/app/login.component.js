@@ -27,6 +27,7 @@ var LoginComponent = (function () {
         this.noExistingError = true;
     }
     LoginComponent.prototype.login = function () {
+        var _this = this;
         if (this.data.userName == 'a@a.a' && this.data.password == '12345678') {
             if (this.rememberMe) {
                 localStorage.setItem('username', 'a@a.a');
@@ -36,21 +37,19 @@ var LoginComponent = (function () {
             this.router.navigate(['/']);
         }
         else {
-            /*
-                        this.webService.login(this.data);
-                        this.noRegisteredError = false;
-            */
-            if (this.webService.login(this.data)) {
-                console.log(true);
-                this.noRegisteredError = true;
-                this.webService.isAuthenticated = true;
-                this.webService.currentUser = this.data.userName;
-                this.router.navigate(['/']);
-            }
-            else {
+            this.webService.login(this.data)
+                .subscribe(function (response) {
+                _this.noRegisteredError = true;
+                _this.webService.isAuthenticated = true;
+                _this.webService.currentUser = _this.data.userName;
+                //   this.webService.token = response.data.token;
+                _this.router.navigate(['/']);
+            }, function (error) {
+                if (error.status == 403) {
+                    _this.noRegisteredError = false;
+                }
                 console.log(false);
-                this.noRegisteredError = false;
-            }
+            });
         }
     };
     LoginComponent.prototype.register = function () {
