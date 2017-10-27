@@ -39,4 +39,9 @@ public class UserServiceImpl implements IUserService {
     public boolean isPwdValid(CredentialsPair pair) {
         return false;
     }
+
+    @Override
+    public void delete(String username) {
+        userRepository.delete(username);
+    }
 }

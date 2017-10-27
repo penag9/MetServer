@@ -13,4 +13,6 @@ public interface IUserService {
     User getUser(String username);
 
     boolean isPwdValid(CredentialsPair pair);
+
+    void delete(String username);
 }
