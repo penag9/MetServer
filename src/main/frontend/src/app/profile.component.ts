@@ -25,9 +25,32 @@ export class ProfileComponent {
         french: ''
     };
 
-    constructor(private webService: WebService, private router: Router) { }
+    constructor(private webService: WebService, private router: Router) { 
+        this.webService.getProfile()
+            .subscribe(response => {
+                console.log(response);
+            }, error => {
+    
+                console.log(error);
+            });
+    }
 
     update() {}
+
+    delete() {
+
+        this.webService.deleteProfile()
+        .subscribe(response => {
+            console.log(response);
+            localStorage.removeItem('token');
+            localStorage.removeItem('username');
+
+            this.router.navigate(['/']);
+        }, error => {
+
+            console.log(error);
+        });
+    }
 }
 
 

@@ -16,7 +16,7 @@ var LoginComponent = (function () {
         this.webService = webService;
         this.router = router;
         this.data = {
-            userName: '',
+            username: '',
             password: ''
         };
         this.newUser = false;
@@ -28,55 +28,60 @@ var LoginComponent = (function () {
     }
     LoginComponent.prototype.login = function () {
         var _this = this;
-        if (this.data.userName == 'a@a.a' && this.data.password == '12345678') {
+        console.log('Login ', this.data);
+        if (this.data.username == 'a@a.a' && this.data.password == '12345678') {
             if (this.rememberMe) {
                 localStorage.setItem('username', 'a@a.a');
             }
             this.webService.isAuthenticated = true;
-            this.webService.currentUser = this.data.userName;
+            this.webService.currentUser = this.data.username;
             this.router.navigate(['/']);
         }
         else {
             this.webService.login(this.data)
                 .subscribe(function (response) {
+                console.log(response, response.json());
                 _this.noRegisteredError = true;
                 _this.webService.isAuthenticated = true;
-                _this.webService.currentUser = _this.data.userName;
-                //   this.webService.token = response.data.token;
+                _this.webService.currentUser = _this.data.username;
+                if (_this.rememberMe) {
+                    localStorage.setItem('username', _this.data.username);
+                }
                 _this.router.navigate(['/']);
             }, function (error) {
                 if (error.status == 403) {
                     _this.noRegisteredError = false;
                 }
-                console.log(false);
+                console.log(error);
             });
         }
     };
     LoginComponent.prototype.register = function () {
-        /*
-                if (this.data.username.indexOf('@') == -1 || this.data.username.indexOf('.') == -1) {
-                    this.noEmailError = false;
-                    return;
-                }
-        
-        */
+        var _this = this;
+        console.log('Register ', this.data);
         if (this.data.password != this.repeat) {
             this.noRepeatError = false;
             return;
         }
-        if (this.webService.register(this.data)) {
-            this.webService.isAuthenticated = true;
-            this.webService.currentUser = this.data.userName;
-            this.router.navigate(['/']);
-        }
-        else {
-        }
+        this.webService.register(this.data)
+            .subscribe(function (response) {
+            console.log(response, response.json());
+            _this.noRegisteredError = true;
+            _this.webService.isAuthenticated = true;
+            _this.webService.currentUser = _this.data.username;
+            // localStorage.setItem('username', this.data.username);
+            //   this.webService.token = response.data.token;
+            _this.router.navigate(['/']);
+        }, function (error) {
+            console.log(error);
+        });
     };
     LoginComponent.prototype.resetData = function () {
-        this.data.userName = '';
+        this.data.username = '';
         this.data.password = '';
         this.noRegisteredError = true;
         this.noExistingError = true;
+        this.noRepeatError = true;
     };
     return LoginComponent;
 }());

@@ -11,7 +11,7 @@ import { WebService } from './web.service';
 export class LoginComponent {
 
     data = {
-        userName: '',
+        username: '',
         password: ''
     };
 
@@ -28,84 +28,78 @@ export class LoginComponent {
     constructor(private webService: WebService, private router: Router) { }
 
     login() {
-       
+       console.log('Login ',this.data);
 
-        if (this.data.userName == 'a@a.a' && this.data.password == '12345678') {
+        if (this.data.username == 'a@a.a' && this.data.password == '12345678') {
             if (this.rememberMe) {
                 localStorage.setItem('username', 'a@a.a');
 
             }
 
             this.webService.isAuthenticated = true;
-            this.webService.currentUser = this.data.userName;
+            this.webService.currentUser = this.data.username;
             this.router.navigate(['/']);
         } else {
 
 
             this.webService.login(this.data)
                 .subscribe(response => {
+                    
+            console.log(response, response.json());
                     this.noRegisteredError = true;
                     this.webService.isAuthenticated = true;
 
-                    this.webService.currentUser = this.data.userName;
-                 //   this.webService.token = response.data.token;
+                    this.webService.currentUser = this.data.username;
+                    if (this.rememberMe) {
+                         localStorage.setItem('username', this.data.username);
+                        //   this.webService.token = response.data.token;
+                    }
                     this.router.navigate(['/']);
                 }, error => {
                     if (error.status == 403) {
                         this.noRegisteredError = false;
                     }
-                    console.log(false);
+                    console.log(error);
                 });
 
-
-/*
-            
-            if (this.webService.login(this.data)) {
-
-                console.log(true);
-
-                this.noRegisteredError = true;
-                this.webService.isAuthenticated = true;
-                this.webService.currentUser = this.data.userName;
-                this.router.navigate(['/']);
-            } else {
-                console.log(false);
-                this.noRegisteredError = false;
-            }
-           */ 
         }
     }
 
     register() {
-        /*
-                if (this.data.username.indexOf('@') == -1 || this.data.username.indexOf('.') == -1) {
-                    this.noEmailError = false;
-                    return;
-                }
-        
-        */
+
+       console.log('Register ',this.data);
+
         if (this.data.password != this.repeat) {
             this.noRepeatError = false;
             return;
         }
 
-        if (this.webService.register(this.data)) {
-
+        this.webService.register(this.data)
+        .subscribe(response => {
+            console.log(response, response.json());
+            this.noRegisteredError = true;
             this.webService.isAuthenticated = true;
-            this.webService.currentUser = this.data.userName;
+
+            this.webService.currentUser = this.data.username;
+
+           // localStorage.setItem('username', this.data.username);
+         //   this.webService.token = response.data.token;
             this.router.navigate(['/']);
-        } else {
-            // this.errorMessage = 'Проблема с регистрацией';
-        }
+        }, error => {
+
+            console.log(error);
+        });
+
 
     }
 
     resetData() {
-        this.data.userName = '';
+        this.data.username = '';
         this.data.password = '';
 
         this.noRegisteredError = true;
         this.noExistingError = true;
+        this.noRepeatError = true;
     }
 }
 

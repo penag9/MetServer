@@ -55,37 +55,18 @@ export class WebService {
 
   getMessage(type) {
     let headers = localStorage.getItem('token') ?
-                      new Headers({ 'Content-Type': 'application/json','Authorization': localStorage.getItem('token') }) 
+                      new Headers({ 'Content-Type': 'application/json', 'Authorization': localStorage.getItem('token') }) 
                       :new Headers({ 'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
     return this.http.get(this.BASE_URL + type, options);
   }
 
-  handleError(errorMessage) {
-    console.log(errorMessage);
-  }
 
   register(data) {
 
 
     return this.postMessage('users', JSON.stringify(data));
-    /*
-    console.log('register ', JSON.stringify(data));
-    try {
-      let response = await this.postMessage('users', JSON.stringify(data));
-
-      console.log(response);
-
-      this.currentUser = data.username;
-      this.isAuthenticated = true;
-    } catch (error) {
-
-      console.log(error);
-      this.handleError('Unable to get message');
-
-      return false;
-    }
-    */
+    
   }
 
   login(data) {
@@ -93,35 +74,21 @@ export class WebService {
 
     return this.postMessage('login', JSON.stringify(data));
 
-    /*
-    console.log('login  ', JSON.stringify(data));
-    try {
-      let response = await this.postMessage('login', JSON.stringify(data));
-      console.log('resp ',response);
-    } catch (error) {
-      console.log('error ',error);
-      if(error.status == 403) {
-       // this.webErrors.unauthorized = true;
-      }
-      this.handleError('Unable to get message');
-      return false;
-    }
-     */
+  }
+
+  getProfile() {
+    return this.getMessage('users/' + this.currentUser);
+  }
+
+  deleteProfile() {
+
+    return this.getMessage('users/' + this.currentUser + '/delete');
   }
 
   getUsersList() {
 
       return this.getMessage('users');
     
-    /*
-    try {
-      let response = await this.getMessage('users');
-      this.users.push(response.json());
-    } catch (error) {
-      this.handleError('Unable to get message');
-      return false;
-    }
-    */
   }
 
 
@@ -130,15 +97,6 @@ export class WebService {
     
       return this.postMessage('message', data);
 
-    /*
-    try {
-      let response = await this.postMessage('message', data);
-      if (response.json()) return true;
-    } catch (error) {
-      this.handleError('Unable to get message');
-      return false;
-    }
-        */
   }
 
   getHireForVacationList() { }

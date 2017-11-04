@@ -27,8 +27,26 @@ var ProfileComponent = (function () {
             romanian: '',
             french: ''
         };
+        this.webService.getProfile()
+            .subscribe(function (response) {
+            console.log(response);
+        }, function (error) {
+            console.log(error);
+        });
     }
     ProfileComponent.prototype.update = function () { };
+    ProfileComponent.prototype.delete = function () {
+        var _this = this;
+        this.webService.deleteProfile()
+            .subscribe(function (response) {
+            console.log(response);
+            localStorage.removeItem('token');
+            localStorage.removeItem('username');
+            _this.router.navigate(['/']);
+        }, function (error) {
+            console.log(error);
+        });
+    };
     return ProfileComponent;
 }());
 ProfileComponent = __decorate([

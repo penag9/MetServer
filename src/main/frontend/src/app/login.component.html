@@ -13,7 +13,7 @@
                 <p>
                     <label class="tab2"> Адрес электронной почты : </label><br>
                     <input type="email" class="field tab2" [(ngModel)]="data.username" required pattern="[!-~]{1,}@[!-~]{1,}\.[!-~]{1,}" name="username" #username="ngModel">
-                    <span [ngClass]="{'error': true, 'hiden': !webService.webErrors.unauthorized }"> Неверный логин или пароль </span>
+                    <span [ngClass]="{'error': true, 'hiden': noRegisteredError }"> Неверный логин или пароль </span>
 
                 </p>
                 <p>
@@ -41,14 +41,14 @@
                 </p>
                 <p>
                     <label class="tab2"> Пароль : </label><br>
-                    <input type="password" class="field tab2" [(ngModel)]="data.password" required onchange="form.recovery.pattern = this.value;" pattern="[!-~]{8,}" name="password" #password="ngModel">
+                    <input type="password" class="field tab2" [(ngModel)]="data.password" required onchange="form.repeat.pattern = this.value;" pattern="[!-~]{8,}" name="password" #password="ngModel">
                     <span [ngClass]="{'error': true, 'hiden': password.valid || password.pristine }"> Минимум 8 символов: английские буквы, цифры, символы  </span>
 
                 </p>
                 <p>
                     <label class="tab2"> Потвердить пароль : </label><br>
                     <input type="password" class="field tab2" [(ngModel)]="repeat" pattern="[!-~]{8,}" required name="repeat" onchange="noRepeatError=true;" #rec="ngModel">
-                    <span [ngClass]="{'error': true, 'hiden': noRepeatError || rec.valid || rec.pristine }"> Вторично введенный пароль не соответствует изначальному  </span>
+                    <span [ngClass]="{'error': true, 'hiden': noRepeatError }"> Вторично введенный пароль не соответствует изначальному  </span>
 
                     <p>
                         <span class="tab2"><input type="checkbox" name="agree" required [ngModel]="isAccepted" #agree="ngModel"> я соглашаюсь с правилами пользования сайта</span>
