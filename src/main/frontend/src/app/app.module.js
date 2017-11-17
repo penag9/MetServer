@@ -78,6 +78,9 @@ var routes = [
     },
     { path: 'show/SAVacation',
         component: show_apply_vacation_component_1.ShowApplyVacationComponent
+    },
+    { path: '**',
+        component: home_component_1.HomeComponent
     }
 ];
 var AppModule = (function () {

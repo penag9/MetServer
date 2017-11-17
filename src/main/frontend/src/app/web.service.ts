@@ -5,7 +5,8 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class WebService {
 
-  BASE_URL = 'http://localhost:8080/';
+  //BASE_URL = 'http://localhost:8080/';
+  BASE_URL = 'http://httpbin.org/post';
 
 
   users = [{ name: 'A', text: 'A' }, { name: 'B', text: 'B' }];
@@ -50,7 +51,8 @@ export class WebService {
                       new Headers({ 'Content-Type': 'application/json','Authorization': localStorage.getItem('token') }) 
                       :new Headers({ 'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
-    return this.http.post(this.BASE_URL + type, message, options);
+    //return this.http.post(this.BASE_URL + type, message, options);
+    return this.http.post(this.BASE_URL , message, options);
   }
 
   getMessage(type) {

@@ -74,6 +74,9 @@ let routes = [
   },
   { path : 'show/SAVacation',
     component : ShowApplyVacationComponent
+  },
+  { path : '**',
+    component : HomeComponent
   }];
 
 @NgModule({

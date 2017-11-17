@@ -14,7 +14,8 @@ require("rxjs/add/operator/toPromise");
 var WebService = (function () {
     function WebService(http) {
         this.http = http;
-        this.BASE_URL = 'http://localhost:8080/';
+        //BASE_URL = 'http://localhost:8080/';
+        this.BASE_URL = 'http://httpbin.org/post';
         this.users = [{ name: 'A', text: 'A' }, { name: 'B', text: 'B' }];
         this.isAuthenticated = false;
         this.currentUser = '';
@@ -49,7 +50,8 @@ var WebService = (function () {
             new http_1.Headers({ 'Content-Type': 'application/json', 'Authorization': localStorage.getItem('token') })
             : new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
-        return this.http.post(this.BASE_URL + type, message, options);
+        //return this.http.post(this.BASE_URL + type, message, options);
+        return this.http.post(this.BASE_URL, message, options);
     };
     WebService.prototype.getMessage = function (type) {
         var headers = localStorage.getItem('token') ?
