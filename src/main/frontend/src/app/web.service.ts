@@ -5,11 +5,9 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class WebService {
 
-  //BASE_URL = 'http://localhost:8080/';
-  BASE_URL = 'http://httpbin.org/post';
+  BASE_URL = 'http://localhost:8080/';
+  //BASE_URL = 'http://httpbin.org/post';
 
-
-  users = [{ name: 'A', text: 'A' }, { name: 'B', text: 'B' }];
 
   isAuthenticated = false;
 
@@ -42,22 +40,23 @@ export class WebService {
   constructor(private http: Http) {
     if (this.currentUser = localStorage.getItem('username')) {
       this.isAuthenticated = true;
+      sessionStorage.setItem('token', localStorage.getItem('token'));
     }
   }
 
   postMessage(type, message) {
-
-    let headers = localStorage.getItem('token') ?
-                      new Headers({ 'Content-Type': 'application/json','Authorization': localStorage.getItem('token') }) 
+    let token = sessionStorage.getItem('token');    
+    let headers = token ?
+                      new Headers({ 'Content-Type': 'application/json', 'authorization': token }) 
                       :new Headers({ 'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
-    //return this.http.post(this.BASE_URL + type, message, options);
-    return this.http.post(this.BASE_URL , message, options);
+    return this.http.post(this.BASE_URL + type, message, options);
   }
 
   getMessage(type) {
-    let headers = localStorage.getItem('token') ?
-                      new Headers({ 'Content-Type': 'application/json', 'Authorization': localStorage.getItem('token') }) 
+    let token = sessionStorage.getItem('token');    
+    let headers = token ?
+                      new Headers({ 'Content-Type': 'application/json', 'authorization': token }) 
                       :new Headers({ 'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
     return this.http.get(this.BASE_URL + type, options);
@@ -65,40 +64,32 @@ export class WebService {
 
 
   register(data) {
-
-
-    return this.postMessage('users', JSON.stringify(data));
-    
+    return this.postMessage('register', JSON.stringify(data));    
   }
 
   login(data) {
-
-
     return this.postMessage('login', JSON.stringify(data));
-
   }
 
   getProfile() {
     return this.getMessage('users/' + this.currentUser);
   }
 
-  deleteProfile() {
+  updateProfile(data) {
+    return this.postMessage('users/update/' + this.currentUser, JSON.stringify(data));
+  }
 
-    return this.getMessage('users/' + this.currentUser + '/delete');
+  deleteProfile() {
+    return this.getMessage('users/delete/' + this.currentUser);
   }
 
   getUsersList() {
-
-      return this.getMessage('users');
-    
+      return this.getMessage('users');    
   }
 
 
-  placeRequest(data) {
-
-    
+  placeRequest(data) {    
       return this.postMessage('message', data);
-
   }
 
   getHireForVacationList() { }

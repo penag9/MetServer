@@ -14,12 +14,12 @@ export class ProfileComponent {
 
 
     data = {
-        userName: '',
+        username: '',
         name: '',
         phone: '',
         sex: '',
         russian: '',
-        russhebrew: '',
+        hebrew: '',
         english: '',
         romanian: '',
         french: ''
@@ -28,23 +28,38 @@ export class ProfileComponent {
     constructor(private webService: WebService, private router: Router) { 
         this.webService.getProfile()
             .subscribe(response => {
-                console.log(response);
+                console.log(response.json());
+                let result = response.json();
+                this.data.username = result.username || '';
             }, error => {
     
                 console.log(error);
+                
+                this.router.navigate(['/login']);
             });
     }
 
-    update() {}
+    update() {
+        this.webService.updateProfile(this.data)
+        .subscribe(response => {
+            console.log(response);
+        }, error => {
+
+            console.log(error);
+        });
+    }
 
     delete() {
 
         this.webService.deleteProfile()
         .subscribe(response => {
             console.log(response);
-            localStorage.removeItem('token');
             localStorage.removeItem('username');
-
+            localStorage.removeItem('token');
+            sessionStorage.removeItem('username');
+            sessionStorage.removeItem('token');
+            this.webService.isAuthenticated = false;
+            this.webService.currentUser = '';
             this.router.navigate(['/']);
         }, error => {
 

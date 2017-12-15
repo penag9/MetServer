@@ -29,32 +29,25 @@ var LoginComponent = (function () {
     LoginComponent.prototype.login = function () {
         var _this = this;
         console.log('Login ', this.data);
-        if (this.data.username == 'a@a.a' && this.data.password == '12345678') {
-            if (this.rememberMe) {
-                localStorage.setItem('username', 'a@a.a');
+        this.webService.login(this.data)
+            .subscribe(function (response) {
+            //console.log(response, response.json());
+            _this.noRegisteredError = true;
+            _this.webService.isAuthenticated = true;
+            _this.webService.currentUser = _this.data.username;
+            var token = response.json().token;
+            sessionStorage.setItem('token', token);
+            if (_this.rememberMe) {
+                localStorage.setItem('username', _this.data.username);
+                localStorage.setItem('token', token);
             }
-            this.webService.isAuthenticated = true;
-            this.webService.currentUser = this.data.username;
-            this.router.navigate(['/']);
-        }
-        else {
-            this.webService.login(this.data)
-                .subscribe(function (response) {
-                console.log(response, response.json());
-                _this.noRegisteredError = true;
-                _this.webService.isAuthenticated = true;
-                _this.webService.currentUser = _this.data.username;
-                if (_this.rememberMe) {
-                    localStorage.setItem('username', _this.data.username);
-                }
-                _this.router.navigate(['/']);
-            }, function (error) {
-                if (error.status == 403) {
-                    _this.noRegisteredError = false;
-                }
-                console.log(error);
-            });
-        }
+            _this.router.navigate(['/']);
+        }, function (error) {
+            if (error.status == 401) {
+                _this.noRegisteredError = false;
+            }
+            console.log(error);
+        });
     };
     LoginComponent.prototype.register = function () {
         var _this = this;
@@ -65,15 +58,18 @@ var LoginComponent = (function () {
         }
         this.webService.register(this.data)
             .subscribe(function (response) {
-            console.log(response, response.json());
+            // console.log(response, response.json());
             _this.noRegisteredError = true;
             _this.webService.isAuthenticated = true;
             _this.webService.currentUser = _this.data.username;
-            // localStorage.setItem('username', this.data.username);
-            //   this.webService.token = response.data.token;
+            sessionStorage.setItem('username', _this.data.username);
+            sessionStorage.setItem('token', response.json().token);
             _this.router.navigate(['/']);
         }, function (error) {
             console.log(error);
+            if (error.status == 401) {
+                _this.noExistingError = false;
+            }
         });
     };
     LoginComponent.prototype.resetData = function () {

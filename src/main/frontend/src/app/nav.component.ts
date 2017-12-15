@@ -18,9 +18,9 @@ import { WebService } from './web.service';
                 
                 <button *ngIf="!webService.isAuthenticated" id="help" (click)="$event.stopPropagation();">помощь</button>   
                 <div *ngIf="webService.isAuthenticated" style="display: inline-table;">
-                    <button class="small" (click)="$event.stopPropagation();"> помощь </button>   
+                    <button class="small" (click)="help(); $event.stopPropagation();"> помощь </button>   
                     <br>
-                    <button class="small" (click)="logout();$event.stopPropagation();" >выход</button>                
+                    <button class="small" (click)="logout(); $event.stopPropagation();" >выход</button>                
                 <div>
             </div>
     </div>
@@ -33,9 +33,22 @@ export class NavComponent {
 
     logout() {
         localStorage.removeItem('username');
+        localStorage.removeItem('token');
+        sessionStorage.removeItem('username');
+        sessionStorage.removeItem('token');
         this.webService.isAuthenticated = false;
         this.webService.currentUser = '';
         this.router.navigate(['/']);
+    }
+
+    help(){
+        this.webService.getUsersList()
+        .subscribe(response => {
+            console.log(response);
+        }, error => {
+
+            console.log(error);
+        });
     }
 
 }

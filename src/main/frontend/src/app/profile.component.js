@@ -13,11 +13,12 @@ var router_1 = require("@angular/router");
 var web_service_1 = require("./web.service");
 var ProfileComponent = (function () {
     function ProfileComponent(webService, router) {
+        var _this = this;
         this.webService = webService;
         this.router = router;
         this.selectedTab = 0;
         this.data = {
-            userName: '',
+            username: '',
             name: '',
             phone: '',
             sex: '',
@@ -29,9 +30,12 @@ var ProfileComponent = (function () {
         };
         this.webService.getProfile()
             .subscribe(function (response) {
-            console.log(response);
+            console.log(response.json());
+            var result = response.json();
+            _this.data.username = result.username || '';
         }, function (error) {
             console.log(error);
+            _this.router.navigate(['/login']);
         });
     }
     ProfileComponent.prototype.update = function () { };
@@ -40,8 +44,12 @@ var ProfileComponent = (function () {
         this.webService.deleteProfile()
             .subscribe(function (response) {
             console.log(response);
-            localStorage.removeItem('token');
             localStorage.removeItem('username');
+            localStorage.removeItem('token');
+            sessionStorage.removeItem('username');
+            sessionStorage.removeItem('token');
+            _this.webService.isAuthenticated = false;
+            _this.webService.currentUser = '';
             _this.router.navigate(['/']);
         }, function (error) {
             console.log(error);

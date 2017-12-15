@@ -51,6 +51,16 @@ export class PasswordComponent {
             return;
         }
 
+        this.webService.updateProfile({password: this.newPassword})
+        .subscribe(response => {
+            console.log(response);
+
+            this.router.navigate(['/profile']);
+        }, error => {
+
+            console.log(error);
+        });
+
         this.router.navigate(['/profile']);
 
     }

@@ -14,9 +14,8 @@ require("rxjs/add/operator/toPromise");
 var WebService = (function () {
     function WebService(http) {
         this.http = http;
-        //BASE_URL = 'http://localhost:8080/';
-        this.BASE_URL = 'http://httpbin.org/post';
-        this.users = [{ name: 'A', text: 'A' }, { name: 'B', text: 'B' }];
+        this.BASE_URL = 'http://localhost:8080/';
+        //BASE_URL = 'http://httpbin.org/post';
         this.isAuthenticated = false;
         this.currentUser = '';
         this.currentTable = [{
@@ -43,25 +42,28 @@ var WebService = (function () {
         this.currentMessageIndex = 1;
         if (this.currentUser = localStorage.getItem('username')) {
             this.isAuthenticated = true;
+            sessionStorage.setItem('token', localStorage.getItem('token'));
         }
     }
     WebService.prototype.postMessage = function (type, message) {
-        var headers = localStorage.getItem('token') ?
-            new http_1.Headers({ 'Content-Type': 'application/json', 'Authorization': localStorage.getItem('token') })
+        var token = sessionStorage.getItem('token');
+        var headers = token ?
+            new http_1.Headers({ 'Content-Type': 'application/json', 'authorization': token })
             : new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
-        //return this.http.post(this.BASE_URL + type, message, options);
-        return this.http.post(this.BASE_URL, message, options);
+        return this.http.post(this.BASE_URL + type, message, options);
+        //return this.http.post(this.BASE_URL , message, options);
     };
     WebService.prototype.getMessage = function (type) {
-        var headers = localStorage.getItem('token') ?
-            new http_1.Headers({ 'Content-Type': 'application/json', 'Authorization': localStorage.getItem('token') })
+        var token = sessionStorage.getItem('token');
+        var headers = token ?
+            new http_1.Headers({ 'Content-Type': 'application/json', 'authorization': token })
             : new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
         return this.http.get(this.BASE_URL + type, options);
     };
     WebService.prototype.register = function (data) {
-        return this.postMessage('users', JSON.stringify(data));
+        return this.postMessage('register', JSON.stringify(data));
     };
     WebService.prototype.login = function (data) {
         return this.postMessage('login', JSON.stringify(data));
@@ -70,7 +72,7 @@ var WebService = (function () {
         return this.getMessage('users/' + this.currentUser);
     };
     WebService.prototype.deleteProfile = function () {
-        return this.getMessage('users/' + this.currentUser + '/delete');
+        return this.getMessage('users/delete/' + this.currentUser);
     };
     WebService.prototype.getUsersList = function () {
         return this.getMessage('users');

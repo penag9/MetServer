@@ -28,46 +28,36 @@ export class LoginComponent {
     constructor(private webService: WebService, private router: Router) { }
 
     login() {
-       console.log('Login ',this.data);
+        console.log('Login ', this.data);
+        this.webService.login(this.data)
+            .subscribe(response => {
+                //console.log(response, response.json());
+                this.noRegisteredError = true;
+                this.webService.isAuthenticated = true;
 
-        if (this.data.username == 'a@a.a' && this.data.password == '12345678') {
-            if (this.rememberMe) {
-                localStorage.setItem('username', 'a@a.a');
+                this.webService.currentUser = this.data.username;
 
-            }
+                let token = response.json().token;
+                sessionStorage.setItem('token', token);
 
-            this.webService.isAuthenticated = true;
-            this.webService.currentUser = this.data.username;
-            this.router.navigate(['/']);
-        } else {
+                if (this.rememberMe) {
+                    localStorage.setItem('username', this.data.username);
+                    localStorage.setItem('token', token);
+                }
 
+                this.router.navigate(['/']);
+            }, error => {
+                if (error.status == 401) {
+                    this.noRegisteredError = false;
+                }
+                console.log(error);
+            });
 
-            this.webService.login(this.data)
-                .subscribe(response => {
-                    
-            console.log(response, response.json());
-                    this.noRegisteredError = true;
-                    this.webService.isAuthenticated = true;
-
-                    this.webService.currentUser = this.data.username;
-                    if (this.rememberMe) {
-                         localStorage.setItem('username', this.data.username);
-                        //   this.webService.token = response.data.token;
-                    }
-                    this.router.navigate(['/']);
-                }, error => {
-                    if (error.status == 403) {
-                        this.noRegisteredError = false;
-                    }
-                    console.log(error);
-                });
-
-        }
     }
 
     register() {
 
-       console.log('Register ',this.data);
+        console.log('Register ', this.data);
 
         if (this.data.password != this.repeat) {
             this.noRepeatError = false;
@@ -75,20 +65,23 @@ export class LoginComponent {
         }
 
         this.webService.register(this.data)
-        .subscribe(response => {
-            console.log(response, response.json());
-            this.noRegisteredError = true;
-            this.webService.isAuthenticated = true;
+            .subscribe(response => {
+               // console.log(response, response.json());
+                this.noRegisteredError = true;
+                this.webService.isAuthenticated = true;
 
-            this.webService.currentUser = this.data.username;
+                this.webService.currentUser = this.data.username;
 
-           // localStorage.setItem('username', this.data.username);
-         //   this.webService.token = response.data.token;
-            this.router.navigate(['/']);
-        }, error => {
+                sessionStorage.setItem('username', this.data.username);
+                sessionStorage.setItem('token', response.json().token);
+                this.router.navigate(['/']);
+            }, error => {
 
-            console.log(error);
-        });
+                console.log(error);
+                if (error.status == 401) {
+                    this.noExistingError = false;
+                }
+            });
 
 
     }
