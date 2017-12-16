@@ -6,12 +6,14 @@ import { WebService } from './web.service';
 @Component({
     selector: 'admin',
     template: `
-    <div *ngIf="!logged">
+    <div class=tab2 *ngIf="!logged">
+        for demo - admin admin
         <input type="text" [(ngModel)]="data.username" required name="username" #username="ngModel">
         <input type="text" [(ngModel)]="data.password" required name="password" #password="ngModel">
         <button type="submit" (click)="login();">Login</button>
+        {{errorMessage}}
     </div>
-    <div *ngIf="logged">
+    <div class=tab2 *ngIf="logged">
         <button (click)="generate();">Generate new user</button>
         <button (click)="showAllUsers();">Show all user</button>
         <br/>
@@ -30,6 +32,8 @@ export class AdminComponent {
 
     logged = false;
 
+    errorMessage = '';
+
     users = [];
 
     constructor(private webService: WebService, private router: Router) { }
@@ -38,13 +42,13 @@ export class AdminComponent {
         console.log('Admin Login ', this.data);
         this.webService.adminLogin(this.data)
             .subscribe(response => {
-
                 let token = response.json().token;
                 sessionStorage.setItem('Atoken', token);
                 sessionStorage.setItem('Auser', this.data.username);
                 this.logged = true;
-
+                this.errorMessage = '';
             }, error => {
+                this.errorMessage = 'Wrong username or password';
                 console.log(error);
             });
 
@@ -62,10 +66,8 @@ export class AdminComponent {
 
     }
 
-    showAllUsers() {
-
-
-        this.webService.getUsersList()
+    showAllBots() {
+        this.webService.getBotsList()
             .subscribe(response => {
                 this.users = response._body;
                 console.log(response);

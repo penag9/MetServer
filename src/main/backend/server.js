@@ -38,7 +38,7 @@ app.use(bodyParser.json());
 // list of all users
 app.get('/users', (req, res) => {
 
-    User.find({}, { _id: 0, password: 0, __v: 0 }, function(err, results) {
+    User.find({}, { _id: 0, password: 0, bot: 0, __v: 0 }, function(err, results) {
         if (err) {
             console.log('error occured ', err);
             res.status(500).send('Internal error');
@@ -161,6 +161,8 @@ app.post('/register', (req, res) => {
 
 })
 
+//------------- Admin tools -------------
+
 //Admin login
 app.post('/admin/login', (req, res) => {
     Admin.find({ username: req.body.username }, function(err, results) {
@@ -215,6 +217,22 @@ app.get('/admin/generate', (req, res) => {
         });
 
 });
+
+
+// list of all bots
+app.get('admin/bots', (req, res) => {
+
+    User.find({ bot: { $exists: true } /*{ $gt: 0 }*/ }, { _id: 0, password: 0, __v: 0 }, function(err, results) {
+        if (err) {
+            console.log('error occured ', err);
+            res.status(500).send('Internal error');
+        } else {
+            res.json(results);
+        }
+    });
+});
+
+//-----------------Helpers--------------------
 
 function sendToken(user, res) {
     var token = jwt.sign(user.password, '123');

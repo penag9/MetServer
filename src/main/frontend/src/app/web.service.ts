@@ -95,6 +95,10 @@ export class WebService {
     return this.getMessage("admin/generate");
   }
 
+  getBotsList() {
+    return this.getMessage('admin/bots');    
+}
+
 
   placeRequest(data) {    
       return this.postMessage('message', data);
