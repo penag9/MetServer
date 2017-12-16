@@ -22,6 +22,7 @@ import { ShowHireVacationTableComponent } from './show/show-hire-vacation-table.
 import { ShowApplyVacationTableComponent } from './show/show-apply-vacation-table.component';
 import { ShowHireVacationComponent } from './show/show-hire-vacation.component';
 import { ShowApplyVacationComponent } from './show/show-apply-vacation.component';
+import { AdminComponent } from './admin.component';
 
 let routes = [
   { path : '',
@@ -75,6 +76,9 @@ let routes = [
   { path : 'show/SAVacation',
     component : ShowApplyVacationComponent
   },
+  { path : 'admin',
+    component : AdminComponent
+  },
   { path : '**',
     component : HomeComponent
   }];
@@ -83,8 +87,8 @@ let routes = [
   imports:      [ BrowserModule, FormsModule, HttpModule,  RouterModule.forRoot(routes) ],
   declarations: [ AppComponent, NavComponent, HomeComponent, RequestComponent,
                   LoginComponent, PasswordComponent, MessagesComponent, ProfileComponent, RegisterComponent, UsersComponent,
-                  HVComponent, AVComponent, ShowHireVacationTableComponent,ShowApplyVacationTableComponent,
-                   ShowHireVacationComponent,ShowApplyVacationComponent ],
+                  HVComponent, AVComponent, ShowHireVacationTableComponent ,ShowApplyVacationTableComponent,
+                   ShowHireVacationComponent, ShowApplyVacationComponent, AdminComponent ],
   bootstrap:    [ AppComponent ],
   providers:    [ WebService ]
 })

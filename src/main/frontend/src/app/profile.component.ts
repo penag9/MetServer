@@ -29,8 +29,8 @@ export class ProfileComponent {
         this.webService.getProfile()
             .subscribe(response => {
                 console.log(response.json());
-                let result = response.json();
-                this.data.username = result.username || '';
+                this.data = response.json();
+                //this.data.username = result.username || '';
             }, error => {
     
                 console.log(error);

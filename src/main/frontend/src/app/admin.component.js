@@ -11,66 +11,56 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var web_service_1 = require("./web.service");
-var ProfileComponent = (function () {
-    function ProfileComponent(webService, router) {
-        var _this = this;
+var AdminComponent = (function () {
+    function AdminComponent(webService, router) {
         this.webService = webService;
         this.router = router;
-        this.selectedTab = 0;
         this.data = {
             username: '',
-            name: '',
-            phone: '',
-            sex: '',
-            russian: '',
-            hebrew: '',
-            english: '',
-            romanian: '',
-            french: ''
+            password: ''
         };
-        this.webService.getProfile()
-            .subscribe(function (response) {
-            console.log(response.json());
-            _this.data = response.json();
-            //this.data.username = result.username || '';
-        }, function (error) {
-            console.log(error);
-            _this.router.navigate(['/login']);
-        });
+        this.logged = false;
+        this.users = [];
     }
-    ProfileComponent.prototype.update = function () {
-        this.webService.updateProfile(this.data)
-            .subscribe(function (response) {
-            console.log(response);
-        }, function (error) {
-            console.log(error);
-        });
-    };
-    ProfileComponent.prototype.delete = function () {
+    AdminComponent.prototype.login = function () {
         var _this = this;
-        this.webService.deleteProfile()
+        console.log('Admin Login ', this.data);
+        this.webService.adminLogin(this.data)
             .subscribe(function (response) {
-            console.log(response);
-            localStorage.removeItem('username');
-            localStorage.removeItem('token');
-            sessionStorage.removeItem('username');
-            sessionStorage.removeItem('token');
-            _this.webService.isAuthenticated = false;
-            _this.webService.currentUser = '';
-            _this.router.navigate(['/']);
+            var token = response.json().token;
+            sessionStorage.setItem('Atoken', token);
+            sessionStorage.setItem('Auser', _this.data.username);
+            _this.logged = true;
         }, function (error) {
             console.log(error);
         });
     };
-    return ProfileComponent;
+    AdminComponent.prototype.generate = function () {
+        this.webService.generateUser()
+            .subscribe(function (response) {
+            console.log(response);
+        }, function (error) {
+            console.log(error);
+        });
+    };
+    AdminComponent.prototype.showAllUsers = function () {
+        var _this = this;
+        this.webService.getUsersList()
+            .subscribe(function (response) {
+            _this.users = response._body;
+            console.log(response);
+        }, function (error) {
+            console.log(error);
+        });
+    };
+    return AdminComponent;
 }());
-ProfileComponent = __decorate([
+AdminComponent = __decorate([
     core_1.Component({
-        selector: 'profile',
-        templateUrl: './profile.component.html',
-        styleUrls: ['./profile.component.css']
+        selector: 'admin',
+        template: "\n    <div *ngIf=\"!logged\">\n        <input type=\"text\" [(ngModel)]=\"data.username\" required name=\"username\" #username=\"ngModel\">\n        <input type=\"text\" [(ngModel)]=\"data.password\" required name=\"password\" #password=\"ngModel\">\n        <button type=\"submit\" (click)=\"login();\">Login</button>\n    </div>\n    <div *ngIf=\"logged\">\n        <button (click)=\"generate();\">Generate new user</button>\n        <button (click)=\"showAllUsers();\">Show all user</button>\n        <br/>\n        <textarea readonly> {{users}} </textarea>\n\n    </div>\n\n    "
     }),
     __metadata("design:paramtypes", [web_service_1.WebService, router_1.Router])
-], ProfileComponent);
-exports.ProfileComponent = ProfileComponent;
-//# sourceMappingURL=profile.component.js.map
+], AdminComponent);
+exports.AdminComponent = AdminComponent;
+//# sourceMappingURL=admin.component.js.map

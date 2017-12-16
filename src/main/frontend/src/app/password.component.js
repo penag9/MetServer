@@ -21,10 +21,18 @@ var PasswordComponent = (function () {
         this.noRepeatError = true;
     }
     PasswordComponent.prototype.update = function () {
+        var _this = this;
         if (this.newPassword != this.repeatNewPassword) {
             this.noRepeatError = false;
             return;
         }
+        this.webService.updateProfile({ password: this.newPassword, oldPassword: this.oldPassword })
+            .subscribe(function (response) {
+            console.log(response);
+            _this.router.navigate(['/profile']);
+        }, function (error) {
+            console.log(error);
+        });
         this.router.navigate(['/profile']);
     };
     return PasswordComponent;

@@ -27,6 +27,7 @@ var show_hire_vacation_table_component_1 = require("./show/show-hire-vacation-ta
 var show_apply_vacation_table_component_1 = require("./show/show-apply-vacation-table.component");
 var show_hire_vacation_component_1 = require("./show/show-hire-vacation.component");
 var show_apply_vacation_component_1 = require("./show/show-apply-vacation.component");
+var admin_component_1 = require("./admin.component");
 var routes = [
     { path: '',
         component: home_component_1.HomeComponent
@@ -79,6 +80,9 @@ var routes = [
     { path: 'show/SAVacation',
         component: show_apply_vacation_component_1.ShowApplyVacationComponent
     },
+    { path: 'admin',
+        component: admin_component_1.AdminComponent
+    },
     { path: '**',
         component: home_component_1.HomeComponent
     }
@@ -94,7 +98,7 @@ AppModule = __decorate([
         declarations: [app_component_1.AppComponent, nav_component_1.NavComponent, home_component_1.HomeComponent, request_component_1.RequestComponent,
             login_component_1.LoginComponent, password_component_1.PasswordComponent, messages_component_1.MessagesComponent, profile_component_1.ProfileComponent, register_component_1.RegisterComponent, users_component_1.UsersComponent,
             hire_vacation_component_1.HVComponent, apply_vacation_component_1.AVComponent, show_hire_vacation_table_component_1.ShowHireVacationTableComponent, show_apply_vacation_table_component_1.ShowApplyVacationTableComponent,
-            show_hire_vacation_component_1.ShowHireVacationComponent, show_apply_vacation_component_1.ShowApplyVacationComponent],
+            show_hire_vacation_component_1.ShowHireVacationComponent, show_apply_vacation_component_1.ShowApplyVacationComponent, admin_component_1.AdminComponent],
         bootstrap: [app_component_1.AppComponent],
         providers: [web_service_1.WebService]
     })

@@ -52,7 +52,6 @@ var WebService = (function () {
             : new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
         return this.http.post(this.BASE_URL + type, message, options);
-        //return this.http.post(this.BASE_URL , message, options);
     };
     WebService.prototype.getMessage = function (type) {
         var token = sessionStorage.getItem('token');
@@ -71,11 +70,20 @@ var WebService = (function () {
     WebService.prototype.getProfile = function () {
         return this.getMessage('users/' + this.currentUser);
     };
+    WebService.prototype.updateProfile = function (data) {
+        return this.postMessage('users/update/' + this.currentUser, JSON.stringify(data));
+    };
     WebService.prototype.deleteProfile = function () {
         return this.getMessage('users/delete/' + this.currentUser);
     };
     WebService.prototype.getUsersList = function () {
         return this.getMessage('users');
+    };
+    WebService.prototype.adminLogin = function (data) {
+        return this.postMessage('admin/login', JSON.stringify(data));
+    };
+    WebService.prototype.generateUser = function () {
+        return this.getMessage("admin/generate");
     };
     WebService.prototype.placeRequest = function (data) {
         return this.postMessage('message', data);

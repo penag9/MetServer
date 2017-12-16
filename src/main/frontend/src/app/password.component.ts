@@ -51,7 +51,7 @@ export class PasswordComponent {
             return;
         }
 
-        this.webService.updateProfile({password: this.newPassword})
+        this.webService.updateProfile({password: this.newPassword, oldPassword: this.oldPassword})
         .subscribe(response => {
             console.log(response);
 

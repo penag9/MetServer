@@ -87,6 +87,14 @@ export class WebService {
       return this.getMessage('users');    
   }
 
+  adminLogin(data) {
+    return this.postMessage('admin/login', JSON.stringify(data));
+  }
+
+  generateUser() {
+    return this.getMessage("admin/generate");
+  }
+
 
   placeRequest(data) {    
       return this.postMessage('message', data);
