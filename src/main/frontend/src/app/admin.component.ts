@@ -8,6 +8,7 @@ import { WebService } from './web.service';
     template: `
     <div class=tab2 *ngIf="!logged">
         for demo - admin admin
+        <br/>
         <input type="text" [(ngModel)]="data.username" required name="username" #username="ngModel">
         <input type="text" [(ngModel)]="data.password" required name="password" #password="ngModel">
         <button type="submit" (click)="login();">Login</button>
@@ -15,10 +16,9 @@ import { WebService } from './web.service';
     </div>
     <div class=tab2 *ngIf="logged">
         <button (click)="generate();">Generate new user</button>
-        <button (click)="showAllUsers();">Show all user</button>
+        <button (click)="showAllBots();">Show all bots</button>
         <br/>
         <textarea readonly> {{users}} </textarea>
-
     </div>
 
     `
@@ -48,7 +48,13 @@ export class AdminComponent {
                 this.logged = true;
                 this.errorMessage = '';
             }, error => {
-                this.errorMessage = 'Wrong username or password';
+
+                if (error.status == 401) {
+                    this.errorMessage = 'Wrong username or password';
+                } else {
+
+                    this.errorMessage = 'Try later';
+                }
                 console.log(error);
             });
 
@@ -69,8 +75,10 @@ export class AdminComponent {
     showAllBots() {
         this.webService.getBotsList()
             .subscribe(response => {
-                this.users = response._body;
-                console.log(response);
+               
+                this.users =  response.json();
+
+                console.log(this.users);
             }, error => {
                 console.log(error);
             });

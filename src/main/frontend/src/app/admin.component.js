@@ -19,7 +19,8 @@ var AdminComponent = (function () {
             username: '',
             password: ''
         };
-        this.logged = false;
+        this.logged = true;
+        this.errorMessage = '';
         this.users = [];
     }
     AdminComponent.prototype.login = function () {
@@ -31,7 +32,14 @@ var AdminComponent = (function () {
             sessionStorage.setItem('Atoken', token);
             sessionStorage.setItem('Auser', _this.data.username);
             _this.logged = true;
+            _this.errorMessage = '';
         }, function (error) {
+            if (error.status == 401) {
+                _this.errorMessage = 'Wrong username or password';
+            }
+            else {
+                _this.errorMessage = 'Try later';
+            }
             console.log(error);
         });
     };
@@ -43,12 +51,12 @@ var AdminComponent = (function () {
             console.log(error);
         });
     };
-    AdminComponent.prototype.showAllUsers = function () {
+    AdminComponent.prototype.showAllBots = function () {
         var _this = this;
-        this.webService.getUsersList()
+        this.webService.getBotsList()
             .subscribe(function (response) {
-            _this.users = response._body;
-            console.log(response);
+            _this.users = response.json();
+            console.log(_this.users);
         }, function (error) {
             console.log(error);
         });
@@ -58,7 +66,7 @@ var AdminComponent = (function () {
 AdminComponent = __decorate([
     core_1.Component({
         selector: 'admin',
-        template: "\n    <div *ngIf=\"!logged\">\n        <input type=\"text\" [(ngModel)]=\"data.username\" required name=\"username\" #username=\"ngModel\">\n        <input type=\"text\" [(ngModel)]=\"data.password\" required name=\"password\" #password=\"ngModel\">\n        <button type=\"submit\" (click)=\"login();\">Login</button>\n    </div>\n    <div *ngIf=\"logged\">\n        <button (click)=\"generate();\">Generate new user</button>\n        <button (click)=\"showAllUsers();\">Show all user</button>\n        <br/>\n        <textarea readonly> {{users}} </textarea>\n\n    </div>\n\n    "
+        template: "\n    <div class=tab2 *ngIf=\"!logged\">\n        for demo - admin admin\n        <br/>\n        <input type=\"text\" [(ngModel)]=\"data.username\" required name=\"username\" #username=\"ngModel\">\n        <input type=\"text\" [(ngModel)]=\"data.password\" required name=\"password\" #password=\"ngModel\">\n        <button type=\"submit\" (click)=\"login();\">Login</button>\n        {{errorMessage}}\n    </div>\n    <div class=tab2 *ngIf=\"logged\">\n        <button (click)=\"generate();\">Generate new user</button>\n        <button (click)=\"showAllBots();\">Show all bots</button>\n        <br/>\n        <textarea readonly> {{users}} </textarea>\n    </div>\n\n    "
     }),
     __metadata("design:paramtypes", [web_service_1.WebService, router_1.Router])
 ], AdminComponent);

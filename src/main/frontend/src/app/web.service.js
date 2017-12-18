@@ -85,6 +85,9 @@ var WebService = (function () {
     WebService.prototype.generateUser = function () {
         return this.getMessage("admin/generate");
     };
+    WebService.prototype.getBotsList = function () {
+        return this.getMessage('admin/bots');
+    };
     WebService.prototype.placeRequest = function (data) {
         return this.postMessage('message', data);
     };

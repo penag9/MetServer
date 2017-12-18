@@ -259,6 +259,12 @@ function checkAuthenticated(req, res, next) {
     next();
 }
 
+function tmp() {
+
+
+}
+
 app.listen(port, function() {
     console.log('app listening on port ' + port);
+    tmp();
 });
