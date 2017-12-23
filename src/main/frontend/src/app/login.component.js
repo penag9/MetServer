@@ -34,11 +34,9 @@ var LoginComponent = (function () {
             //console.log(response, response.json());
             _this.noRegisteredError = true;
             _this.webService.isAuthenticated = true;
-            _this.webService.currentUser = _this.data.username;
             var token = response.json().token;
             sessionStorage.setItem('token', token);
             if (_this.rememberMe) {
-                localStorage.setItem('username', _this.data.username);
                 localStorage.setItem('token', token);
             }
             _this.router.navigate(['/']);
@@ -61,8 +59,6 @@ var LoginComponent = (function () {
             // console.log(response, response.json());
             _this.noRegisteredError = true;
             _this.webService.isAuthenticated = true;
-            _this.webService.currentUser = _this.data.username;
-            sessionStorage.setItem('username', _this.data.username);
             sessionStorage.setItem('token', response.json().token);
             _this.router.navigate(['/']);
         }, function (error) {

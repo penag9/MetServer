@@ -11,8 +11,6 @@ export class WebService {
 
   isAuthenticated = false;
 
-  currentUser = '';
-
   currentTable = [{
     id: 1, lang: 'Русский', place: 'Яфо', begin: '2/3/2017', end: '  5/3/2017', name: 'Кто-то 1',
     phone: '11111', russian: true, russianLevel: 3, hebrew: false, hebrewLevel: 0, romanian: false,
@@ -38,24 +36,22 @@ export class WebService {
   currentMessageIndex = 1;
 
   constructor(private http: Http) {
-    if (this.currentUser = localStorage.getItem('username')) {
+    if (localStorage.getItem('token')) {
       this.isAuthenticated = true;
       sessionStorage.setItem('token', localStorage.getItem('token'));
     }
   }
 
-  postMessage(type, message) {
-    let token = sessionStorage.getItem('token');    
-    let headers = token ?
+  postMessage(type, message , token = '') { 
+    let headers = token.length ?
                       new Headers({ 'Content-Type': 'application/json', 'authorization': token }) 
                       :new Headers({ 'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
     return this.http.post(this.BASE_URL + type, message, options);
   }
 
-  getMessage(type) {
-    let token = sessionStorage.getItem('token');    
-    let headers = token ?
+  getMessage(type, token = '') { 
+    let headers = token.length ?
                       new Headers({ 'Content-Type': 'application/json', 'authorization': token }) 
                       :new Headers({ 'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
@@ -64,27 +60,31 @@ export class WebService {
 
 
   register(data) {
-    return this.postMessage('register', JSON.stringify(data));    
+    return this.postMessage('register' , JSON.stringify(data));    
   }
 
   login(data) {
-    return this.postMessage('login', JSON.stringify(data));
+    return this.postMessage('login' , JSON.stringify(data));
   }
 
-  getProfile() {
-    return this.getMessage('users/' + this.currentUser);
+  getProfile(user) {
+    return (user.length ? this.getMessage('user', sessionStorage.getItem('Atoken'))
+                       : this.getMessage('user', sessionStorage.getItem('token')));
   }
 
-  updateProfile(data) {
-    return this.postMessage('users/update/' + this.currentUser, JSON.stringify(data));
+  updateProfile(data, user = '') {
+    return (user.length ? this.postMessage('user/update' , JSON.stringify(data), sessionStorage.getItem('Atoken')) 
+                       :  this.postMessage('user/update' , JSON.stringify(data), sessionStorage.getItem('token')));
   }
 
-  deleteProfile() {
-    return this.getMessage('users/delete/' + this.currentUser);
+  deleteProfile(user = '') {
+
+    return (user.length ? this.getMessage('user/delete', sessionStorage.getItem('Atoken'))
+                       : this.getMessage('user/delete', sessionStorage.getItem('token')));
   }
 
   getUsersList() {
-      return this.getMessage('users');    
+      return this.getMessage('users',sessionStorage.getItem('token'));    
   }
 
   adminLogin(data) {
@@ -92,16 +92,16 @@ export class WebService {
   }
 
   generateUser() {
-    return this.getMessage("admin/generate");
+    return this.getMessage('admin/generate', sessionStorage.getItem('Atoken'));
   }
 
   getBotsList() {
-    return this.getMessage('admin/bots');    
+    return this.getMessage('admin/bots', sessionStorage.getItem('Atoken'));
 }
 
 
   placeRequest(data) {    
-      return this.postMessage('message', data);
+      return this.postMessage('message' , data, sessionStorage.getItem('token'));
   }
 
   getHireForVacationList() { }

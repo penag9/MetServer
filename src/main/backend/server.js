@@ -49,24 +49,24 @@ app.get('/users', (req, res) => {
 });
 
 // delete user
-app.get('/users/delete/:user', checkAuthenticated, (req, res) => {
+app.get('/user/delete', checkAuthenticated, (req, res) => {
     //add password check
 
-    User.remove({ username: req.params.user, password: req.params.password }, function(err, results) {
+    User.remove({ username: req.username }, function(err, results) {
         if (err) {
             console.log('error occured ', err);
             res.status(500).send('Internal error');
         } else {
             console.log(results);
-            res.status(200).send(req.params.user + ' deleted');
+            res.status(200).send(req.username + ' deleted');
         }
     });
 });
 
 // Get profile
-app.get('/users/:user', checkAuthenticated, (req, res) => {
+app.get('/user', checkAuthenticated, (req, res) => {
 
-    User.findOne({ username: req.params.user, password: req.password }, { _id: 0, password: 0, __v: 0 }, function(err, result) {
+    User.findOne({ username: req.username }, { _id: 0, password: 0, __v: 0 }, function(err, result) {
         if (err) {
             console.log('error occured ', err);
             res.status(500).send('Internal error');
@@ -82,8 +82,10 @@ app.get('/users/:user', checkAuthenticated, (req, res) => {
 });
 
 // Update profile
-app.post('/users/update/:user', checkAuthenticated, (req, res) => {
-    User.findOne({ username: req.params.user, password: req.password }, function(err, result) {
+app.post('/user/update', checkAuthenticated, (req, res) => {
+
+    console.log('req.username  ', req.username);
+    User.findOne({ username: req.username }, function(err, result) {
         if (err) {
             console.log('error occured ', err);
             res.status(500).send('Internal error');
@@ -102,7 +104,7 @@ app.post('/users/update/:user', checkAuthenticated, (req, res) => {
 
                 console.log('result ', result);
                 result.save();
-                res.status(200).send(req.params.user + ' updated');
+                res.status(200).send(req.username + ' updated');
 
             } else res.status(403).send({ message: 'User does not exist' });
         }
@@ -112,7 +114,6 @@ app.post('/users/update/:user', checkAuthenticated, (req, res) => {
 //User login
 app.post('/login', (req, res) => {
 
-    console.log(req.body);
     User.find({ username: req.body.username }, function(err, results) {
         if (err) {
             console.log('error occured ', err);
@@ -188,7 +189,7 @@ app.post('/admin/login', (req, res) => {
 });
 
 //Admin generate new user
-app.get('/admin/generate', (req, res) => {
+app.get('/admin/generate', checkAuthenticated, (req, res) => {
 
     console.log('Generate');
 
@@ -220,7 +221,9 @@ app.get('/admin/generate', (req, res) => {
 
 
 // list of all bots
-app.get('admin/bots', (req, res) => {
+app.get('/admin/bots', checkAuthenticated, (req, res) => {
+
+    console.log('Bots');
 
     User.find({ bot: { $exists: true } /*{ $gt: 0 }*/ }, { _id: 0, password: 0, __v: 0 }, function(err, results) {
         if (err) {
@@ -235,8 +238,8 @@ app.get('admin/bots', (req, res) => {
 //-----------------Helpers--------------------
 
 function sendToken(user, res) {
-    var token = jwt.sign(user.password, '123');
-    res.json({ username: user.username, token });
+    var token = jwt.sign(user.username, '123');
+    res.json({ token });
 }
 
 
@@ -250,11 +253,11 @@ function checkAuthenticated(req, res, next) {
 
     var token = req.header('authorization');
 
-    var pass = jwt.decode(token, '123');
-    if (!pass)
+    var username = jwt.decode(token, '123');
+    if (!username)
         return res.status(401).send({ message: 'Unauthorized requested. Authentication header invalid' });
 
-    req.password = pass;
+    req.username = username;
 
     next();
 }
@@ -262,6 +265,13 @@ function checkAuthenticated(req, res, next) {
 function tmp() {
 
 
+    User.find({ bot: { $exists: true } /*{ $gt: 0 }*/ }, { _id: 0, password: 0, __v: 0 }, function(err, results) {
+        if (err) {
+            console.log('error ', err);
+        } else {
+            console.log(results);
+        }
+    });
 }
 
 app.listen(port, function() {

@@ -19,7 +19,7 @@ var AdminComponent = (function () {
             username: '',
             password: ''
         };
-        this.logged = true;
+        this.logged = false;
         this.errorMessage = '';
         this.users = [];
     }
@@ -46,6 +46,7 @@ var AdminComponent = (function () {
     AdminComponent.prototype.generate = function () {
         this.webService.generateUser()
             .subscribe(function (response) {
+            // this.users =  response.json();
             console.log(response);
         }, function (error) {
             console.log(error);
@@ -66,7 +67,7 @@ var AdminComponent = (function () {
 AdminComponent = __decorate([
     core_1.Component({
         selector: 'admin',
-        template: "\n    <div class=tab2 *ngIf=\"!logged\">\n        for demo - admin admin\n        <br/>\n        <input type=\"text\" [(ngModel)]=\"data.username\" required name=\"username\" #username=\"ngModel\">\n        <input type=\"text\" [(ngModel)]=\"data.password\" required name=\"password\" #password=\"ngModel\">\n        <button type=\"submit\" (click)=\"login();\">Login</button>\n        {{errorMessage}}\n    </div>\n    <div class=tab2 *ngIf=\"logged\">\n        <button (click)=\"generate();\">Generate new user</button>\n        <button (click)=\"showAllBots();\">Show all bots</button>\n        <br/>\n        <textarea readonly> {{users}} </textarea>\n    </div>\n\n    "
+        template: "\n    <div class=tab2 *ngIf=\"!logged\">\n        for demo - admin admin\n        <br/>\n        <input type=\"text\" [(ngModel)]=\"data.username\" required name=\"username\" #username=\"ngModel\">\n        <input type=\"text\" [(ngModel)]=\"data.password\" required name=\"password\" #password=\"ngModel\">\n        <button type=\"submit\" (click)=\"login();\">Login</button>\n        {{errorMessage}}\n    </div>\n    <div class=tab2 *ngIf=\"logged\">\n        <button (click)=\"generate();\">Generate new user</button>\n        <button (click)=\"showAllBots();\">Show all bots</button>\n        <br/>\n\n        <table>\n            <tr>\n                <th> N </th>\n                <th> \u0418\u043C\u044F </th>\n            </tr>\n            <tr *ngFor=\"let bot of users; let i = index\" >\n                <td>{{bot.bot}}</td>\n                <td>{{bot.username}}</td>\n            </tr>\n        </table>\n    </div>\n\n    "
     }),
     __metadata("design:paramtypes", [web_service_1.WebService, router_1.Router])
 ], AdminComponent);

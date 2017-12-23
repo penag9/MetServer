@@ -18,7 +18,17 @@ import { WebService } from './web.service';
         <button (click)="generate();">Generate new user</button>
         <button (click)="showAllBots();">Show all bots</button>
         <br/>
-        <textarea readonly> {{users}} </textarea>
+
+        <table>
+            <tr>
+                <th> N </th>
+                <th> Имя </th>
+            </tr>
+            <tr *ngFor="let bot of users; let i = index" >
+                <td>{{bot.bot}}</td>
+                <td>{{bot.username}}</td>
+            </tr>
+        </table>
     </div>
 
     `
@@ -65,6 +75,7 @@ export class AdminComponent {
         this.webService.generateUser()
             .subscribe(response => {
 
+               // this.users =  response.json();
                 console.log(response);
             }, error => {
                 console.log(error);

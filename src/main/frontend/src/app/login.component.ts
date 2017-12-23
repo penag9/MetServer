@@ -35,13 +35,10 @@ export class LoginComponent {
                 this.noRegisteredError = true;
                 this.webService.isAuthenticated = true;
 
-                this.webService.currentUser = this.data.username;
-
                 let token = response.json().token;
                 sessionStorage.setItem('token', token);
 
                 if (this.rememberMe) {
-                    localStorage.setItem('username', this.data.username);
                     localStorage.setItem('token', token);
                 }
 
@@ -70,9 +67,6 @@ export class LoginComponent {
                 this.noRegisteredError = true;
                 this.webService.isAuthenticated = true;
 
-                this.webService.currentUser = this.data.username;
-
-                sessionStorage.setItem('username', this.data.username);
                 sessionStorage.setItem('token', response.json().token);
                 this.router.navigate(['/']);
             }, error => {

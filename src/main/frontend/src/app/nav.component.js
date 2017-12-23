@@ -17,12 +17,9 @@ var NavComponent = (function () {
         this.router = router;
     }
     NavComponent.prototype.logout = function () {
-        localStorage.removeItem('username');
         localStorage.removeItem('token');
-        sessionStorage.removeItem('username');
         sessionStorage.removeItem('token');
         this.webService.isAuthenticated = false;
-        this.webService.currentUser = '';
         this.router.navigate(['/']);
     };
     NavComponent.prototype.help = function () {

@@ -32,12 +32,9 @@ export class NavComponent {
     constructor(private webService: WebService, private router: Router) { }
 
     logout() {
-        localStorage.removeItem('username');
         localStorage.removeItem('token');
-        sessionStorage.removeItem('username');
         sessionStorage.removeItem('token');
         this.webService.isAuthenticated = false;
-        this.webService.currentUser = '';
         this.router.navigate(['/']);
     }
 

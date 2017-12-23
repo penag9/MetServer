@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { WebService } from './web.service';
@@ -9,6 +9,9 @@ import { WebService } from './web.service';
     styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent {
+
+    @Input() 
+    user = '';
 
     selectedTab = 0;
 
@@ -26,11 +29,10 @@ export class ProfileComponent {
     };
 
     constructor(private webService: WebService, private router: Router) { 
-        this.webService.getProfile()
+        this.webService.getProfile(this.user)
             .subscribe(response => {
                 console.log(response.json());
                 this.data = response.json();
-                //this.data.username = result.username || '';
             }, error => {
     
                 console.log(error);
@@ -40,7 +42,7 @@ export class ProfileComponent {
     }
 
     update() {
-        this.webService.updateProfile(this.data)
+        this.webService.updateProfile(this.data, this.user)
         .subscribe(response => {
             console.log(response);
         }, error => {
@@ -51,15 +53,12 @@ export class ProfileComponent {
 
     delete() {
 
-        this.webService.deleteProfile()
+        this.webService.deleteProfile(this.user)
         .subscribe(response => {
             console.log(response);
-            localStorage.removeItem('username');
             localStorage.removeItem('token');
-            sessionStorage.removeItem('username');
             sessionStorage.removeItem('token');
             this.webService.isAuthenticated = false;
-            this.webService.currentUser = '';
             this.router.navigate(['/']);
         }, error => {
 

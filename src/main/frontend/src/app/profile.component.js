@@ -16,6 +16,7 @@ var ProfileComponent = (function () {
         var _this = this;
         this.webService = webService;
         this.router = router;
+        this.user = '';
         this.selectedTab = 0;
         this.data = {
             username: '',
@@ -28,18 +29,17 @@ var ProfileComponent = (function () {
             romanian: '',
             french: ''
         };
-        this.webService.getProfile()
+        this.webService.getProfile(this.user)
             .subscribe(function (response) {
             console.log(response.json());
             _this.data = response.json();
-            //this.data.username = result.username || '';
         }, function (error) {
             console.log(error);
             _this.router.navigate(['/login']);
         });
     }
     ProfileComponent.prototype.update = function () {
-        this.webService.updateProfile(this.data)
+        this.webService.updateProfile(this.data, this.user)
             .subscribe(function (response) {
             console.log(response);
         }, function (error) {
@@ -48,15 +48,12 @@ var ProfileComponent = (function () {
     };
     ProfileComponent.prototype.delete = function () {
         var _this = this;
-        this.webService.deleteProfile()
+        this.webService.deleteProfile(this.user)
             .subscribe(function (response) {
             console.log(response);
-            localStorage.removeItem('username');
             localStorage.removeItem('token');
-            sessionStorage.removeItem('username');
             sessionStorage.removeItem('token');
             _this.webService.isAuthenticated = false;
-            _this.webService.currentUser = '';
             _this.router.navigate(['/']);
         }, function (error) {
             console.log(error);
@@ -64,6 +61,10 @@ var ProfileComponent = (function () {
     };
     return ProfileComponent;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], ProfileComponent.prototype, "user", void 0);
 ProfileComponent = __decorate([
     core_1.Component({
         selector: 'profile',
