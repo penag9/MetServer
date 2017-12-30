@@ -43,7 +43,7 @@ export class WebService {
   }
 
   postMessage(type, message , token = '') { 
-    let headers = token.length ?
+    let headers = token ?
                       new Headers({ 'Content-Type': 'application/json', 'authorization': token }) 
                       :new Headers({ 'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
@@ -51,7 +51,7 @@ export class WebService {
   }
 
   getMessage(type, token = '') { 
-    let headers = token.length ?
+    let headers = token ?
                       new Headers({ 'Content-Type': 'application/json', 'authorization': token }) 
                       :new Headers({ 'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
@@ -67,19 +67,19 @@ export class WebService {
     return this.postMessage('login' , JSON.stringify(data));
   }
 
-  getProfile(user) {
-    return (user.length ? this.getMessage('user', sessionStorage.getItem('Atoken'))
+  getProfile(user = '') {
+    return (user.length ? this.getMessage('admin/user/' + user, sessionStorage.getItem('Atoken'))
                        : this.getMessage('user', sessionStorage.getItem('token')));
   }
 
   updateProfile(data, user = '') {
-    return (user.length ? this.postMessage('user/update' , JSON.stringify(data), sessionStorage.getItem('Atoken')) 
+    return (user.length ? this.postMessage('admin/update/' + user , JSON.stringify(data), sessionStorage.getItem('Atoken')) 
                        :  this.postMessage('user/update' , JSON.stringify(data), sessionStorage.getItem('token')));
   }
 
   deleteProfile(user = '') {
 
-    return (user.length ? this.getMessage('user/delete', sessionStorage.getItem('Atoken'))
+    return (user.length ? this.getMessage('admin/delete/' + user , sessionStorage.getItem('Atoken'))
                        : this.getMessage('user/delete', sessionStorage.getItem('token')));
   }
 

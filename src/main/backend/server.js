@@ -225,12 +225,70 @@ app.get('/admin/bots', checkAuthenticated, (req, res) => {
 
     console.log('Bots');
 
-    User.find({ bot: { $exists: true } /*{ $gt: 0 }*/ }, { _id: 0, password: 0, __v: 0 }, function(err, results) {
+    User.find({ bot: { $exists: true } /*{ $gt: 0 }*/ }, { _id: 0, __v: 0 }, function(err, results) {
         if (err) {
             console.log('error occured ', err);
             res.status(500).send('Internal error');
         } else {
             res.json(results);
+        }
+    });
+});
+
+// delete user
+app.get('/admin/delete/:user', checkAuthenticated, (req, res) => {
+
+    User.remove({ username: req.params.user }, function(err, results) {
+        if (err) {
+            console.log('error occured ', err);
+            res.status(500).send('Internal error');
+        } else {
+            console.log(results);
+            res.status(200).send(req.params.user + ' deleted');
+        }
+    });
+});
+
+// Get profile
+app.get('/admin/user/:user', checkAuthenticated, (req, res) => {
+
+    User.findOne({ username: req.params.user }, { _id: 0, __v: 0 }, function(err, result) {
+        if (err) {
+            console.log('error occured ', err);
+            res.status(500).send('Internal error');
+
+        } else {
+
+            if (result) {
+                console.log('result ', result);
+                res.send(result);
+            } else res.status(403).send({ message: 'User does not exist' });
+        }
+    });
+});
+
+// Update profile
+app.post('/admin/update/:user', checkAuthenticated, (req, res) => {
+
+    User.findOne({ username: req.params.user }, function(err, result) {
+        if (err) {
+            console.log('error occured ', err);
+            res.status(500).send('Internal error');
+
+        } else {
+            if (result) {
+                for (var field in req.body) {
+                    result[field] = req.body[field];
+
+                    console.log('field ', field);
+
+                }
+
+                console.log('result ', result);
+                result.save();
+                res.status(200).send(req.params.user + ' updated');
+
+            } else res.status(403).send({ message: 'User does not exist' });
         }
     });
 });

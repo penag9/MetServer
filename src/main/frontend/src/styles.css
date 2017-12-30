@@ -18,7 +18,7 @@ nav {
 }
 
 nav:hover {
-    cursor: url("app/images/click1.png"), pointer;
+    cursor: url("app/images/click2.png"), pointer;
 }
 
 button {

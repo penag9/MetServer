@@ -13,7 +13,6 @@ var router_1 = require("@angular/router");
 var web_service_1 = require("./web.service");
 var ProfileComponent = (function () {
     function ProfileComponent(webService, router) {
-        var _this = this;
         this.webService = webService;
         this.router = router;
         this.user = '';
@@ -29,15 +28,19 @@ var ProfileComponent = (function () {
             romanian: '',
             french: ''
         };
+    }
+    ProfileComponent.prototype.ngOnChanges = function () {
+        var _this = this;
         this.webService.getProfile(this.user)
             .subscribe(function (response) {
             console.log(response.json());
             _this.data = response.json();
         }, function (error) {
             console.log(error);
-            _this.router.navigate(['/login']);
+            if (_this.user == '')
+                _this.router.navigate(['/login']);
         });
-    }
+    };
     ProfileComponent.prototype.update = function () {
         this.webService.updateProfile(this.data, this.user)
             .subscribe(function (response) {

@@ -19,9 +19,14 @@ var AdminComponent = (function () {
             username: '',
             password: ''
         };
-        this.logged = false;
+        this.username = '';
+        this.logged = true;
+        this.showProfile = false;
+        this.showBotsList = false;
         this.errorMessage = '';
         this.users = [];
+        if (sessionStorage.getItem('Atoken'))
+            this.logged = true;
     }
     AdminComponent.prototype.login = function () {
         var _this = this;
@@ -30,7 +35,6 @@ var AdminComponent = (function () {
             .subscribe(function (response) {
             var token = response.json().token;
             sessionStorage.setItem('Atoken', token);
-            sessionStorage.setItem('Auser', _this.data.username);
             _this.logged = true;
             _this.errorMessage = '';
         }, function (error) {
@@ -43,12 +47,31 @@ var AdminComponent = (function () {
             console.log(error);
         });
     };
-    AdminComponent.prototype.generate = function () {
-        this.webService.generateUser()
+    AdminComponent.prototype.getUser = function (username) {
+        var _this = this;
+        this.webService.getProfile(username)
             .subscribe(function (response) {
-            // this.users =  response.json();
+            _this.username = response.json().username;
+            _this.showProfile = true;
+            _this.showBotsList = false;
+            _this.errorMessage = '';
             console.log(response);
         }, function (error) {
+            _this.errorMessage = error.json().message;
+            console.log(error);
+        });
+    };
+    AdminComponent.prototype.generate = function () {
+        var _this = this;
+        this.webService.generateUser()
+            .subscribe(function (response) {
+            _this.username = response.json().username;
+            _this.showProfile = true;
+            _this.showBotsList = false;
+            _this.errorMessage = '';
+            console.log(response);
+        }, function (error) {
+            _this.errorMessage = 'Try later';
             console.log(error);
         });
     };
@@ -57,8 +80,12 @@ var AdminComponent = (function () {
         this.webService.getBotsList()
             .subscribe(function (response) {
             _this.users = response.json();
+            _this.showProfile = false;
+            _this.showBotsList = true;
+            _this.errorMessage = '';
             console.log(_this.users);
         }, function (error) {
+            _this.errorMessage = 'Try later';
             console.log(error);
         });
     };
@@ -67,7 +94,8 @@ var AdminComponent = (function () {
 AdminComponent = __decorate([
     core_1.Component({
         selector: 'admin',
-        template: "\n    <div class=tab2 *ngIf=\"!logged\">\n        for demo - admin admin\n        <br/>\n        <input type=\"text\" [(ngModel)]=\"data.username\" required name=\"username\" #username=\"ngModel\">\n        <input type=\"text\" [(ngModel)]=\"data.password\" required name=\"password\" #password=\"ngModel\">\n        <button type=\"submit\" (click)=\"login();\">Login</button>\n        {{errorMessage}}\n    </div>\n    <div class=tab2 *ngIf=\"logged\">\n        <button (click)=\"generate();\">Generate new user</button>\n        <button (click)=\"showAllBots();\">Show all bots</button>\n        <br/>\n\n        <table>\n            <tr>\n                <th> N </th>\n                <th> \u0418\u043C\u044F </th>\n            </tr>\n            <tr *ngFor=\"let bot of users; let i = index\" >\n                <td>{{bot.bot}}</td>\n                <td>{{bot.username}}</td>\n            </tr>\n        </table>\n    </div>\n\n    "
+        template: "\n\n    <h1>{{errorMessage}}</h1>\n    <div class=tab2 *ngIf=\"!logged\">\n        for demo - admin admin\n        <br/>\n        <input type=\"text\" [(ngModel)]=\"data.username\" required name=\"username\" #username=\"ngModel\">\n        <input type=\"text\" [(ngModel)]=\"data.password\" required name=\"password\" #password=\"ngModel\">\n        <button type=\"submit\" (click)=\"login();\">Login</button>\n    </div>\n    <div class=tab2 *ngIf=\"logged\">\n\n\n    <input type=\"text\" [(ngModel)]=\"username\" >\n    <button (click)=\"getUser(username);\">Get user</button>\n    <br/>\n        <button (click)=\"generate();\">Generate new user</button>\n        <button (click)=\"showAllBots();\">Show all bots</button>\n        <br/>\n        <div *ngIf=\"showProfile\">\n            <profile [user]=\"username\"></profile>\n        </div>\n        <div *ngIf=\"showBotsList\">\n           <table class=\"show\">\n                <tr>\n                    <th class=\"show\"> N </th>\n                    <th class=\"show\"> \u0418\u043C\u044F </th>\n                    <th class=\"show\"> \u041F\u043E\u0447\u0442\u0430 </th>\n                    <th class=\"show\"> \u041F\u0430\u0440\u043E\u043B\u044C </th>\n                </tr>\n                <tr class=\"show\" *ngFor=\"let bot of users;\" (click)=\"getUser(bot.username)\" >\n                    <td class=\"show\">{{bot.bot}}</td>\n                    <td class=\"show\">{{bot.name}}</td>\n                    <td class=\"show\">{{bot.username}}</td>\n                    <td class=\"show\">{{bot.password}}</td>\n                </tr>\n            </table>\n        </div>\n    </div>\n    ",
+        styleUrls: ['./admin.component.css']
     }),
     __metadata("design:paramtypes", [web_service_1.WebService, router_1.Router])
 ], AdminComponent);

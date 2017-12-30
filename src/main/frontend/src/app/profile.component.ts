@@ -28,7 +28,9 @@ export class ProfileComponent {
         french: ''
     };
 
-    constructor(private webService: WebService, private router: Router) { 
+    constructor(private webService: WebService, private router: Router) { }
+
+    ngOnChanges() {
         this.webService.getProfile(this.user)
             .subscribe(response => {
                 console.log(response.json());
@@ -37,7 +39,7 @@ export class ProfileComponent {
     
                 console.log(error);
                 
-                this.router.navigate(['/login']);
+                if(this.user == '' )this.router.navigate(['/login']);
             });
     }
 

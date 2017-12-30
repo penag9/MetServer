@@ -46,7 +46,7 @@ var WebService = (function () {
     }
     WebService.prototype.postMessage = function (type, message, token) {
         if (token === void 0) { token = ''; }
-        var headers = token.length ?
+        var headers = token ?
             new http_1.Headers({ 'Content-Type': 'application/json', 'authorization': token })
             : new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
@@ -54,7 +54,7 @@ var WebService = (function () {
     };
     WebService.prototype.getMessage = function (type, token) {
         if (token === void 0) { token = ''; }
-        var headers = token.length ?
+        var headers = token ?
             new http_1.Headers({ 'Content-Type': 'application/json', 'authorization': token })
             : new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
@@ -67,17 +67,18 @@ var WebService = (function () {
         return this.postMessage('login', JSON.stringify(data));
     };
     WebService.prototype.getProfile = function (user) {
-        return (user.length ? this.getMessage('user', sessionStorage.getItem('Atoken'))
+        if (user === void 0) { user = ''; }
+        return (user.length ? this.getMessage('admin/user/' + user, sessionStorage.getItem('Atoken'))
             : this.getMessage('user', sessionStorage.getItem('token')));
     };
     WebService.prototype.updateProfile = function (data, user) {
         if (user === void 0) { user = ''; }
-        return (user.length ? this.postMessage('user/update', JSON.stringify(data), sessionStorage.getItem('Atoken'))
+        return (user.length ? this.postMessage('admin/update/' + user, JSON.stringify(data), sessionStorage.getItem('Atoken'))
             : this.postMessage('user/update', JSON.stringify(data), sessionStorage.getItem('token')));
     };
     WebService.prototype.deleteProfile = function (user) {
         if (user === void 0) { user = ''; }
-        return (user.length ? this.getMessage('user/delete', sessionStorage.getItem('Atoken'))
+        return (user.length ? this.getMessage('admin/delete/' + user, sessionStorage.getItem('Atoken'))
             : this.getMessage('user/delete', sessionStorage.getItem('token')));
     };
     WebService.prototype.getUsersList = function () {
