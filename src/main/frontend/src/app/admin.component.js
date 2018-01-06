@@ -20,7 +20,7 @@ var AdminComponent = (function () {
             password: ''
         };
         this.username = '';
-        this.logged = true;
+        this.logged = false;
         this.showProfile = false;
         this.showBotsList = false;
         this.errorMessage = '';

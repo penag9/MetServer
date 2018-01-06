@@ -55,10 +55,9 @@ export class AdminComponent {
         password: ''
     };
 
-
     username = '';
 
-    logged = true;
+    logged = false;
     showProfile = false;
     showBotsList = false;
 

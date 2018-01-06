@@ -48,7 +48,7 @@ button.small {
 
 button:hover,
 button#help:hover {
-    cursor: url("../app/images/click1.png"), pointer;
+    cursor: url("../app/images/click2.png"), pointer;
 }
 
 div.navBar {

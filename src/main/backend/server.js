@@ -149,7 +149,7 @@ app.post('/register', (req, res) => {
             } else {
                 User.create({ username: req.body.username, password: req.body.password }, function(err, results) {
                     if (err) {
-                        console.log('error occured ', err);
+                        console.log('2 error occured ', err);
                         res.status(500).send('Internal error');
 
                     } else {
@@ -174,7 +174,7 @@ app.post('/admin/login', (req, res) => {
         } else {
             if (results.length == 0) {
                 sendAuthError(res);
-                next();
+                return;
             }
 
             if (results[0].password == req.body.password)

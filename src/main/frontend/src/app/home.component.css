@@ -40,7 +40,7 @@ button.big {
 }
 
 button.big:hover {
-    cursor: url("../app/images/click1.png"), pointer;
+    cursor: url("../app/images/click2.png"), pointer;
 }
 
 button.add {
@@ -55,5 +55,5 @@ button.add {
 }
 
 button.add:hover {
-    cursor: url("../app/images/click1.png"), pointer;
+    cursor: url("../app/images/click2.png"), pointer;
 }
