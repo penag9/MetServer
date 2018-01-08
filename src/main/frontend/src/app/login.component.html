@@ -12,13 +12,13 @@
             <div class="tab2">
                 <p>
                     <label class="tab2"> Адрес электронной почты : </label><br>
-                    <input type="email" class="field tab2" [(ngModel)]="data.username" required pattern="[!-~]{1,}@[!-~]{1,}\.[!-~]{1,}" name="username" #username="ngModel">
-                    <span [ngClass]="{'error': true, 'hiden': noRegisteredError }"> Неверный логин или пароль </span>
+                    <input type="email" class="field tab2" [(ngModel)]="data.username" required (focus)="noRegisteredError=true;" name="username" #username="ngModel">
+                    <span [ngClass]="{'error': true, 'hiden': !errors.wrongLogin }"> Неверный логин или пароль </span>
 
                 </p>
                 <p>
                     <label class="tab2"> Пароль :</label><br>
-                    <input type="password" class="field tab2" [(ngModel)]="data.password" required pattern="[!-~]{8,}" name="password" #password="ngModel">
+                    <input type="password" class="field tab2" [(ngModel)]="data.password" required name="password" #password="ngModel">
 
                 </p>
                 <p>
@@ -35,20 +35,20 @@
             <div class="tab2">
                 <p>
                     <label class="tab2"> Адрес электронной почты : </label><br>
-                    <input type="emai" class="field tab2" [(ngModel)]="data.username" required pattern="[!-~]{1,}@[!-~]{1,}\.[!-~]{1,}" name="username" #username="ngModel">
-                    <span [ngClass]="{'error': true, 'hiden': username.valid || username.pristine }"> В адресе должен быть знак '@' и '.' </span>
-                    <span [ngClass]=" { 'error': true, 'hiden': noExistingError  } "> Это адрес почты уже существует </span>
+                    <input type="emai" class="field tab2" [(ngModel)]="data.username" required (focus)="errors.wrongUsername=false; errors.existingUser=false;" (blur)="checkUsername([user])" name="username" #user="ngModel">
+                    <span [ngClass]="{'error': true, 'hiden': !errors.wrongUsername }"> В адресе должны быть английские буквы, знак '@' и '.'</span>
+                    <span [ngClass]=" { 'error': true, 'hiden': !errors.existingUser  } "> Это адрес почты уже существует </span>
                 </p>
                 <p>
                     <label class="tab2"> Пароль : </label><br>
-                    <input type="password" class="field tab2" [(ngModel)]="data.password" required onchange="form.repeat.pattern = this.value;" pattern="[!-~]{8,}" name="password" #password="ngModel">
-                    <span [ngClass]="{'error': true, 'hiden': password.valid || password.pristine }"> Минимум 8 символов: английские буквы, цифры, символы  </span>
+                    <input type="password" class="field tab2" [(ngModel)]="data.password" required (focus)="errors.wrongPassword=false;" (blur)="checkPassword([pass])" name="password" #pass="ngModel">
+                    <span [ngClass]="{'error': true, 'hiden': !errors.wrongPassword }"> Минимум 8 символов: английские буквы, цифры, символы</span>
 
                 </p>
                 <p>
                     <label class="tab2"> Потвердить пароль : </label><br>
-                    <input type="password" class="field tab2" [(ngModel)]="repeat" pattern="[!-~]{8,}" required name="repeat" onchange="noRepeatError=true;" #rec="ngModel">
-                    <span [ngClass]="{'error': true, 'hiden': noRepeatError }"> Вторично введенный пароль не соответствует изначальному  </span>
+                    <input type="password" class="field tab2" [(ngModel)]="repeat" required (focus)="noRepeatError=true;" (blur)="checkRepeatPassword([rep])" name="repeat" #rep="ngModel">
+                    <span [ngClass]="{'error': true, 'hiden': !errors.wrongRepeat }"> Вторично введенный пароль не соответствует изначальному  </span>
 
                     <p>
                         <span class="tab2"><input type="checkbox" name="agree" required [ngModel]="isAccepted" #agree="ngModel"> я соглашаюсь с правилами пользования сайта</span>

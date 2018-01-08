@@ -26,7 +26,7 @@ import { WebService } from './web.service';
         <button (click)="showAllBots();">Show all bots</button>
         <br/>
         <div *ngIf="showProfile">
-            <profile [user]="username"></profile>
+            <profile [user]="username" (botUpdated)="showAllBots();"></profile>
         </div>
         <div *ngIf="showBotsList">
            <table class="show">
@@ -97,8 +97,8 @@ export class AdminComponent {
         this.webService.getProfile(username)
             .subscribe(response => {
                 this.username = response.json().username;
-                this.showProfile = true;
                 this.showBotsList = false;
+                this.showProfile = true;
                 this.errorMessage = '';
                 console.log(response);
             }, error => {

@@ -8,18 +8,23 @@ var Admin = require('./admin.model');
 
 
 var port = 8080;
-var db = 'mongodb://localhost/example';
+var db = 'mongodb://localhost/example2';
 var promise = mongoose.connect(db, {
     useMongoClient: true
 });
 //promise.then(function(some) {});
 
+//mongoose.connection.dropDatabase();
+
+
+
 //User.remove({}).exec();
 
 User.create({
     username: 'a@a.a',
-    password: '12345678',
+    password: '12345678'
 });
+
 
 Admin.create({
     username: 'admin',
@@ -149,9 +154,8 @@ app.post('/register', (req, res) => {
             } else {
                 User.create({ username: req.body.username, password: req.body.password }, function(err, results) {
                     if (err) {
-                        console.log('2 error occured ', err);
+                        console.log('error occured ', err);
                         res.status(500).send('Internal error');
-
                     } else {
                         sendToken(results, res);
                     }
@@ -322,8 +326,8 @@ function checkAuthenticated(req, res, next) {
 
 function tmp() {
 
-
-    User.find({ bot: { $exists: true } /*{ $gt: 0 }*/ }, { _id: 0, password: 0, __v: 0 }, function(err, results) {
+    console.log('List of all users :');
+    User.find({ /*bot: { $exists: true } /*{ $gt: 0 }*/ }, { _id: 0, __v: 0 }, function(err, results) {
         if (err) {
             console.log('error ', err);
         } else {

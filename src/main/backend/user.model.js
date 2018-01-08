@@ -18,10 +18,7 @@ var UserSchema = new mongoose.Schema({
     romanian: Boolean,
     hebrew: Boolean,
     french: Boolean,
-    bot: {
-        type: Number,
-        unique: true
-    }
+    bot: Number
 });
 
 module.exports = mongoose.model('user', UserSchema);

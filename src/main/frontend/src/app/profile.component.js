@@ -13,9 +13,11 @@ var router_1 = require("@angular/router");
 var web_service_1 = require("./web.service");
 var ProfileComponent = (function () {
     function ProfileComponent(webService, router) {
+        var _this = this;
         this.webService = webService;
         this.router = router;
         this.user = '';
+        this.botUpdated = new core_1.EventEmitter();
         this.selectedTab = 0;
         this.data = {
             username: '',
@@ -28,12 +30,21 @@ var ProfileComponent = (function () {
             romanian: '',
             french: ''
         };
+        this.webService.getProfile(this.user)
+            .subscribe(function (response) {
+            console.log('Constructor ', response.json());
+            _this.data = response.json();
+        }, function (error) {
+            console.log(error);
+            if (_this.user == '')
+                _this.router.navigate(['/login']);
+        });
     }
     ProfileComponent.prototype.ngOnChanges = function () {
         var _this = this;
         this.webService.getProfile(this.user)
             .subscribe(function (response) {
-            console.log(response.json());
+            console.log('ngOnChanges ', response.json());
             _this.data = response.json();
         }, function (error) {
             console.log(error);
@@ -42,9 +53,14 @@ var ProfileComponent = (function () {
         });
     };
     ProfileComponent.prototype.update = function () {
+        var _this = this;
         this.webService.updateProfile(this.data, this.user)
             .subscribe(function (response) {
             console.log(response);
+            if (_this.user == '')
+                _this.router.navigate(['/']);
+            else
+                _this.botUpdated.emit(true);
         }, function (error) {
             console.log(error);
         });
@@ -57,7 +73,10 @@ var ProfileComponent = (function () {
             localStorage.removeItem('token');
             sessionStorage.removeItem('token');
             _this.webService.isAuthenticated = false;
-            _this.router.navigate(['/']);
+            if (_this.user == '')
+                _this.router.navigate(['/']);
+            else
+                _this.botUpdated.emit(true);
         }, function (error) {
             console.log(error);
         });
@@ -68,6 +87,10 @@ __decorate([
     core_1.Input(),
     __metadata("design:type", Object)
 ], ProfileComponent.prototype, "user", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", Object)
+], ProfileComponent.prototype, "botUpdated", void 0);
 ProfileComponent = __decorate([
     core_1.Component({
         selector: 'profile',

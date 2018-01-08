@@ -22,9 +22,13 @@ var LoginComponent = (function () {
         this.newUser = false;
         this.rememberMe = false;
         this.repeat = '';
-        this.noRepeatError = true;
-        this.noRegisteredError = true;
-        this.noExistingError = true;
+        this.errors = {
+            wrongLogin: false,
+            existingUser: false,
+            wrongUsername: false,
+            wrongPassword: false,
+            wrongRepeat: false
+        };
     }
     LoginComponent.prototype.login = function () {
         var _this = this;
@@ -32,7 +36,7 @@ var LoginComponent = (function () {
         this.webService.login(this.data)
             .subscribe(function (response) {
             //console.log(response, response.json());
-            _this.noRegisteredError = true;
+            _this.errors.wrongLogin = false;
             _this.webService.isAuthenticated = true;
             var token = response.json().token;
             sessionStorage.setItem('token', token);
@@ -42,7 +46,7 @@ var LoginComponent = (function () {
             _this.router.navigate(['/']);
         }, function (error) {
             if (error.status == 401) {
-                _this.noRegisteredError = false;
+                _this.errors.wrongLogin = true;
             }
             console.log(error);
         });
@@ -50,30 +54,57 @@ var LoginComponent = (function () {
     LoginComponent.prototype.register = function () {
         var _this = this;
         console.log('Register ', this.data);
-        if (this.data.password != this.repeat) {
-            this.noRepeatError = false;
-            return;
-        }
         this.webService.register(this.data)
             .subscribe(function (response) {
             // console.log(response, response.json());
-            _this.noRegisteredError = true;
+            _this.errors.existingUser = false;
             _this.webService.isAuthenticated = true;
             sessionStorage.setItem('token', response.json().token);
             _this.router.navigate(['/']);
         }, function (error) {
             console.log(error);
             if (error.status == 401) {
-                _this.noExistingError = false;
+                _this.errors.existingUser = true;
             }
         });
     };
     LoginComponent.prototype.resetData = function () {
         this.data.username = '';
         this.data.password = '';
-        this.noRegisteredError = true;
-        this.noExistingError = true;
-        this.noRepeatError = true;
+        for (var key in this.errors) {
+            this.errors[key] = false;
+        }
+        this.errors.existingUser = false;
+    };
+    LoginComponent.prototype.checkUsername = function (user) {
+        if (/[!-~]{1,}@[!-~]{1,}\.[!-~]{1,}/.test(this.data.username)) {
+            this.errors.wrongUsername = false;
+            user.valid = true;
+        }
+        else {
+            this.errors.wrongUsername = true;
+            user.valid = false;
+        }
+    };
+    LoginComponent.prototype.checkPassword = function (pass) {
+        if (/[!-~]{8,}/.test(this.data.password)) {
+            this.errors.wrongPassword = false;
+            pass.valid = false;
+        }
+        else {
+            this.errors.wrongPassword = true;
+            pass.valid = true;
+        }
+    };
+    LoginComponent.prototype.checkRepeatPassword = function (rep) {
+        if (this.data.password != this.repeat) {
+            this.errors.wrongRepeat = true;
+            rep.valid = false;
+        }
+        else {
+            this.errors.wrongRepeat = false;
+            rep.valid = true;
+        }
     };
     return LoginComponent;
 }());
