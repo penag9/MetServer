@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter} from '@angular/core';
 import { Router } from '@angular/router';
 
 import { WebService } from './web.service';
@@ -17,13 +17,13 @@ import { WebService } from './web.service';
                 </p>
                 <p>
                     <label class="tab2"> Новый пароль : </label><br>
-                    <input type="password" class="field tab2" [(ngModel)]="newPassword" required pattern="[!-~]{8,}" name="newPassword" #newpassword="ngModel">
-                    <span [ngClass]="{'error': true, 'hiden': newpassword.valid || newpassword.pristine }"> Минимум 8 символов: английские буквы, цифры, символы  </span>
+                    <input type="password" class="field tab2" [(ngModel)]="newPassword" required (focus)="errors.wrongNewPassword=false;" (blur)="checkPassword([newpassword])" name="newPassword" #newpassword="ngModel">
+                    <span [ngClass]="{'error': true, 'hiden': !errors.wrongNewPassword }"> Минимум 8 символов: английские буквы, цифры, символы  </span>
                 </p>
                 <p>
-                    <label class="tab2"> Новый пароль еще раз : </label><br>
-                    <input type="password" class="field tab2" [(ngModel)]="repeatNewPassword" pattern="[!-~]{8,}" required name="repeatNewPassword" onclick="noRepeatError=true;" #repeat="ngModel">
-                    <span [ngClass]="{'error': true, 'hiden': noRepeatError  }"> Вторично введенный пароль не соответствует изначальному  </span>
+                    <label class="tab2"> Новый пароль еще раз : </label><br>                   
+                    <input type="password" class="field tab2" [(ngModel)]="repeatNewPassword" required (focus)="errors.wrongRepeat=false;" (blur)="checkRepeatPassword([repeat])" name="repeatNewPassword" #repeat="ngModel">
+                    <span [ngClass]="{'error': true, 'hiden': !errors.wrongRepeat  }"> Вторично введенный пароль не соответствует изначальному  </span>
 
                 </p>
                 <br><br>
@@ -36,11 +36,21 @@ import { WebService } from './web.service';
 })
 export class PasswordComponent {
 
+    @Input() 
+    user = '';
+
+    @Output()
+    passwordUpdated = new EventEmitter();
 
     oldPassword = '';
     newPassword = '';
     repeatNewPassword = '';
 
+    errors = {
+        wrongOldPassword: false,
+        wrongNewPassword: false,
+        wrongRepeat: false
+    };
     noRepeatError = true;
     
     constructor(private webService: WebService, private router: Router) { }
@@ -51,17 +61,39 @@ export class PasswordComponent {
             return;
         }
 
-        this.webService.updateProfile({password: this.newPassword, oldPassword: this.oldPassword})
+        this.webService.updateProfile({password: this.newPassword, oldPassword: this.oldPassword}, this.user)
         .subscribe(response => {
             console.log(response);
 
-            this.router.navigate(['/profile']);
+            if(this.user == '' ) this.router.navigate(['/profile']);
+            else this.passwordUpdated.emit(true);
         }, error => {
 
             console.log(error);
+
+            if(this.user == '' ) this.router.navigate(['/profile']);
+            else this.passwordUpdated.emit(false);
         });
-
-        this.router.navigate(['/profile']);
-
     }
- }
+
+
+    checkPassword(pass) {
+        if(/[!-~]{8,}/.test(this.newPassword)) {
+            this.errors.wrongNewPassword = false;
+            pass.valid = false;
+        } else  {
+            this.errors.wrongNewPassword = true;
+            pass.valid = true;
+        }
+    }
+
+    checkRepeatPassword(rep) {
+        if(this.newPassword != this.repeatNewPassword) {
+            this.errors.wrongRepeat = true;
+            rep.valid = false;
+        } else {
+            this.errors.wrongRepeat = false;
+            rep.valid = true;
+        }
+    }
+}

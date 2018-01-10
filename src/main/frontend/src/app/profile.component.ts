@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter,  OnChanges } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { WebService } from './web.service';
@@ -8,13 +8,16 @@ import { WebService } from './web.service';
     templateUrl: './profile.component.html',
     styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnChanges {
 
     @Input() 
     user = '';
 
     @Output()
     botUpdated = new EventEmitter();
+
+    @Output() 
+    changePassword = new EventEmitter();
 
     selectedTab = 0;
 
@@ -30,33 +33,40 @@ export class ProfileComponent {
         french: ''
     };
 
-    constructor(private webService: WebService, private router: Router) {
-
-        this.webService.getProfile(this.user)
-            .subscribe(response => {
-                console.log('Constructor ',response.json());
-                this.data = response.json();
-            }, error => {
-    
-                console.log(error);
-                
-                if(this.user == '' )this.router.navigate(['/login']);
-            });            
+    constructor(private webService: WebService, private router: Router) {        
      }
 
 
     ngOnChanges() {
-
         this.webService.getProfile(this.user)
             .subscribe(response => {
-                console.log('ngOnChanges ',response.json());
+                console.log('ngOnChanges ', response.json());
+                this.data = response.json();
+            }, error => {
+    
+                console.log(error);
+                
+                if(this.user == '' ) this.router.navigate(['/login']);
+            });
+            
+    }
+
+    ngOnInit() {
+        
+        //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+        //Add 'implements OnInit' to the class.
+        
+        this.webService.getProfile(this.user)
+            .subscribe(response => {
+                console.log('ngOnInit ',response.json());
                 this.data = response.json();
             }, error => {
     
                 console.log(error);
                 
                 if(this.user == '' )this.router.navigate(['/login']);
-            });
+            });   
+                     
     }
 
     update() {
@@ -85,6 +95,11 @@ export class ProfileComponent {
 
             console.log(error);
         });
+    }
+
+    updatePassword() {
+        if(this.user == '' ) this.router.navigate(['/password']);
+        else this.changePassword.emit(true);
     }
 }
 

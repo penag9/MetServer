@@ -26,7 +26,10 @@ import { WebService } from './web.service';
         <button (click)="showAllBots();">Show all bots</button>
         <br/>
         <div *ngIf="showProfile">
-            <profile [user]="username" (botUpdated)="showAllBots();"></profile>
+            <profile [user]="getUsername" (botUpdated)="showAllBots();" (changePassword)="showChangePassword=true;"></profile>
+        </div>
+        <div *ngIf="showChangePassword">
+            <password [user]="getUsername" (passwordUpdated)="showChangePassword=false;"></password>
         </div>
         <div *ngIf="showBotsList">
            <table class="show">
@@ -55,11 +58,12 @@ export class AdminComponent {
         password: ''
     };
 
-    username = '';
+    getUsername = '';
 
     logged = false;
     showProfile = false;
     showBotsList = false;
+    showChangePassword = false;
 
     errorMessage = '';
 
@@ -96,7 +100,7 @@ export class AdminComponent {
 
         this.webService.getProfile(username)
             .subscribe(response => {
-                this.username = response.json().username;
+                this.getUsername = response.json().username;
                 this.showBotsList = false;
                 this.showProfile = true;
                 this.errorMessage = '';
@@ -111,7 +115,7 @@ export class AdminComponent {
 
         this.webService.generateUser()
             .subscribe(response => {
-                this.username = response.json().username;
+                this.getUsername = response.json().username;
                 this.showProfile = true;
                 this.showBotsList = false;
                 this.errorMessage = '';

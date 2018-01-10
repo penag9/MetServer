@@ -54,7 +54,7 @@
                 </p> <br>
             </div>
             <p>
-                <button type="button" class="white" routerLink="/password"> Поменять пароль </button>
+                <button type="button" class="white" (click)="updatePassword();"> Поменять пароль </button>
                 <button type="submit" class="submit right" [disabled]="!f.valid">Сохранить</button>
                 <button type="button" class="white right" onclick="history.back()"> Обратно </button>
             </p>

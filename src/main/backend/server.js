@@ -89,6 +89,7 @@ app.get('/user', checkAuthenticated, (req, res) => {
 // Update profile
 app.post('/user/update', checkAuthenticated, (req, res) => {
 
+    var resendToken = false;
     console.log('req.username  ', req.username);
     User.findOne({ username: req.username }, function(err, result) {
         if (err) {
@@ -101,19 +102,16 @@ app.post('/user/update', checkAuthenticated, (req, res) => {
                 console.log('body ', req.body);
                 for (var field in req.body) {
                     result[field] = req.body[field];
-
-                    console.log('field ', field);
-                    if (field == 'password') sendToken(result, res);
-
+                    if (field == 'password') resendToken = true;
                 }
-
-                console.log('result ', result);
                 result.save();
-                res.status(200).send(req.username + ' updated');
+                if (resendToken) sendToken(result, res);
+                else res.status(200).send(req.username + ' updated');
 
             } else res.status(403).send({ message: 'User does not exist' });
         }
     });
+
 });
 
 //User login
