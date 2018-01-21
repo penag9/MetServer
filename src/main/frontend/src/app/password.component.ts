@@ -27,7 +27,7 @@ import { WebService } from './web.service';
 
                 </p>
                 <br><br>
-                <button  routerLink="/profile"> Отменить </button>    
+                <button  (click)="history.back();"> Отменить </button>    
                 <button  type="submit" class="right" [disabled]="!f.valid" > Сохранить </button>    
             </form>     
         </div>
@@ -65,13 +65,13 @@ export class PasswordComponent {
         .subscribe(response => {
             console.log(response);
 
-            if(this.user == '' ) this.router.navigate(['/profile']);
+            if(this.user == '' ) history.back();
             else this.passwordUpdated.emit(true);
         }, error => {
 
             console.log(error);
 
-            if(this.user == '' ) this.router.navigate(['/profile']);
+            if(this.user == '' ) history.back();
             else this.passwordUpdated.emit(false);
         });
     }
