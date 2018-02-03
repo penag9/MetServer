@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { NavComponent }  from './nav.component';
+import { NavComponent }  from './navigation.component';
 
 @Component({
   selector: 'my-app',
-  template: ` <nav routerLink="/"></nav> 
+  template: ` <navigate routerLink="/"></navigate>  
               <router-outlet></router-outlet>
               `,
 })

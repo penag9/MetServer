@@ -12,7 +12,7 @@ var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
 var web_service_1 = require("./web.service");
 var app_component_1 = require("./app.component");
-var nav_component_1 = require("./nav.component");
+var navigation_component_1 = require("./navigation.component");
 var home_component_1 = require("./home.component");
 var request_component_1 = require("./request.component");
 var login_component_1 = require("./login.component");
@@ -95,7 +95,7 @@ var AppModule = (function () {
 AppModule = __decorate([
     core_1.NgModule({
         imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, router_1.RouterModule.forRoot(routes)],
-        declarations: [app_component_1.AppComponent, nav_component_1.NavComponent, home_component_1.HomeComponent, request_component_1.RequestComponent,
+        declarations: [app_component_1.AppComponent, navigation_component_1.NavComponent, home_component_1.HomeComponent, request_component_1.RequestComponent,
             login_component_1.LoginComponent, password_component_1.PasswordComponent, messages_component_1.MessagesComponent, profile_component_1.ProfileComponent, register_component_1.RegisterComponent, users_component_1.UsersComponent,
             hire_vacation_component_1.HVComponent, apply_vacation_component_1.AVComponent, show_hire_vacation_table_component_1.ShowHireVacationTableComponent, show_apply_vacation_table_component_1.ShowApplyVacationTableComponent,
             show_hire_vacation_component_1.ShowHireVacationComponent, show_apply_vacation_component_1.ShowApplyVacationComponent, admin_component_1.AdminComponent],

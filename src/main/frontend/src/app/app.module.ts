@@ -7,7 +7,7 @@ import { HttpModule } from '@angular/http';
 import { WebService } from './web.service';
 
 import { AppComponent }  from './app.component';
-import { NavComponent }  from './nav.component';
+import { NavComponent }  from './navigation.component';
 import { HomeComponent } from './home.component';
 import { RequestComponent } from './request.component';
 import { LoginComponent } from './login.component';

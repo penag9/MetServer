@@ -5,19 +5,16 @@ body {
     -o-background-size: cover;
     background-size: cover;
     margin: 0px;
-    min-width: 1200px;
     min-height: 1000px;
 }
 
-nav {
+navigate {
     height: 189.3px;
-    background: url("logo.png");
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
+    background-color: #fc5c03;
     margin: 0px;
 }
 
-nav:hover {
+navigate:hover {
     cursor: url("app/images/click2.png"), pointer;
 }
 

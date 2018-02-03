@@ -7,7 +7,8 @@ div.container {
     position: relative;
     left: 50%;
     transform: translateX(-50%);
-    width: 1300px;
+    width: 100%;
+    max-width: 1300px;
     height: 790px;
     outline: none;
 }
@@ -22,7 +23,7 @@ div.container2 {
 
 div.container3 {
     height: 680px;
-    width: 633;
+    width: 100%;
     text-align: center;
     border-radius: 15px;
     border: 1px solid black;
@@ -56,4 +57,23 @@ button.add {
 
 button.add:hover {
     cursor: url("../app/images/click2.png"), pointer;
+}
+
+div.desktop {
+    display: inline;
+    width: 100%;
+}
+
+div.mobile {
+    display: none;
+}
+
+@media only screen and (max-width: 1024px) {
+    div.desktop {
+        display: none;
+    }
+    div.mobile {
+        display: inline;
+        width: 100%;
+    }
 }
