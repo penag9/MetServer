@@ -4,11 +4,12 @@ var bodyParser = require('body-parser');
 var jwt = require('jsonwebtoken');
 var mongoose = require('mongoose');
 var User = require('./user.model');
+var Messages = require('./message.model');
 var Admin = require('./admin.model');
 
 
 var port = 8080;
-var db = 'mongodb://localhost/example2';
+var db = 'mongodb://localhost/example4';
 var promise = mongoose.connect(db, {
     useMongoClient: true
 });
@@ -19,12 +20,12 @@ var promise = mongoose.connect(db, {
 
 
 //User.remove({}).exec();
+//Messages.remove({}).exec();
 
 User.create({
     username: 'a@a.a',
     password: '12345678'
 });
-
 
 Admin.create({
     username: 'admin',
@@ -55,17 +56,22 @@ app.get('/users', (req, res) => {
 
 // delete user
 app.get('/user/delete', checkAuthenticated, (req, res) => {
-    //add password check
 
-    User.remove({ username: req.username }, function(err, results) {
+    User.findOne({ username: req.username }, function(err, result) {
         if (err) {
             console.log('error occured ', err);
             res.status(500).send('Internal error');
         } else {
-            console.log(results);
+            Messages.remove({user: result._id}, function(err){
+                if (err) {
+                    console.log('error occured when deleting messages', err);
+                }
+            });
+            result.remove();
             res.status(200).send(req.username + ' deleted');
         }
     });
+
 });
 
 // Get profile
@@ -162,7 +168,100 @@ app.post('/register', (req, res) => {
         }
     });
 
-})
+});
+
+//------------- Messages ----------------
+
+// Get list of messages for the user
+app.get('user/messages', checkAuthenticated, (req, res) => {
+    User.findOne({ username: req.body.username }, function(err, result) {        
+        if (err) {
+            console.log('error occured ', err);
+            res.status(500).send('Internal error');
+        } else {
+            Messages.find({ user: result._id}, function(err, results) {
+                if (err) {
+                    console.log('error occured ', err);
+                    res.status(500).send('Internal error');
+                } else {
+                    console.log('result ', results);
+                    res.sent(results);
+                }
+            });
+        }
+    });
+
+});
+
+// Get list of messages by type
+app.get('/messages:type', checkAuthenticated, (req, res) => {
+    Messages.find({type: req.params.type}, function(err, results) {
+        if (err) {
+            console.log('error occured ', err);
+            res.status(500).send('Internal error');
+        } else {
+            console.log('result ', results);
+            res.send(results);
+        }
+    });
+});
+
+// Add message
+app.post('/addMessage', checkAuthenticated, (req, res) => {
+
+    User.find({ username: req.body.username }, function(err, results) {
+        if (err) {
+            console.log('error occured ', err);
+            res.status(500).send('Internal error');
+
+        } else {
+            if (results.length == 0) {
+                sendAuthError(res);
+                return;
+            }
+
+            Messages.create({ type: req.body.type, text: req.body.test, beginDate: req.body.beginDate, 
+                                endDate: req.body.endDate, user: results[0]._id  }, function(err, result) {
+                if (err) {
+                    console.log('error occured ', err);
+                    res.status(500).send('Internal error');
+                } else {
+                    res.status(200).send('Message added');
+                }
+            });
+        }
+    });
+});
+
+// Delete message
+app.post('/deleteMessage:id', checkAuthenticated, (req, res) => {
+
+    Messages.remove(req.params.id , function(err) {
+        if (err) {
+            console.log('error occured ', err);
+            res.status(500).send('Internal error');
+
+        } else {
+            res.status(200).send('Message deleted');            
+        }
+    });
+});
+
+//Get full message
+app.get('/message:id', checkAuthenticated, (req, res) => {
+    Messages.findById( req.params.id, function(err, result) {
+        if (err) {
+            console.log('error occured ', err);
+            res.status(500).send('Internal error');
+        } else {
+
+            if (result) {
+                console.log('result ', result);
+                res.send(result);
+            } else res.status(403).send({ message: 'Message does not exist' });
+        }
+    });
+});
 
 //------------- Admin tools -------------
 
@@ -240,13 +339,18 @@ app.get('/admin/bots', checkAuthenticated, (req, res) => {
 // delete user
 app.get('/admin/delete/:user', checkAuthenticated, (req, res) => {
 
-    User.remove({ username: req.params.user }, function(err, results) {
+    User.findOne({ username: req.params.user }, function(err, result) {
         if (err) {
             console.log('error occured ', err);
             res.status(500).send('Internal error');
         } else {
-            console.log(results);
-            res.status(200).send(req.params.user + ' deleted');
+            Messages.remove({user: result._id}, function(err){
+                if (err) {
+                    console.log('error occured when deleting messages', err);
+                }
+            });
+            result.remove();
+            res.status(200).send(req.username + ' deleted');
         }
     });
 });
@@ -326,12 +430,14 @@ function tmp() {
 
     console.log('List of all users :');
     User.find({ /*bot: { $exists: true } /*{ $gt: 0 }*/ }, { _id: 0, __v: 0 }, function(err, results) {
+        
         if (err) {
             console.log('error ', err);
         } else {
             console.log(results);
         }
     });
+        
 }
 
 app.listen(port, function() {
