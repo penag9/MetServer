@@ -4,7 +4,6 @@ var bodyParser = require('body-parser');
 var jwt = require('jsonwebtoken');
 var mongoose = require('mongoose');
 var User = require('./user.model');
-var Messages = require('./message.model');
 var FamilyHolliday = require('./family.holliday.model');
 var MetapeletHolliday = require('./metapelet.holliday.model');
 var Admin = require('./admin.model');
@@ -22,7 +21,6 @@ var promise = mongoose.connect(db, {
 
 
 //User.remove({}).exec();
-Messages.remove({}).exec();
 
 User.create({
     username: 'a@a.a',
@@ -76,11 +74,6 @@ app.get('/user/delete', checkAuthenticated, (req, res) => {
                 }
             });
 
-            Messages.remove({ user: result._id }, function(err) {
-                if (err) {
-                    console.log('error occured when deleting messages', err);
-                }
-            });
             result.remove();
             res.status(200).send(req.username + ' deleted');
         }
@@ -194,17 +187,6 @@ app.get('user/messages', (req, res) => {
             console.log('error occured ', err);
             // res.status(500).send('Internal error');
         } else {
-            /* change to metapelet and family and concate results
-            Messages.find({ user: result._id}, function(err, results) {
-                if (err) {
-                    console.log('error occured ', err);
-                    //res.status(500).send('Internal error');
-                } else {
-                    console.log('result ', results);
-                    res.sent(results);
-                }
-            });
-            */
             FamilyHolliday.find({ user: result._id }, function(err, results) {
                 if (err) {
                     console.log('error occured ', err);
@@ -255,17 +237,6 @@ app.get('/messages/:type', (req, res) => {
             });
             break;
     }
-    /*
-    Messages.find({ type: req.params.type }, function(err, results) {
-        if (err) {
-            console.log('error occured ', err);
-            res.status(500).send('Internal error');
-        } else {
-            console.log('result ', results);
-            res.send(results);
-        }
-    });
-    */
 });
 
 // Add message
