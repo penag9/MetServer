@@ -5,11 +5,13 @@ var jwt = require('jsonwebtoken');
 var mongoose = require('mongoose');
 var User = require('./user.model');
 var Messages = require('./message.model');
+var FamilyHolliday = require('./family.holliday.model');
+var MetapeletHolliday = require('./metapelet.holliday.model');
 var Admin = require('./admin.model');
 
 
 var port = 8080;
-var db = 'mongodb://localhost/example4';
+var db = 'mongodb://localhost/example5';
 var promise = mongoose.connect(db, {
     useMongoClient: true
 });
@@ -20,7 +22,7 @@ var promise = mongoose.connect(db, {
 
 
 //User.remove({}).exec();
-//Messages.remove({}).exec();
+Messages.remove({}).exec();
 
 User.create({
     username: 'a@a.a',
@@ -62,7 +64,19 @@ app.get('/user/delete', checkAuthenticated, (req, res) => {
             console.log('error occured ', err);
             res.status(500).send('Internal error');
         } else {
-            Messages.remove({user: result._id}, function(err){
+
+            MetapeletHolliday.remove({ user: result._id }, function(err) {
+                if (err) {
+                    console.log('error occured when deleting messages', err);
+                }
+            });
+            FamilyHolliday.remove({ user: result._id }, function(err) {
+                if (err) {
+                    console.log('error occured when deleting messages', err);
+                }
+            });
+
+            Messages.remove({ user: result._id }, function(err) {
                 if (err) {
                     console.log('error occured when deleting messages', err);
                 }
@@ -173,13 +187,53 @@ app.post('/register', (req, res) => {
 //------------- Messages ----------------
 
 // Get list of messages for the user
-app.get('user/messages', checkAuthenticated, (req, res) => {
-    User.findOne({ username: req.body.username }, function(err, result) {        
+app.get('user/messages', (req, res) => {
+    var fullResult = [];
+    User.findOne({ username: req.body.username }, function(err, result) {
         if (err) {
             console.log('error occured ', err);
-            res.status(500).send('Internal error');
+            // res.status(500).send('Internal error');
         } else {
+            /* change to metapelet and family and concate results
             Messages.find({ user: result._id}, function(err, results) {
+                if (err) {
+                    console.log('error occured ', err);
+                    //res.status(500).send('Internal error');
+                } else {
+                    console.log('result ', results);
+                    res.sent(results);
+                }
+            });
+            */
+            FamilyHolliday.find({ user: result._id }, function(err, results) {
+                if (err) {
+                    console.log('error occured ', err);
+                } else {
+                    console.log('result ', results);
+                    fullResult = fullResult.concat(results);
+                }
+            });
+            MetapeletHolliday.find({ user: result._id }, function(err, results) {
+                if (err) {
+                    console.log('error occured ', err);
+                } else {
+                    console.log('result ', results);
+                    fullResult = fullResult.concat(results);
+                }
+            });
+
+        }
+    });
+
+    res.sent(results);
+});
+
+// Get list of messages by type
+app.get('/messages/:type', (req, res) => {
+    console.log('type ', req.params.type);
+    switch (req.params.type) {
+        case 'familyHolliday':
+            FamilyHolliday.find({}, function(err, results) {
                 if (err) {
                     console.log('error occured ', err);
                     res.status(500).send('Internal error');
@@ -188,14 +242,21 @@ app.get('user/messages', checkAuthenticated, (req, res) => {
                     res.sent(results);
                 }
             });
-        }
-    });
-
-});
-
-// Get list of messages by type
-app.get('/messages:type', checkAuthenticated, (req, res) => {
-    Messages.find({type: req.params.type}, function(err, results) {
+            break;
+        case 'metapeletHolliday':
+            MetapeletHolliday.find({}, function(err, results) {
+                if (err) {
+                    console.log('error occured ', err);
+                    res.status(500).send('Internal error');
+                } else {
+                    console.log('result ', results);
+                    res.sent(results);
+                }
+            });
+            break;
+    }
+    /*
+    Messages.find({ type: req.params.type }, function(err, results) {
         if (err) {
             console.log('error occured ', err);
             res.status(500).send('Internal error');
@@ -204,6 +265,7 @@ app.get('/messages:type', checkAuthenticated, (req, res) => {
             res.send(results);
         }
     });
+    */
 });
 
 // Add message
@@ -220,8 +282,13 @@ app.post('/addMessage', checkAuthenticated, (req, res) => {
                 return;
             }
 
-            Messages.create({ type: req.body.type, text: req.body.test, beginDate: req.body.beginDate, 
-                                endDate: req.body.endDate, user: results[0]._id  }, function(err, result) {
+            Messages.create({
+                type: req.body.type,
+                text: req.body.test,
+                beginDate: req.body.beginDate,
+                endDate: req.body.endDate,
+                user: results[0]._id
+            }, function(err, result) {
                 if (err) {
                     console.log('error occured ', err);
                     res.status(500).send('Internal error');
@@ -233,36 +300,21 @@ app.post('/addMessage', checkAuthenticated, (req, res) => {
     });
 });
 
-// Delete message
-app.post('/deleteMessage:id', checkAuthenticated, (req, res) => {
+// Delete message  change by type?
+/*
+app.post('/deleteMessage/:id', checkAuthenticated, (req, res) => {
 
-    Messages.remove(req.params.id , function(err) {
+    Messages.remove(req.params.id, function(err) {
         if (err) {
             console.log('error occured ', err);
             res.status(500).send('Internal error');
 
         } else {
-            res.status(200).send('Message deleted');            
+            res.status(200).send('Message deleted');
         }
     });
 });
-
-//Get full message
-app.get('/message:id', checkAuthenticated, (req, res) => {
-    Messages.findById( req.params.id, function(err, result) {
-        if (err) {
-            console.log('error occured ', err);
-            res.status(500).send('Internal error');
-        } else {
-
-            if (result) {
-                console.log('result ', result);
-                res.send(result);
-            } else res.status(403).send({ message: 'Message does not exist' });
-        }
-    });
-});
-
+*/
 //------------- Admin tools -------------
 
 //Admin login
@@ -344,7 +396,7 @@ app.get('/admin/delete/:user', checkAuthenticated, (req, res) => {
             console.log('error occured ', err);
             res.status(500).send('Internal error');
         } else {
-            Messages.remove({user: result._id}, function(err){
+            Messages.remove({ user: result._id }, function(err) {
                 if (err) {
                     console.log('error occured when deleting messages', err);
                 }
@@ -430,14 +482,55 @@ function tmp() {
 
     console.log('List of all users :');
     User.find({ /*bot: { $exists: true } /*{ $gt: 0 }*/ }, { _id: 0, __v: 0 }, function(err, results) {
-        
+
         if (err) {
             console.log('error ', err);
         } else {
             console.log(results);
         }
     });
+
+    // messages for a
+    /*
+    User.findOne({ username: 'a@a.a' }, function(err, result) {
+        if (err) {
+            console.log('error occured ', err);
+        } else {
+
+            Messages.create({ type: 12, lang: 'Русский', place: 'Яфо', begin: '2/3/2017', end: '  5/3/2017', name: 'Кто-то 1',
+            phone: '11111', russian: true, russianLevel: 3, hebrew: false, hebrewLevel: 0, romanian: false,
+            romanianLevel: 0, english: false, englishLevel: 0, text: 'aaaaa', user: result._id  });
+
+
+
+            Messages.create({ type: 12, lang: 'Русский, Иврит, Румынский, Английский', place: 'Яфо', begin: '3/4/2017', end: '  7/4/2017', name: 'Кто-то 2',
+            phone: '22222', russian: true, russianLevel: 3, hebrew: true, hebrewLevel: 1, romanian: true,
+            romanianLevel: 1, english: true, englishLevel: 2, text: 'ssssss', user: result._id  });
+    
+
+
+            Messages.create({ type: 22,  lang: 'Русский, Иврит', place: 'Яфо', begin: '4/5/2017', end: '  8/5/2017', name: 'Кто-то 3',
+            phone: '33333', russian: true, russianLevel: 3, hebrew: true, hebrewLevel: 3, romanian: false,
+            romanianLevel: 0, english: false, englishLevel: 0, text: 'dddddd', user: result._id  });
         
+
+
+            Messages.create({ type: 22, lang: 'Русский', place: 'Яфо', begin: '5/6/2017', end: '  9/6/2017', name: 'Кто-то 4',
+            phone: '444444', russian: true, russianLevel: 3, hebrew: false, hebrewLevel: 0, romanian: false,
+            romanianLevel: 0, english: false, englishLevel: 0, text: 'ffffff', user: result._id  });
+                             
+            }
+    });
+        
+    Messages.find({ }, { _id: 0, __v: 0 }, function(err, results) {
+        
+        if (err) {
+            console.log('error  ', err);
+        } else {
+            console.log(results);
+        }
+    });
+    */
 }
 
 app.listen(port, function() {

@@ -42,7 +42,7 @@ import { WebService } from '../web.service';
             <input type="checkbox" [(ngModel)]="data.english" name="english"> Английский
         </span><br><br>
         <label> Дополнительная информация : </label><br>
-        <textarea rows="10" cols="100" [(ngModel)]="data.freetext" name="freetext"></textarea>
+        <textarea rows="10" cols="100" [(ngModel)]="data.text" name="freetext"></textarea>
         <br><br>
         <button  (click)="placeRequest()"> Готово </button> 
         <button type="button" onclick="history.back()">Обратно</button> 
@@ -52,7 +52,7 @@ import { WebService } from '../web.service';
 export class HVComponent {
 
     data = {
-        type: '1',
+        type: '12',
         username: '',
         phone: '',
         begin: '',
@@ -62,7 +62,7 @@ export class HVComponent {
         hebrew: false,
         romanian: false,
         english: false,
-        freetext: ''
+        text: ''
     };
 
     errorMessage = '';

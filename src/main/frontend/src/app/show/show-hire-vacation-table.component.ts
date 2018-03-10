@@ -8,20 +8,20 @@ import { WebService } from '../web.service';
     template: ` 
     <h2 class="center"> Требуется замена на время отпуска </h2>
     <div style="overflow-x:auto;">
-        <table class="show">
+        <table class="listOfMessages">
             <tr>
-                <th class="show"> Языки </th>
-                <th class="show"> Где </th>
-                <th class="show"> По какое число </th>
-                <th class="show"> С какого числа </th>
-                <th class="show"> Имя </th>
+                <th class="listOfMessages"> Языки </th>
+                <th class="listOfMessages"> Где </th>
+                <th class="listOfMessages"> По какое число </th>
+                <th class="listOfMessages"> С какого числа </th>
+                <th class="listOfMessages"> Имя </th>
             </tr>
-            <tr class="show" *ngFor="let message of webService.currentTable; let i = index" (click)="showMessage(i)">
-                <td class="show">{{message.lang}}</td>
-                <td class="show">{{message.place}}</td>
-                <td class="show">{{message.end}}</td>
-                <td class="show">{{message.begin}}</td>
-                <td class="show">{{message.name}}</td>
+            <tr class="listOfMessages" *ngFor="let message of webService.currentTable; let i = index" (click)="showMessage(i)">
+                <td class="listOfMessages">{{message.lang}}</td>
+                <td class="listOfMessages">{{message.place}}</td>
+                <td class="listOfMessages">{{message.end}}</td>
+                <td class="listOfMessages">{{message.begin}}</td>
+                <td class="listOfMessages">{{message.name}}</td>
             </tr>
         </table>
 

@@ -71,7 +71,7 @@ import { WebService } from '../web.service';
         </span><br>
         <br><br>
         <label> Дополнительная информация : </label><br>
-        <textarea rows="10" cols="100" [(ngModel)]="data.freetext" name="freetext"></textarea>
+        <textarea rows="10" cols="100" [(ngModel)]="data.text" name="freetext"></textarea>
         <br><br>
         <button  (click)="placeRequest()"> Готово </button>  
         <button type="button" onclick="history.back()">Обратно</button>
@@ -81,7 +81,7 @@ import { WebService } from '../web.service';
 export class AVComponent {
 
     data = {
-        type: '2',
+        type: '22',
         username: '',
         phone: '',
         begin: '',
@@ -95,7 +95,7 @@ export class AVComponent {
         romanianLevel: 0,
         english: false,
         englishLevel: 0,
-        freetext: ''
+        text: ''
     };
 
     errorMessage = '';

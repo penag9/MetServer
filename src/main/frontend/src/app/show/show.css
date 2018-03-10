@@ -4,24 +4,24 @@ button {
     background-color: #fc5c03;
 }
 
-table.show {
+table.listOfMessages {
     width: 100%;
     padding: 4rem;
 }
 
-tr.show:nth-child(even) {
-    background-color: lightblue;
+tr.listOfMessages:nth-child(even) {
+    background-color: #fda97c;
 }
 
-tr.show:nth-child(odd) {
-    background-color: lightsteelblue
+tr.listOfMessages:nth-child(odd) {
+    background-color: #f8c0a1;
 }
 
-tr.show:hover {
-    background-color: lightgreen;
+tr.listOfMessages:hover {
+    background-color:#ffc65c;
 }
 
-th.show {
-    background-color: lightskyblue;
+th.listOfMessages {
+    background-color: white;
     color: white;
 }

@@ -14,22 +14,22 @@ export class WebService {
   currentTable = [{
     id: 1, lang: 'Русский', place: 'Яфо', begin: '2/3/2017', end: '  5/3/2017', name: 'Кто-то 1',
     phone: '11111', russian: true, russianLevel: 3, hebrew: false, hebrewLevel: 0, romanian: false,
-    romanianLevel: 0, english: false, englishLevel: 0, freetext: 'aaaaa'
+    romanianLevel: 0, english: false, englishLevel: 0, text: 'aaaaa'
   },
   {
     id: 2, lang: 'Русский, Иврит, Румынский, Английский', place: 'Яфо', begin: '3/4/2017', end: '  7/4/2017', name: 'Кто-то 2',
     phone: '22222', russian: true, russianLevel: 3, hebrew: true, hebrewLevel: 1, romanian: true,
-    romanianLevel: 1, english: true, englishLevel: 2, freetext: 'ssssss'
+    romanianLevel: 1, english: true, englishLevel: 2, text: 'ssssss'
   },
   {
     id: 3, lang: 'Русский, Иврит', place: 'Яфо', begin: '4/5/2017', end: '  8/5/2017', name: 'Кто-то 3',
     phone: '33333', russian: true, russianLevel: 3, hebrew: true, hebrewLevel: 3, romanian: false,
-    romanianLevel: 0, english: false, englishLevel: 0, freetext: 'dddddd'
+    romanianLevel: 0, english: false, englishLevel: 0, text: 'dddddd'
   },
   {
     id: 4, lang: 'Русский', place: 'Яфо', begin: '5/6/2017', end: '  9/6/2017', name: 'Кто-то 4',
     phone: '444444', russian: true, russianLevel: 3, hebrew: false, hebrewLevel: 0, romanian: false,
-    romanianLevel: 0, english: false, englishLevel: 0, freetext: 'ffffff'
+    romanianLevel: 0, english: false, englishLevel: 0, text: 'ffffff'
   },
   ];
 
@@ -104,8 +104,24 @@ export class WebService {
       return this.postMessage('message' , data, sessionStorage.getItem('token'));
   }
 
-  getHireForVacationList() { }
+  getHireForVacationList() {
+    this.getMessage('messages/familyHolliday')
+    .subscribe(response => {
+        console.log(response.json());
+        this.currentTable = response.json();
+    }, error => {
+        console.log(error);
+    });
+  }
 
-  getApplyForVacationList() { }
+  getApplyForVacationList() {
+    this.getMessage('messages/metapeletHolliday')
+    .subscribe(response => {
+        console.log(response);
+        this.currentTable = response.json();
+    }, error => {
+        console.log(error);
+    });
+  }
 
 }

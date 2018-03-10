@@ -33,7 +33,7 @@ import { WebService } from '../web.service';
     </div><br><br>
     <div>
     <label> Дополнительная информация : </label><br>
-    <textarea rows="10" cols="100" readonly name="freetext">{{webService.currentTable[webService.currentMessageIndex].freetext}}</textarea>
+    <textarea rows="10" cols="100" readonly name="freetext">{{webService.currentTable[webService.currentMessageIndex].text}}</textarea>
     <br><br>
     <button type="button" onclick="history.back()">Обратно</button>
     `,
